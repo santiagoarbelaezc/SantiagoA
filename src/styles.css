@@ -1,0 +1,126 @@
+/* You can add global styles to this file, and also import other style files */
+@import 'aos/dist/aos.css';
+
+/* Reset y estilos base */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: 'Inter', 'Segoe UI', sans-serif;
+  line-height: 1.6;
+  color: #ffffff;
+  background-color: #000000;
+  overflow-x: hidden;
+  font-weight: 300;
+}
+
+/* Variables CSS para el tema oscuro elegante */
+:root {
+  --black-primary: #000000;
+  --black-secondary: #0a0a0a;
+  --black-tertiary: #111111;
+  --white-primary: #ffffff;
+  --white-secondary: #e0e0e0;
+  --accent-glow: rgba(255, 255, 255, 0.1);
+  --line-color: rgba(255, 255, 255, 0.15);
+}
+
+/* Fondo con líneas elegantes */
+body::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: 
+    linear-gradient(90deg, var(--line-color) 1px, transparent 1px) 0 0 / 50px 50px,
+    linear-gradient(0deg, var(--line-color) 1px, transparent 1px) 0 0 / 50px 50px;
+  pointer-events: none;
+  z-index: -1;
+}
+
+/* Tipografía elegante */
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 300;
+  line-height: 1.2;
+  margin-bottom: 1.5rem;
+  letter-spacing: -0.02em;
+}
+
+h1 {
+  font-size: 4rem;
+  font-weight: 250;
+  letter-spacing: -0.03em;
+}
+
+h2 {
+  font-size: 2.5rem;
+  font-weight: 300;
+}
+
+h3 {
+  font-size: 1.5rem;
+  font-weight: 350;
+}
+
+p {
+  margin-bottom: 1.5rem;
+  color: var(--white-secondary);
+  font-weight: 300;
+  line-height: 1.6;
+}
+
+/* Utilidades */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* Scrollbar personalizado */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--black-secondary);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--white-primary);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--white-secondary);
+}
+
+/* Efectos de selección */
+::selection {
+  background: var(--white-primary);
+  color: var(--black-primary);
+}
