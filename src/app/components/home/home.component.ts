@@ -11,6 +11,7 @@ export class HomeComponent implements OnInit {
     // Inicializar las animaciones al cargar la página
     setTimeout(() => {
       this.checkScroll();
+      this.initializeProgressBars();
     }, 100);
   }
 
@@ -33,7 +34,9 @@ export class HomeComponent implements OnInit {
     const elements = document.querySelectorAll(
       '.hero-title, .hero-subtitle, .hero-line, .hero-actions, .hero-image, ' +
       '.section-divider, .section-header, .about-text, .skill-category, ' +
-      '.project-card, .contact-text, .contact-link, .footer'
+      '.skill-item, .specialty-card, .project-card, .contact-text, ' +
+      '.contact-link, .footer, .title-ornament, .category-line, .card-line, ' +
+      '.stat-item, .hero-badge, .section-number'
     );
 
     elements.forEach(element => {
@@ -49,6 +52,17 @@ export class HomeComponent implements OnInit {
       // Opcional: Ocultar de nuevo cuando sale del viewport (para scroll up/down)
       else if (elementBottom < 0 || elementTop > windowHeight) {
         element.classList.remove('revealed');
+      }
+    });
+  }
+
+  private initializeProgressBars() {
+    // Inicializar barras de progreso
+    const progressBars = document.querySelectorAll('.progress-bar');
+    progressBars.forEach(bar => {
+      const level = bar.getAttribute('data-level');
+      if (level) {
+        (bar as HTMLElement).style.setProperty('--progress-width', `${level}%`);
       }
     });
   }
