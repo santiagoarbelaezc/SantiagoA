@@ -4,15 +4,15 @@
   display: flex;
   align-items: center;
   position: relative;
-  padding: 4rem 0 2rem; /* Cambiado de 3rem a 4rem en top para +10px */
+  padding: 4rem 0 2rem;
   overflow: hidden;
   background: linear-gradient(135deg, 
     var(--white-primary) 0%,
     var(--white-secondary) 30%,
     var(--white-accent) 70%,
     var(--white-tertiary) 100%) !important;
-  width: 100%;
   box-sizing: border-box;
+  z-index: 1;
 }
 
 .hero::before {
@@ -202,9 +202,21 @@
   display: block;
 }
 
-.title-line.line-1 { color: rgba(0, 0, 0, 0.9); font-weight: 400; }
-.title-line.line-2 { color: rgba(0, 0, 0, 0.8); font-weight: 300; }
-.title-line.line-3 { color: rgba(0, 0, 0, 0.7); font-weight: 200; }
+/* MANTENER COLORES DE TEXTO ESPECÍFICOS PARA HERO */
+.hero .title-line.line-1 {
+  color: rgba(0, 0, 0, 0.9) !important;
+  font-weight: 400;
+}
+
+.hero .title-line.line-2 {
+  color: rgba(0, 0, 0, 0.8) !important;
+  font-weight: 300;
+}
+
+.hero .title-line.line-3 {
+  color: rgba(0, 0, 0, 0.7) !important;
+  font-weight: 200;
+}
 
 /* Subtítulo */
 .hero-subtitle {
@@ -213,10 +225,13 @@
 
 .subtitle-text {
   font-size: 1.4rem;
-  color: rgba(0, 0, 0, 0.8);
   font-weight: 350;
   line-height: 1.6;
   margin-bottom: 1rem;
+}
+
+.hero .subtitle-text {
+  color: rgba(0, 0, 0, 0.8) !important;
 }
 
 .subtitle-line { display: block; }
@@ -235,9 +250,12 @@
 
 .hero-description p {
   font-size: 1.1rem;
-  color: rgba(0, 0, 0, 0.7);
   line-height: 1.7;
   max-width: 550px;
+}
+
+.hero .hero-description p {
+  color: rgba(0, 0, 0, 0.7) !important;
 }
 
 /* Divisor elegante */
@@ -277,14 +295,20 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  color: rgba(0, 0, 0, 0.7);
+}
+
+.hero .info-icon {
+  color: rgba(0, 0, 0, 0.7) !important;
 }
 
 .info-text {
   font-size: 0.85rem;
-  color: rgba(0, 0, 0, 0.8);
   font-weight: 400;
   white-space: nowrap;
+}
+
+.hero .info-text {
+  color: rgba(0, 0, 0, 0.8) !important;
 }
 
 /* Botones */
@@ -376,8 +400,11 @@
 
 .social-label {
   font-size: 0.9rem;
-  color: rgba(0, 0, 0, 0.6);
   font-weight: 400;
+}
+
+.hero .social-label {
+  color: rgba(0, 0, 0, 0.6) !important;
 }
 
 .social-links {
@@ -393,15 +420,18 @@
   height: 36px;
   border-radius: 50%;
   background: rgba(255, 255, 255, 0.6);
-  color: rgba(0, 0, 0, 0.7);
   transition: all var(--transition-normal);
   backdrop-filter: blur(5px);
   border: 1px solid rgba(0, 0, 0, 0.1);
 }
 
+.hero .social-link {
+  color: rgba(0, 0, 0, 0.7) !important;
+}
+
 .social-link:hover {
   background: rgba(0, 0, 0, 0.9);
-  color: white;
+  color: white !important;
   transform: translateY(-2px);
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
 }
@@ -593,7 +623,9 @@
   }
 }
 
-/* RESPONSIVE DESIGN */
+/* ===== MEDIA QUERIES RESPONSIVE ===== */
+
+/* Laptops pequeñas (1200px y menos) */
 @media (max-width: 1200px) {
   .hero { padding-top: 6.8rem; margin-top: 1.6rem; }
   .hero-content { padding: 0 2.5rem; gap: 3.5rem; }
@@ -604,6 +636,7 @@
   .hero-image-section { margin-right: -80px; }
 }
 
+/* Tablets grandes y laptops pequeñas (992px y menos) */
 @media (max-width: 992px) {
   .hero { padding: 6rem 0 2rem; min-height: auto; margin-top: 1.5rem; }
   .hero-content { grid-template-columns: 1fr; gap: 3rem; padding: 0 2rem; }
@@ -643,6 +676,7 @@
   .layer-3 { width: 350px; height: 350px; }
 }
 
+/* Tablets (768px y menos) */
 @media (max-width: 768px) {
   .hero { padding: 5.5rem 0 1.5rem; margin-top: 1rem; }
   .hero-content { gap: 2.5rem; padding: 0 1.5rem; }
@@ -657,6 +691,7 @@
   .profile-image { max-width: 450px; max-height: 600px; }
 }
 
+/* Móviles grandes (576px y menos) */
 @media (max-width: 576px) {
   .hero { padding: 5rem 0 1rem; margin-top: 1rem; }
   .hero-content { padding: 0 1rem; gap: 2rem; }
@@ -672,6 +707,7 @@
   .corner-bl, .corner-br { bottom: 10px; }
 }
 
+/* iPhone y móviles pequeños (480px y menos) */
 @media (max-width: 480px) {
   .hero { padding: 4.5rem 0 1rem; margin-top: 1rem; }
   .hero-title { font-size: 2rem; }
@@ -690,6 +726,7 @@
   .layer-3 { animation-duration: 8s; opacity: 0.2; }
 }
 
+/* iPhone SE y móviles muy pequeños (375px y menos) */
 @media (max-width: 375px) {
   .hero { padding: 4rem 0 0.8rem; margin-top: 1rem; }
   .hero-content { padding: 0 0.75rem; gap: 1.75rem; }
@@ -704,6 +741,7 @@
   .social-link { width: 30px; height: 30px; }
 }
 
+/* Orientación horizontal en móviles */
 @media (max-width: 932px) and (orientation: landscape) {
   .hero { padding: 4rem 0; min-height: auto; margin-top: 1rem; }
   .hero-content { grid-template-columns: 1fr 1fr; gap: 1.5rem; align-items: center; }
