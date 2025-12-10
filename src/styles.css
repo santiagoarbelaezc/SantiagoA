@@ -61,63 +61,6 @@ body {
   --black-line: rgba(255, 255, 255, 0.12);
   --black-glow: rgba(255, 255, 255, 0.06);
   
-  /* ===== NUEVA PALETA PARA PROFILE X ===== */
-  
-  /* Cafés enriquecidos - Más tonos para Profile X */
-  --brown-50: #fdf8f3;
-  --brown-100: #f6f0e8;
-  --brown-200: #e8d5c4;
-  --brown-300: #d4b899;
-  --brown-400: #c19a6d;
-  --brown-500: #a87c4f;  /* Café principal */
-  --brown-600: #8b5a30;
-  --brown-700: #6f4518;
-  --brown-800: #553312;
-  --brown-900: #3d2209;
-  
-  /* Beiges suaves - Para fondos y acentos */
-  --beige-50: #fefefc;
-  --beige-100: #fbf9f5;
-  --beige-200: #f5f1e8;
-  --beige-300: #eee7d8;
-  --beige-400: #e5dcc8;
-  --beige-500: #d4c9ad;
-  --beige-600: #c2b492;
-  --beige-700: #a89978;
-  --beige-800: #8a7d5f;
-  --beige-900: #6d6248;
-  
-  /* Negros enriquecidos - Más profundidad */
-  --black-50: #f8f9fa;
-  --black-100: #e9ecef;
-  --black-200: #dee2e6;
-  --black-300: #ced4da;
-  --black-400: #adb5bd;
-  --black-500: #6c757d;
-  --black-600: #495057;
-  --black-700: #343a40;
-  --black-800: #212529;
-  --black-900: #121416;
-  
-  /* Grises cálidos - Para Profile X */
-  --warm-gray-50: #fafaf9;
-  --warm-gray-100: #f5f5f4;
-  --warm-gray-200: #e7e5e4;
-  --warm-gray-300: #d6d3d1;
-  --warm-gray-400: #a8a29e;
-  --warm-gray-500: #78716c;
-  --warm-gray-600: #57534e;
-  --warm-gray-700: #44403c;
-  --warm-gray-800: #292524;
-  --warm-gray-900: #1c1917;
-  
-  /* Colores de acento para animaciones */
-  --accent-green: #10B981;
-  --accent-blue: #3B82F6;
-  --accent-purple: #8B5CF6;
-  --accent-pink: #EC4899;
-  --accent-orange: #F59E0B;
-  
   /* Transiciones estandarizadas */
   --transition-fast: 0.2s cubic-bezier(0.4, 0, 0.2, 1);
   --transition-normal: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
@@ -125,73 +68,6 @@ body {
   --transition-bounce: 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
 }
 
-/* ===== CLASES ESPECÍFICAS PARA PROFILE X ===== */
-
-/* Tema Profile X - Combinación única de cafés y beiges */
-.profile-x-theme {
-  --profile-x-bg-primary: var(--beige-50);
-  --profile-x-bg-secondary: var(--beige-100);
-  --profile-x-bg-tertiary: var(--beige-200);
-  --profile-x-accent-primary: var(--brown-500);
-  --profile-x-accent-secondary: var(--brown-600);
-  --profile-x-text-primary: var(--brown-900);
-  --profile-x-text-secondary: var(--brown-700);
-  --profile-x-text-tertiary: var(--brown-500);
-  --profile-x-border: var(--beige-300);
-  --profile-x-shadow: rgba(168, 124, 79, 0.15);
-  --profile-x-glow: rgba(168, 124, 79, 0.08);
-}
-
-/* Modo oscuro para Profile X */
-.profile-x-theme.dark {
-  --profile-x-bg-primary: var(--black-900);
-  --profile-x-bg-secondary: var(--black-800);
-  --profile-x-bg-tertiary: var(--black-700);
-  --profile-x-accent-primary: var(--brown-400);
-  --profile-x-accent-secondary: var(--brown-300);
-  --profile-x-text-primary: var(--beige-100);
-  --profile-x-text-secondary: var(--beige-300);
-  --profile-x-text-tertiary: var(--beige-500);
-  --profile-x-border: var(--black-600);
-  --profile-x-shadow: rgba(0, 0, 0, 0.3);
-  --profile-x-glow: rgba(212, 201, 173, 0.05);
-}
-
-/* Utilidades de color para Profile X */
-.text-profile-x-primary { color: var(--profile-x-text-primary) !important; }
-.text-profile-x-secondary { color: var(--profile-x-text-secondary) !important; }
-.text-profile-x-tertiary { color: var(--profile-x-text-tertiary) !important; }
-.text-profile-x-accent { color: var(--profile-x-accent-primary) !important; }
-
-.bg-profile-x-primary { background-color: var(--profile-x-bg-primary) !important; }
-.bg-profile-x-secondary { background-color: var(--profile-x-bg-secondary) !important; }
-.bg-profile-x-tertiary { background-color: var(--profile-x-bg-tertiary) !important; }
-.bg-profile-x-accent { background-color: var(--profile-x-accent-primary) !important; }
-
-.border-profile-x { border-color: var(--profile-x-border) !important; }
-.shadow-profile-x { box-shadow: 0 4px 20px var(--profile-x-shadow) !important; }
-
-/* Backdrop para Profile X */
-.bg-backdrop-profile-x {
-  background: rgba(212, 201, 173, 0.1) !important;
-  backdrop-filter: blur(20px);
-  border: 1px solid var(--profile-x-border);
-}
-
-/* Gradientes para Profile X */
-.gradient-profile-x-primary {
-  background: linear-gradient(135deg, var(--beige-50) 0%, var(--beige-100) 50%, var(--beige-200) 100%);
-}
-
-.gradient-profile-x-accent {
-  background: linear-gradient(135deg, var(--brown-400) 0%, var(--brown-500) 50%, var(--brown-600) 100%);
-}
-
-.gradient-profile-x-dark {
-  background: linear-gradient(135deg, var(--black-800) 0%, var(--black-900) 50%, var(--brown-900) 100%);
-}
-
-/* Resto del CSS se mantiene igual desde aquí... */
 /* CAMBIO IMPORTANTE: Secciones transparentes para mostrar fondo dinámico */
 .section-white,
 .section-brown,
@@ -324,21 +200,21 @@ body {
   --text-primary: #000000;
   --text-secondary: rgba(0, 0, 0, 0.85);
   --text-tertiary: rgba(0, 0, 0, 0.6);
-  --text-accent: var(--accent-green);
+  --text-accent: #10B981;
 }
 
 .section-brown {
   --text-primary: #FFFFFF;
   --text-secondary: rgba(255, 255, 255, 0.92);
   --text-tertiary: rgba(255, 255, 255, 0.7);
-  --text-accent: var(--accent-orange);
+  --text-accent: #F59E0B;
 }
 
 .section-black {
   --text-primary: #FFFFFF;
   --text-secondary: rgba(255, 255, 255, 0.88);
   --text-tertiary: rgba(255, 255, 255, 0.65);
-  --text-accent: var(--accent-blue);
+  --text-accent: #3B82F6;
 }
 
 .section-white h1,
@@ -1017,5 +893,30 @@ section {
   
   .bg-backdrop-black {
     background: rgba(0, 0, 0, 0.8) !important;
+  }
+}
+
+/* Añade esto en tu styles.css global o en el app.component.css */
+body.menu-open {
+  overflow: hidden !important;
+  position: fixed;
+  width: 100%;
+  height: 100%;
+}
+
+/* Asegurar que el contenido no se mueva cuando el menú está abierto */
+body.menu-open .hero,
+body.menu-open app-about,
+body.menu-open app-projects,
+body.menu-open app-contact {
+  position: relative;
+  z-index: 1;
+}
+
+/* Para pantallas muy pequeñas */
+@media (max-width: 360px) {
+  body.menu-open {
+    position: fixed;
+    width: 100%;
   }
 }

@@ -71,7 +71,7 @@ export class ProjectsComponent {
     {
       id: 1,
       title: 'TodoTech Shop',
-      description: 'Sistema completo de comercio electrónico de productos de tecnologia, realizado en Spring Boot y Angular, cuenta con panel administrativo e integración de pagos con Stripe.',
+      description: 'Sistema completo de comercio electrónico de productos de tecnologia, realizado en Spring Boot y Angular y con PostgreSQL, cuenta con panel administrativo, cuenta con servicios para descargar recibos e integracion de pagos con Stripe.',
       longDescription: 'Plataforma de e-commerce desarrollada con arquitectura de microservicios. Incluye sistema de carrito de compras, procesamiento de pagos con múltiples proveedores (Stripe, PayPal), panel administrativo para gestión de productos, pedidos y usuarios, y análisis de ventas en tiempo real. Implementa autenticación JWT y autorización basada en roles.',
       image: 'assets/e-commerce.png',
       category: 'E-commerce',
@@ -85,8 +85,8 @@ export class ProjectsComponent {
         { src: 'assets/login.png', alt: 'Login TodoTech' },
         { src: 'assets/admin.png', alt: 'Panel de administración' }
       ],
-      liveUrl: 'https://todotech-shop.demo.com',
-      githubUrl: 'https://github.com/tu-usuario/todotech-shop'
+      liveUrl: 'https://todotechshopfrontend.web.app/login',
+      githubUrl: 'https://github.com/santiagoarbelaezc/TodoTechShop-Frontend'
     },
     {
       id: 2,

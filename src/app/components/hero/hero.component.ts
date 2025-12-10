@@ -6,7 +6,7 @@ import { CommonModule, isPlatformBrowser } from '@angular/common';
   selector: 'app-hero',
   templateUrl: './hero.component.html',
   styleUrls: ['./hero.component.css'],
-  standalone: true, 
+  standalone: true,
   imports: [CommonModule]
 })
 export class HeroComponent implements OnInit, OnDestroy {
@@ -46,6 +46,11 @@ export class HeroComponent implements OnInit, OnDestroy {
     this.scrollService.scrollToSection('about');
   }
 
+  // Método opcional para abrir enlaces en nueva pestaña si quieres manejarlo desde TypeScript
+  openSocialLink(url: string): void {
+    window.open(url, '_blank', 'noopener,noreferrer');
+  }
+
   private animateStats(): void {
     this.stats.forEach((stat) => {
       this.animateCounter(stat);
@@ -74,48 +79,43 @@ export class HeroComponent implements OnInit, OnDestroy {
   }
 
   private setupIntersectionObserver(): void {
-  if (isPlatformBrowser(this.platformId)) {
-    this.observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            // Cuando el elemento entra en el viewport
-            entry.target.classList.add('revealed');
-            entry.target.classList.remove('hidden');
-            
-            // También revelar todos los elementos hijos con data-aos
-            const childElements = entry.target.querySelectorAll('[data-aos]');
-            childElements.forEach((el: Element) => {
-              el.classList.add('revealed');
-              el.classList.remove('hidden');
-            });
-          } else {
-            // Cuando el elemento sale del viewport
-            entry.target.classList.add('hidden');
-            entry.target.classList.remove('revealed');
-            
-            // También ocultar todos los elementos hijos con data-aos
-            const childElements = entry.target.querySelectorAll('[data-aos]');
-            childElements.forEach((el: Element) => {
-              el.classList.add('hidden');
-              el.classList.remove('revealed');
-            });
-          }
-        });
-      },
-      {
-        threshold: 0.1,
-        rootMargin: '0px 0px -10% 0px' // Más sensible para scroll up
-      }
-    );
+    if (isPlatformBrowser(this.platformId)) {
+      this.observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('revealed');
+              entry.target.classList.remove('hidden');
+              
+              const childElements = entry.target.querySelectorAll('[data-aos]');
+              childElements.forEach((el: Element) => {
+                el.classList.add('revealed');
+                el.classList.remove('hidden');
+              });
+            } else {
+              entry.target.classList.add('hidden');
+              entry.target.classList.remove('revealed');
+              
+              const childElements = entry.target.querySelectorAll('[data-aos]');
+              childElements.forEach((el: Element) => {
+                el.classList.add('hidden');
+                el.classList.remove('revealed');
+              });
+            }
+          });
+        },
+        {
+          threshold: 0.1,
+          rootMargin: '0px 0px -10% 0px'
+        }
+      );
 
-    // Observar el contenedor principal del hero en lugar de elementos individuales
-    setTimeout(() => {
-      const heroSection = document.querySelector('.hero');
-      if (heroSection) {
-        this.observer.observe(heroSection);
-      }
-    }, 100);
+      setTimeout(() => {
+        const heroSection = document.querySelector('.hero');
+        if (heroSection) {
+          this.observer.observe(heroSection);
+        }
+      }, 100);
+    }
   }
-}
 }
