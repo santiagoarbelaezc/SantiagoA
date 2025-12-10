@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy, Inject, PLATFORM_ID } from '@angular/core';
+import { Component, OnInit, OnDestroy, Inject, PLATFORM_ID, HostListener } from '@angular/core';
 import { ScrollService } from '../../services/scroll.service';
 import { CommonModule, isPlatformBrowser } from '@angular/common';
 
@@ -16,8 +16,12 @@ export class HeroComponent implements OnInit, OnDestroy {
     { count: 100, label: 'Compromiso', value: 0 }
   ];
 
+  // Imagen dinámica basada en el tamaño de pantalla
+  currentProfileImage = 'assets/profile.jpg';
+  
   private animationTimers: any[] = [];
   private observer!: IntersectionObserver;
+  private isMobile = false;
 
   constructor(
     private scrollService: ScrollService,
@@ -25,6 +29,10 @@ export class HeroComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit() {
+    if (isPlatformBrowser(this.platformId)) {
+      this.checkScreenSize();
+      this.updateProfileImage();
+    }
     this.animateStats();
     this.setupIntersectionObserver();
   }
@@ -38,6 +46,36 @@ export class HeroComponent implements OnInit, OnDestroy {
     }
   }
 
+  // Escuchar cambios en el tamaño de la ventana
+  @HostListener('window:resize', ['$event'])
+  onResize(event: any) {
+    if (isPlatformBrowser(this.platformId)) {
+      const wasMobile = this.isMobile;
+      this.checkScreenSize();
+      
+      // Solo actualizar la imagen si cambió el estado
+      if (wasMobile !== this.isMobile) {
+        this.updateProfileImage();
+      }
+    }
+  }
+
+  private checkScreenSize(): void {
+    if (isPlatformBrowser(this.platformId)) {
+      // Definir el breakpoint para mobile
+      const mobileBreakpoint = 768;
+      this.isMobile = window.innerWidth <= mobileBreakpoint;
+    }
+  }
+
+  private updateProfileImage(): void {
+    this.currentProfileImage = this.isMobile 
+      ? 'assets/profile2.jpg' 
+      : 'assets/profile.jpg';
+    
+    console.log('Imagen actualizada:', this.currentProfileImage, 'Mobile:', this.isMobile);
+  }
+
   scrollToProjects(): void {
     this.scrollService.scrollToSection('projects');
   }
@@ -46,7 +84,6 @@ export class HeroComponent implements OnInit, OnDestroy {
     this.scrollService.scrollToSection('about');
   }
 
-  // Método opcional para abrir enlaces en nueva pestaña si quieres manejarlo desde TypeScript
   openSocialLink(url: string): void {
     window.open(url, '_blank', 'noopener,noreferrer');
   }
