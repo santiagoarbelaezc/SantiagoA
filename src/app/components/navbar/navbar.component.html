@@ -1,0 +1,103 @@
+<!-- navbar.component.html -->
+<nav class="navbar" 
+     [class.scrolled]="isScrolled"
+     [class]="getSectionClass()"
+     [class.menu-open]="isMenuOpen"
+     [style.background]="getNavbarBackground()"
+     [style.border-bottom-color]="getBorderColor()">
+  
+  <div class="nav-container">
+    <!-- Hamburguesa SIEMPRE visible a la izquierda -->
+    <div class="nav-toggle" (click)="toggleMenu()">
+      <div class="hamburger" [class.active]="isMenuOpen">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+    </div>
+
+    <!-- Logo centrado -->
+    <div class="nav-logo">
+      <a href="#hero" class="logo-link" (click)="scrollToSection('hero', $event)">
+        <span class="logo-text">Mi Portafolio</span>
+      </a>
+    </div>
+
+    <!-- Navigation Links Desktop (oculto en móvil) -->
+    <div class="nav-menu">
+      <div class="nav-links">
+        <a *ngFor="let section of mainSections"
+           [href]="section.external ? section.url : '#' + section.id" 
+           class="nav-link" 
+           [class.active]="!section.external && isActiveSection(section.id)"
+           [class.external-link]="section.external"
+           (click)="handleSectionClick(section, $event)">
+          <span class="link-text">{{section.name}}</span>
+          <div class="link-line" *ngIf="!section.external"></div>
+          <span class="external-indicator" *ngIf="section.external">↗</span>
+        </a>
+      </div>
+    </div>
+
+    <!-- Espaciador para balance en desktop -->
+    <div class="nav-spacer"></div>
+  </div>
+
+  <!-- Mobile Menu Overlay -->
+  <div class="mobile-menu-overlay" [class.active]="isMenuOpen" (click)="closeMenu()">
+    <div class="mobile-menu-content" (click)="$event.stopPropagation()">
+      <div class="mobile-menu-header">
+        <div class="mobile-logo">Mi Portafolio</div>
+        <button class="mobile-close" (click)="closeMenu()">
+          <span></span>
+          <span></span>
+        </button>
+      </div>
+      
+      <div class="mobile-nav-links">
+        <!-- Secciones principales -->
+        <div class="mobile-section">
+          <a *ngFor="let section of mainSections"
+             [href]="section.external ? section.url : '#' + section.id" 
+             class="mobile-nav-link" 
+             [class.active]="!section.external && isActiveSection(section.id)"
+             [class.external-link]="section.external"
+             (click)="handleSectionClick(section, $event)">
+            <span class="mobile-link-text">{{section.name}}</span>
+            <div class="mobile-link-line" *ngIf="!section.external"></div>
+            <span class="external-indicator" *ngIf="section.external">↗</span>
+          </a>
+        </div>
+
+        <!-- Subsección de Productos -->
+        <!-- En la subsección de Productos -->
+<div class="mobile-subsection">
+  <div class="subsection-title">Productos</div>
+  <a *ngFor="let product of products"
+     [href]="product.url"
+     class="mobile-nav-link subsection-link"
+     (click)="openExternalLink(product.url, $event)"
+     target="_blank"
+     rel="noopener noreferrer">
+    <span class="mobile-link-text">{{product.name}}</span>
+    <span class="external-indicator">↗</span>
+  </a>
+</div>
+
+<!-- En la subsección de Redes Sociales -->
+<div class="mobile-subsection">
+  <div class="subsection-title">Mis Redes</div>
+  <a *ngFor="let social of socialNetworks"
+     [href]="social.url"
+     class="mobile-nav-link subsection-link"
+     (click)="openExternalLink(social.url, $event)"
+     target="_blank"
+     rel="noopener noreferrer">
+    <span class="mobile-link-text">{{social.name}}</span>
+    <span class="external-indicator">↗</span>
+  </a>
+</div>
+      </div>
+    </div>
+  </div>
+</nav>

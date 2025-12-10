@@ -1,0 +1,26 @@
+/* home-profile.component.css */
+:host {
+  display: block;
+}
+
+/* Aplicar tema Profile X globalmente */
+:host {
+  --profile-x-bg-primary: var(--beige-50);
+  --profile-x-bg-secondary: var(--beige-100);
+  --profile-x-bg-tertiary: var(--beige-200);
+  --profile-x-accent-primary: var(--brown-500);
+  --profile-x-accent-secondary: var(--brown-600);
+  --profile-x-text-primary: var(--brown-900);
+  --profile-x-text-secondary: var(--brown-700);
+  --profile-x-text-tertiary: var(--brown-500);
+  --profile-x-border: var(--beige-300);
+  --profile-x-shadow: rgba(168, 124, 79, 0.15);
+  --profile-x-glow: rgba(168, 124, 79, 0.08);
+}
+
+/* Fondo global para Profile X */
+:host {
+  background: var(--profile-x-bg-primary);
+  color: var(--profile-x-text-primary);
+  min-height: 100vh;
+}

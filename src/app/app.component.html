@@ -1,1 +1,5 @@
-<router-outlet (activate)="onActivate()"></router-outlet>
+<div class="dynamic-background" [style.background]="currentBackground"></div>
+
+<main class="main-content">
+  <router-outlet (activate)="onActivate()"></router-outlet>
+</main>

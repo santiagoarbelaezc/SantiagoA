@@ -1,0 +1,103 @@
+<!-- profile-x-about.component.html -->
+<section class="profile-x-about" id="profile-about">
+  
+  <!-- Fondo negro con onda animada -->
+  <div class="wave-background">
+    <canvas class="wave-canvas" #waveCanvas aria-hidden="true"></canvas>
+    <div class="wave-overlay"></div>
+  </div>
+
+  <div class="container">
+    <!-- Título y subtítulo -->
+    <div class="about-header" data-aos="fade-up">
+      <h2 class="about-title">Wave Style Lab</h2>
+      <div class="about-subtitle">
+        <p>Experimento con deformaciones sutiles y efectos de onda para interfaces únicas</p>
+      </div>
+    </div>
+
+    <!-- Contenido principal -->
+    <div class="about-content">
+      
+      <!-- Sección de controles -->
+      <div class="controls-section" data-aos="fade-right">
+        <div class="control-panel">
+          <h3>Controles de Onda</h3>
+          
+          <div class="control-group">
+            <label class="control-label">Intensidad: {{waveIntensity.toFixed(2)}}</label>
+            <input type="range" min="0.1" max="2" step="0.1" [(ngModel)]="waveIntensity" 
+                   (input)="updateWave()" class="control-slider">
+          </div>
+
+          <div class="control-group">
+            <label class="control-label">Velocidad: {{waveSpeed.toFixed(2)}}</label>
+            <input type="range" min="0.5" max="3" step="0.1" [(ngModel)]="waveSpeed" 
+                   (input)="updateWave()" class="control-slider">
+          </div>
+
+          <div class="control-group">
+            <label class="control-label">Frecuencia: {{waveFrequency.toFixed(2)}}</label>
+            <input type="range" min="1" max="10" step="0.5" [(ngModel)]="waveFrequency" 
+                   (input)="updateWave()" class="control-slider">
+          </div>
+
+          <div class="control-group">
+            <label class="control-label">Amplitud: {{waveAmplitude.toFixed(2)}}</label>
+            <input type="range" min="10" max="200" step="5" [(ngModel)]="waveAmplitude" 
+                   (input)="updateWave()" class="control-slider">
+          </div>
+
+          <!-- Botones de preset -->
+          <div class="control-buttons">
+            <button class="preset-btn" (click)="setPreset('sutil')">Sutil</button>
+            <button class="preset-btn" (click)="setPreset('moderado')">Moderado</button>
+            <button class="preset-btn" (click)="setPreset('intenso')">Intenso</button>
+            <button class="preset-btn" (click)="toggleAnimation()">
+              {{isAnimating ? 'Pausar' : 'Iniciar'}}
+            </button>
+          </div>
+        </div>
+
+        <!-- Información del efecto -->
+        <div class="info-panel">
+          <h4>Efecto de Deformación</h4>
+          <p class="info-text">
+            Esta onda utiliza una función senoidal modificada para crear deformaciones orgánicas.
+            Los controles permiten ajustar la intensidad, velocidad y frecuencia en tiempo real.
+          </p>
+          <div class="stats">
+            <div class="stat">
+              <span class="stat-label">FPS</span>
+              <span class="stat-value">{{currentFPS}}</span>
+            </div>
+            <div class="stat">
+              <span class="stat-label">Frames</span>
+              <span class="stat-value">{{frameCount}}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Sección de visualización -->
+      <div class="visualization-section" data-aos="fade-left">
+        <div class="wave-visualizer">
+          <div class="wave-container">
+            <!-- Aquí irá el canvas con la onda -->
+            <canvas class="wave-preview" #wavePreview aria-hidden="true"></canvas>
+          </div>
+          
+          
+
+          <!-- Grid overlay para visualizar deformaciones -->
+          <div class="grid-overlay"></div>
+        </div>
+
+      </div>
+
+    </div>
+
+    
+
+  </div>
+</section>

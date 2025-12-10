@@ -1,0 +1,1025 @@
+/* profile-x-hero.component.css */
+
+/* ===== PALETA ELEGANTE BLANCO Y NEGRO MEJORADA ===== */
+:host {
+  /* Colores principales - Blanco y Negro Mejorados */
+  --profile-x-black: #000000;
+  --profile-x-black-light: #0a0a0a;
+  --profile-x-black-lighter: #111111;
+  --profile-x-white: #ffffff;
+  --profile-x-white-dark: #f8f8f8;
+  --profile-x-white-darker: #e8e8e8;
+  --profile-x-accent: #ffffff;
+  --profile-x-accent-glow: rgba(255, 255, 255, 0.15);
+  --profile-x-border: rgba(255, 255, 255, 0.1);
+  --profile-x-border-light: rgba(255, 255, 255, 0.2);
+  --profile-x-border-strong: rgba(255, 255, 255, 0.3);
+  --profile-x-shadow: rgba(0, 0, 0, 0.4);
+  
+  /* Tipografía - Coherente con navbar */
+  --font-primary: 'Inter', 'Segoe UI', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-weight-light: 300;
+  --font-weight-normal: 350;
+  --font-weight-medium: 400;
+  --letter-spacing-tight: -0.02em;
+  --letter-spacing-normal: 0.02em;
+  
+  /* Transiciones mejoradas */
+  --transition-fast: 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-normal: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-slow: 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* ===== HERO ELEGANTE MEJORADO ===== */
+.profile-x-hero {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  position: relative;
+  background: var(--profile-x-black);
+  overflow: hidden;
+  padding: 0;
+  color: var(--profile-x-white);
+  font-family: var(--font-primary);
+  font-weight: var(--font-weight-light);
+  isolation: isolate;
+}
+
+/* ===== FONDO ULTRA MINIMALISTA ===== */
+.hero-background {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1;
+  overflow: hidden;
+  background: var(--profile-x-black);
+}
+
+/* Grid minimalista estático */
+.grid-overlay {
+  position: absolute;
+  inset: 0;
+  background-image: 
+    linear-gradient(rgba(255, 255, 255, 0.01) 0.2px, transparent 0.2px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.01) 0.2px, transparent 0.2px);
+  background-size: 60px 60px;
+  opacity: 0.08;
+  pointer-events: none;
+}
+
+/* Líneas minimalistas */
+.minimal-lines {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.minimal-line {
+  position: absolute;
+  background: rgba(255, 255, 255, 0.03);
+}
+
+/* Líneas verticales */
+.line-vertical-left {
+  left: 20%;
+  width: 0.1px;
+  height: 100%;
+}
+
+.line-vertical-right {
+  right: 20%;
+  width: 0.1px;
+  height: 100%;
+}
+
+/* Líneas horizontales */
+.line-horizontal-top {
+  top: 30%;
+  width: 100%;
+  height: 0.1px;
+}
+
+.line-horizontal-bottom {
+  bottom: 30%;
+  width: 100%;
+  height: 0.1px;
+}
+
+/* Gradiente sutil en los bordes */
+.hero-background::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: 
+    radial-gradient(
+      circle at 20% 50%,
+      transparent 0%,
+      rgba(255, 255, 255, 0.01) 15%,
+      transparent 30%
+    ),
+    radial-gradient(
+      circle at 80% 50%,
+      transparent 0%,
+      rgba(255, 255, 255, 0.01) 15%,
+      transparent 30%
+    );
+  pointer-events: none;
+  opacity: 0.3;
+}
+
+/* ===== CONTENEDOR PRINCIPAL MEJORADO ===== */
+.container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 3rem;
+  width: 100%;
+  position: relative;
+  z-index: 2;
+}
+
+.hero-content {
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  gap: 6rem;
+  align-items: center;
+  min-height: 90vh;
+  padding: 5rem 0;
+}
+
+/* ===== SECCIÓN DE TEXTO MEJORADA ===== */
+.hero-text-section {
+  max-width: 550px;
+}
+
+/* Encabezado minimalista mejorado */
+.hero-header {
+  margin-bottom: 4rem;
+  position: relative;
+}
+
+.header-label {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+  opacity: 0.7;
+}
+
+.label-text {
+  font-size: 0.8rem;
+  font-weight: var(--font-weight-normal);
+  letter-spacing: 0.35em;
+  text-transform: uppercase;
+  color: var(--profile-x-white-darker);
+  white-space: nowrap;
+  position: relative;
+}
+
+.label-line {
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    var(--profile-x-white-darker),
+    rgba(255, 255, 255, 0.1)
+  );
+  position: relative;
+  overflow: hidden;
+}
+
+.label-line::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    var(--profile-x-white),
+    transparent
+  );
+  animation: line-scan 4s infinite;
+  animation-delay: calc(var(--delay, 0s) + 1s);
+}
+
+@keyframes line-scan {
+  0% { left: -100%; }
+  100% { left: 100%; }
+}
+
+.main-title {
+  font-size: 5.5rem;
+  line-height: 0.95;
+  font-weight: 250;
+  letter-spacing: var(--letter-spacing-tight);
+  margin-bottom: 0.75rem;
+  position: relative;
+}
+
+.title-word {
+  display: block;
+  color: var(--profile-x-white);
+  position: relative;
+  overflow: hidden;
+}
+
+.title-word::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 0.5px; /* Línea más delgada */
+  background: linear-gradient(90deg, 
+    var(--profile-x-white) 0%, 
+    transparent 100%);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform var(--transition-slow);
+  opacity: 0.3;
+}
+
+[data-aos="fade-up"] .title-word::after {
+  transform: scaleX(1);
+}
+
+.title-subtitle {
+  margin-top: 1.5rem;
+  position: relative;
+  padding-left: 2.5rem;
+}
+
+.subtitle-text {
+  font-size: 1.25rem;
+  font-weight: var(--font-weight-normal);
+  letter-spacing: var(--letter-spacing-normal);
+  color: var(--profile-x-white-darker);
+  position: relative;
+}
+
+.subtitle-text::before {
+  content: '';
+  position: absolute;
+  left: -2.5rem;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 2rem;
+  height: 1px;
+  background: var(--profile-x-white-darker);
+  transition: width var(--transition-normal);
+}
+
+.hero-header:hover .subtitle-text::before {
+  width: 2.5rem;
+}
+
+/* Descripción elegante mejorada */
+.hero-description {
+  margin-bottom: 4rem;
+  position: relative;
+}
+
+.lead-text {
+  font-size: 1.35rem;
+  line-height: 1.7;
+  margin-bottom: 1.75rem;
+  font-weight: var(--font-weight-light);
+  letter-spacing: 0.015em;
+  color: var(--profile-x-white);
+  position: relative;
+  padding-left: 2rem;
+  border-left: 0.5px solid var(--profile-x-border); /* Más delgado */
+}
+
+.highlight {
+  position: relative;
+  color: var(--profile-x-white);
+  font-weight: var(--font-weight-medium);
+  background: linear-gradient(
+    120deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.05) 50%,
+    transparent 100%
+  );
+  padding: 0.1rem 0.3rem;
+  margin: 0 -0.3rem;
+  border-radius: 0.2rem;
+}
+
+.highlight::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0.3rem;
+  right: 0.3rem;
+  height: 0.5px; /* Más delgado */
+  background: var(--profile-x-white);
+  opacity: 0.6;
+  transform: scaleX(0);
+  transition: transform var(--transition-normal);
+  transform-origin: left;
+}
+
+.lead-text:hover .highlight::after {
+  transform: scaleX(1);
+}
+
+.sub-text {
+  font-size: 1.05rem;
+  line-height: 1.7;
+  color: var(--profile-x-white-darker);
+  font-weight: var(--font-weight-light);
+  letter-spacing: 0.015em;
+  max-width: 90%;
+}
+
+/* Píldoras de enfoque mejoradas */
+.focus-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-bottom: 4rem;
+}
+
+.pill {
+  padding: 0.6rem 1.2rem; /* Reducido para más delgado */
+  border: 0.5px solid var(--profile-x-border); /* Más delgado */
+  border-radius: 1.5rem;
+  backdrop-filter: blur(12px);
+  background: rgba(255, 255, 255, 0.03);
+  transition: all var(--transition-normal);
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+}
+
+.pill::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    135deg,
+    transparent 0%,
+    var(--profile-x-accent-glow) 100%
+  );
+  opacity: 0;
+  transition: opacity var(--transition-normal);
+  z-index: 1;
+}
+
+.pill::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.1),
+    transparent
+  );
+  transition: left var(--transition-slow);
+  z-index: 2;
+}
+
+.pill:hover {
+  border-color: var(--profile-x-border-strong);
+  background: rgba(255, 255, 255, 0.06);
+  transform: translateY(-2px);
+  box-shadow: 0 10px 30px var(--profile-x-shadow);
+}
+
+.pill:hover::before {
+  opacity: 1;
+}
+
+.pill:hover::after {
+  left: 100%;
+}
+
+.pill-text {
+  font-size: 0.85rem; /* Un poco más pequeño */
+  font-weight: var(--font-weight-normal);
+  letter-spacing: 0.06em;
+  color: var(--profile-x-white-darker);
+  position: relative;
+  z-index: 3;
+}
+
+/* CTA elegante mejorado */
+.hero-cta {
+  position: relative;
+  margin-top: 3rem;
+}
+
+.elegant-btn {
+  position: relative;
+  background: transparent;
+  border: 0.5px solid var(--profile-x-border); /* Más delgado */
+  color: var(--profile-x-white);
+  padding: 1.1rem 0; /* Reducido */
+  font-size: 1.05rem;
+  font-weight: var(--font-weight-normal);
+  letter-spacing: var(--letter-spacing-normal);
+  cursor: pointer;
+  overflow: hidden;
+  transition: all var(--transition-normal);
+  width: 100%;
+  max-width: 350px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-radius: 0.5rem;
+}
+
+.elegant-btn::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: var(--profile-x-white);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+  z-index: 1;
+}
+
+.elegant-btn::after {
+  content: '';
+  position: absolute;
+  inset: -1px;
+  border: 0.5px solid var(--profile-x-white); /* Más delgado */
+  border-radius: 0.5rem;
+  opacity: 0;
+  transition: opacity var(--transition-normal);
+  z-index: 3;
+}
+
+.btn-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 0 2rem;
+  position: relative;
+  z-index: 2;
+}
+
+.btn-text {
+  transition: color 0.4s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-text::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 100%;
+  height: 0.5px; /* Más delgado */
+  background: var(--profile-x-white);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.4s ease;
+}
+
+.btn-line {
+  flex: 1;
+  height: 0.5px; /* Más delgado */
+  background: var(--profile-x-border);
+  margin: 0 1.25rem;
+  position: relative;
+  overflow: hidden;
+  transition: all var(--transition-normal);
+}
+
+.btn-line::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    var(--profile-x-white),
+    transparent
+  );
+  transition: left 0.6s ease;
+}
+
+.btn-arrow {
+  transition: all var(--transition-normal);
+  position: relative;
+  z-index: 2;
+}
+
+.elegant-btn:hover {
+  border-color: var(--profile-x-white);
+}
+
+.elegant-btn:hover::before {
+  transform: scaleX(1);
+}
+
+.elegant-btn:hover::after {
+  opacity: 1;
+}
+
+.elegant-btn:hover .btn-text {
+  color: var(--profile-x-black);
+}
+
+.elegant-btn:hover .btn-text::after {
+  transform: scaleX(1);
+  background: var(--profile-x-black);
+}
+
+.elegant-btn:hover .btn-line {
+  background: var(--profile-x-black);
+  transform: scaleX(0.8);
+}
+
+.elegant-btn:hover .btn-line::after {
+  left: 100%;
+}
+
+.elegant-btn:hover .btn-arrow {
+  transform: translateX(5px) rotate(45deg);
+}
+
+.cta-note {
+  margin-top: 2rem;
+  opacity: 0.7;
+  position: relative;
+  padding-left: 1.5rem;
+}
+
+.note-text {
+  font-size: 0.8rem;
+  font-weight: var(--font-weight-light);
+  letter-spacing: 0.15em;
+  color: var(--profile-x-white-darker);
+  position: relative;
+}
+
+.note-text::before {
+  content: '';
+  position: absolute;
+  left: -1.5rem;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 1rem;
+  height: 0.5px; /* Más delgado */
+  background: var(--profile-x-white-darker);
+  animation: pulse-line 2s infinite;
+}
+
+@keyframes pulse-line {
+  0%, 100% {
+    opacity: 0.7;
+    width: 1rem;
+  }
+  50% {
+    opacity: 0.3;
+    width: 1.5rem;
+  }
+}
+
+/* ===== SECCIÓN VISUAL MEJORADA ===== */
+.hero-visual-section {
+  position: relative;
+}
+
+.profile-visual {
+  position: relative;
+}
+
+.profile-container {
+  position: relative;
+  margin-bottom: 3rem;
+}
+
+.image-wrapper {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 3/4;
+  border-radius: 1rem;
+  overflow: hidden;
+  background: var(--profile-x-black-light);
+  box-shadow: 
+    0 40px 120px rgba(0, 0, 0, 0.8),
+    0 0 0 0.5px var(--profile-x-border), /* Más delgado */
+    inset 0 0 80px rgba(255, 255, 255, 0.02);
+  transition: all var(--transition-slow);
+}
+
+.image-wrapper:hover {
+  transform: translateY(-5px);
+  box-shadow: 
+    0 60px 160px rgba(0, 0, 0, 0.9),
+    0 0 0 0.5px var(--profile-x-border-strong), /* Más delgado */
+    inset 0 0 100px rgba(255, 255, 255, 0.03);
+}
+
+.profile-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: all var(--transition-slow);
+  filter: contrast(105%) brightness(95%);
+}
+
+.image-wrapper:hover .profile-image {
+  filter: contrast(110%) brightness(100%);
+  transform: scale(1.02);
+}
+
+/* Overlay elegante mejorado */
+.image-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    transparent 30%,
+    rgba(0, 0, 0, 0.7) 80%,
+    rgba(0, 0, 0, 0.9) 100%
+  );
+  display: flex;
+  align-items: flex-end;
+  padding: 3rem;
+  pointer-events: none;
+  z-index: 2;
+}
+
+.overlay-content {
+  width: 100%;
+  position: relative;
+}
+
+.overlay-content::before {
+  content: '';
+  position: absolute;
+  top: -1.5rem;
+  left: 0;
+  width: 3rem;
+  height: 0.5px; /* Más delgado */
+  background: var(--profile-x-white);
+  opacity: 0.6;
+}
+
+.overlay-text {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.overlay-label {
+  font-size: 0.8rem;
+  font-weight: var(--font-weight-normal);
+  letter-spacing: 0.35em;
+  text-transform: uppercase;
+  color: var(--profile-x-white-darker);
+  margin-bottom: 0.5rem;
+}
+
+.overlay-title {
+  font-size: 2.5rem;
+  font-weight: 250;
+  letter-spacing: var(--letter-spacing-tight);
+  color: var(--profile-x-white);
+  line-height: 1;
+  position: relative;
+  overflow: hidden;
+}
+
+.overlay-title::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 0.5px; /* Más delgado */
+  background: var(--profile-x-white);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform var(--transition-slow);
+  opacity: 0.5;
+}
+
+.image-wrapper:hover .overlay-title::after {
+  transform: scaleX(1);
+}
+
+.overlay-title.accent {
+  position: relative;
+  padding-left: 1.5rem;
+}
+
+.overlay-title.accent::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 1rem;
+  height: 1px; /* Mantenido para visibilidad */
+  background: var(--profile-x-white);
+  opacity: 0.8;
+}
+
+/* Marco sutil mejorado */
+.image-frame {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 3;
+}
+
+.frame-line {
+  position: absolute;
+  background: var(--profile-x-border);
+  transition: all var(--transition-slow);
+}
+
+.vertical {
+  width: 0.5px; /* Más delgado */
+  height: 0;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.horizontal {
+  width: 0;
+  height: 0.5px; /* Más delgado */
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.left {
+  left: 1.5rem;
+}
+
+.right {
+  right: 1.5rem;
+}
+
+.top {
+  top: 1.5rem;
+}
+
+.bottom {
+  bottom: 1.5rem;
+}
+
+.image-wrapper:hover .vertical {
+  height: 85%;
+}
+
+.image-wrapper:hover .horizontal {
+  width: 85%;
+}
+
+/* Estadísticas minimalistas mejoradas */
+.minimal-stats {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 2rem 0;
+  border-top: 0.5px solid var(--profile-x-border); /* Más delgado */
+  border-bottom: 0.5px solid var(--profile-x-border); /* Más delgado */
+  position: relative;
+}
+
+.minimal-stats::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 0.5px; /* Más delgado */
+  height: 100%;
+  background: linear-gradient(
+    to bottom,
+    transparent 0%,
+    var(--profile-x-border) 20%,
+    var(--profile-x-border) 80%,
+    transparent 100%
+  );
+}
+
+.stat {
+  text-align: center;
+  flex: 1;
+  position: relative;
+  padding: 0 1.5rem;
+}
+
+.stat-value {
+  font-size: 1.75rem;
+  font-weight: 250;
+  letter-spacing: var(--letter-spacing-tight);
+  color: var(--profile-x-white);
+  margin-bottom: 0.5rem;
+  position: relative;
+  display: inline-block;
+}
+
+.stat-value::after {
+  content: '';
+  position: absolute;
+  bottom: -3px;
+  left: 0;
+  width: 100%;
+  height: 0.5px; /* Más delgado */
+  background: var(--profile-x-white);
+  opacity: 0.3;
+  transform: scaleX(0);
+  transition: transform var(--transition-normal);
+  transform-origin: left;
+}
+
+.stat:hover .stat-value::after {
+  transform: scaleX(1);
+}
+
+.stat-label {
+  font-size: 0.8rem;
+  font-weight: var(--font-weight-normal);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--profile-x-white-darker);
+  line-height: 1.4;
+}
+
+.stat-divider {
+  width: 0.5px; /* Más delgado */
+  height: 3rem;
+  background: linear-gradient(
+    to bottom,
+    transparent 0%,
+    var(--profile-x-border) 50%,
+    transparent 100%
+  );
+}
+
+/* Divisor elegante mejorado */
+.hero-divider {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 2rem;
+  padding: 4rem 0;
+  opacity: 0.5;
+  position: relative;
+}
+
+.divider-line {
+  flex: 1;
+  height: 0.5px; /* Más delgado */
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.15) 30%,
+    rgba(255, 255, 255, 0.15) 70%,
+    transparent
+  );
+  position: relative;
+  overflow: hidden;
+}
+
+.divider-line::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    var(--profile-x-white),
+    transparent
+  );
+  animation: divider-scan 6s infinite;
+  animation-delay: calc(var(--delay, 0s) + 2s);
+}
+
+@keyframes divider-scan {
+  0% { left: -100%; }
+  100% { left: 100%; }
+}
+
+.divider-dot {
+  width: 4px;
+  height: 4px;
+  background: var(--profile-x-white);
+  border-radius: 50%;
+  animation: pulse-dot 3s infinite;
+  box-shadow: 0 0 8px rgba(255, 255, 255, 0.2);
+}
+
+@keyframes pulse-dot {
+  0%, 100% {
+    opacity: 1;
+    transform: scale(1);
+    box-shadow: 0 0 8px rgba(255, 255, 255, 0.2);
+  }
+  50% {
+    opacity: 0.6;
+    transform: scale(1.2);
+    box-shadow: 0 0 12px rgba(255, 255, 255, 0.4);
+  }
+}
+
+/* ===== EFECTOS ESPECIALES MEJORADOS ===== */
+/* Efecto de brillo sutil en elementos */
+.pill,
+.elegant-btn,
+.image-wrapper,
+.stat {
+  position: relative;
+}
+
+.pill::before,
+.elegant-btn::after,
+.image-wrapper::before,
+.stat::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  z-index: 4;
+  opacity: 0;
+  transition: opacity var(--transition-normal);
+}
+
+.pill::before {
+  box-shadow: 0 0 15px rgba(255, 255, 255, 0.08); /* Más sutil */
+}
+
+.elegant-btn::after {
+  box-shadow: 0 0 20px rgba(255, 255, 255, 0.1); /* Más sutil */
+}
+
+.image-wrapper::before {
+  box-shadow: 0 0 30px rgba(255, 255, 255, 0.03); /* Más sutil */
+}
+
+.stat::before {
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.03); /* Más sutil */
+}
+
+.pill:hover::before,
+.elegant-btn:hover::after,
+.image-wrapper:hover::before,
+.stat:hover::before {
+  opacity: 1;
+}
+
+/* ===== EFECTOS DE REDUCED MOTION ===== */
+@media (prefers-reduced-motion: reduce) {
+  .divider-dot,
+  .label-line::after,
+  .divider-line::after,
+  .note-text::before {
+    animation: none;
+  }
+  
+  .image-wrapper:hover .vertical,
+  .image-wrapper:hover .horizontal,
+  .image-wrapper:hover .profile-image {
+    transform: none;
+  }
+  
+  .pill:hover,
+  .elegant-btn:hover .btn-arrow {
+    transform: none;
+  }
+}
+
+/* Asegurar que elementos decorativos no interfieran */
+[aria-hidden="true"] {
+  pointer-events: none;
+}
+
+/* Optimizar rendering de AOS */
+[data-aos] {
+  pointer-events: none;
+}
+
+[data-aos].aos-animate {
+  pointer-events: auto;
+}
+
+/* Asegurar que el contenido esté siempre encima */
+.container {
+  position: relative;
+  z-index: 10;
+}

@@ -1,0 +1,35 @@
+<!-- Contact Section - Paleta Negros -->
+<section id="contact" class="contact-section section-black">
+  <!-- Líneas de sección -->
+  <div class="section-lines">
+    <div class="section-line"></div>
+    <div class="section-line"></div>
+  </div>
+  
+  <div class="container">
+    <div class="section-header">
+      <h2 class="section-title">Contacto</h2>
+      <div class="title-line"></div>
+      <div class="title-ornament"></div>
+    </div>
+    <div class="contact-content">
+      <p class="contact-text">
+        ¿Listo para llevar tu proyecto al siguiente nivel?
+      </p>
+      <div class="contact-links">
+        <a 
+          *ngFor="let link of contactLinks; let i = index" 
+          [href]="link.url" 
+          class="contact-link bg-black-elements"
+          [target]="link.external ? '_blank' : '_self'"
+          [rel]="link.external ? 'noopener noreferrer' : null"
+          [class.revealed]="true"
+        >
+          <span class="link-text">{{ link.text }}</span>
+          <div class="link-line"></div>
+          <div class="link-arrow">→</div>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>

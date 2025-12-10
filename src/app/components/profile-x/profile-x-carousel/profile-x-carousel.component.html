@@ -1,0 +1,71 @@
+<div class="carousel-container">
+  <!-- Escena del carrusel -->
+  <div 
+    #sceneElement
+    class="carousel-scene"
+    [class.dragging]="isDragging"
+    (mousedown)="onMouseDown($event)"
+    (touchstart)="onTouchStart($event)">
+    
+    <!-- Cilindro 3D -->
+    <div 
+      class="carousel-cylinder"
+      [style]="getCylinderStyle()">
+      
+      <!-- Elementos del carrusel -->
+      <div 
+        *ngFor="let image of images; let i = index"
+        class="carousel-item"
+        [style]="getItemStyle(i)">
+        
+        <div 
+          class="carousel-image-wrapper"
+          [style]="getImageWrapperStyle(i)">
+          
+          <img 
+            [src]="image" 
+            [alt]="'Slide ' + (i + 1)"
+            class="carousel-image"
+            draggable="false">
+          
+          <div class="carousel-reflection"></div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Brillo del suelo -->
+    <div class="carousel-floor"></div>
+  </div>
+
+  <!-- Controles de navegación -->
+  <div class="carousel-controls">
+    <button 
+      (click)="onPrev()"
+      class="carousel-button"
+      aria-label="Previous">
+      <svg class="chevron" width="20" height="20" viewBox="0 0 24 24" fill="none">
+        <path d="M15 18L9 12L15 6" stroke="currentColor" stroke-width="1.5"/>
+      </svg>
+    </button>
+    
+    <button 
+      (click)="onNext()"
+      class="carousel-button"
+      aria-label="Next">
+      <svg class="chevron" width="20" height="20" viewBox="0 0 24 24" fill="none">
+        <path d="M9 18L15 12L9 6" stroke="currentColor" stroke-width="1.5"/>
+      </svg>
+    </button>
+  </div>
+
+  <!-- Indicador de puntos -->
+  <div class="carousel-indicator">
+    <button
+      *ngFor="let image of images; let i = index"
+      (click)="goToSlide(i)"
+      class="carousel-dot"
+      [class.active]="getActiveSlideIndex() === i"
+      [attr.aria-label]="'Go to slide ' + (i + 1)">
+    </button>
+  </div>
+</div>

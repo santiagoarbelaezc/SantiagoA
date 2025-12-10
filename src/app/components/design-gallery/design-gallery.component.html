@@ -1,0 +1,107 @@
+<div class="design-gallery">
+  
+ <!-- Botón con icono estructural -->
+<!-- Botón con cubo 3D sólido -->
+<div 
+  class="gallery-button" 
+  *ngIf="!isOpen"
+  [class.hovering]="isHovering"
+  (mouseenter)="isHovering = true"
+  (mouseleave)="isHovering = false"
+  (click)="toggleGallery()">
+  
+  <!-- Cubo 3D sólido tipo Inception -->
+  <div class="inception-icon">
+    <div class="solid-cube">
+      <div class="cube-face"></div> <!-- Frontal -->
+      <div class="cube-face"></div> <!-- Trasera -->
+      <div class="cube-face"></div> <!-- Derecha -->
+      <div class="cube-face"></div> <!-- Izquierda -->
+      <div class="cube-face"></div> <!-- Superior -->
+      <div class="cube-face"></div> <!-- Inferior -->
+    </div>
+  </div>
+  
+  <div class="button-tooltip" *ngIf="isHovering">
+    <span>Galería de Diseños</span>
+    <div class="tooltip-line"></div>
+  </div>
+  
+
+
+  
+</div>
+
+  <!-- Galería abierta -->
+  <div 
+    class="gallery-content" 
+    *ngIf="isOpen"
+    @slideInOut>
+    
+    <!-- Header con icono rotatorio -->
+    <div class="gallery-header">
+      <div class="header-left">
+        <div class="header-icon">
+          <div class="rotating-square"></div>
+        </div>
+        <div class="header-title">
+          <h3>Galería de Diseños</h3>
+          <div class="title-line"></div>
+        </div>
+      </div>
+      
+      <button class="close-btn" (click)="toggleGallery()" aria-label="Cerrar">
+        ×
+      </button>
+    </div>
+
+    <!-- Grid de diseños -->
+    <div class="designs-container" *ngIf="designs && designs.length > 0">
+      <div class="designs-grid">
+        
+        <div 
+          class="design-card" 
+          *ngFor="let design of designs; let i = index">
+          
+          <div class="card-header">
+            <div class="card-category">{{ design.category }}</div>
+            <div class="card-year">{{ design.year }}</div>
+          </div>
+          
+          <h4 class="card-title">{{ design.title }}</h4>
+          
+          <p class="card-description">{{ design.description }}</p>
+          
+          <div class="card-tags">
+            <span class="tag" *ngFor="let tag of design.tags">
+              {{ tag }}
+            </span>
+          </div>
+          
+          <div class="card-number">#{{ i + 1 }}</div>
+          
+          <!-- Línea animada -->
+          <div class="card-line">
+            <div class="line-progress"></div>
+          </div>
+        </div>
+        
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <div class="gallery-footer">
+      <div class="footer-info">
+        <div class="info-item">
+          <span class="info-label">Total:</span>
+          <span class="info-value">{{ designs.length || 0 }} diseños</span>
+        </div>
+      </div>
+      
+      <div class="footer-hint">
+        <span>↔ Desplázate horizontalmente</span>
+      </div>
+    </div>
+    
+  </div>
+</div>

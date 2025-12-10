@@ -1,94 +1,533 @@
 /* You can add global styles to this file, and also import other style files */
 @import 'aos/dist/aos.css';
 
-/* Reset y estilos base */
+/* Reset y estilos base optimizados */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
+*::before,
+*::after {
+  box-sizing: inherit;
+}
+
 html {
   scroll-behavior: smooth;
+  font-size: 16px;
 }
 
+/* CAMBIO PRINCIPAL: Body con color sólido para el fondo dinámico */
 body {
-  font-family: 'Inter', 'Segoe UI', sans-serif;
+  font-family: 'Inter', 'Segoe UI', -apple-system, BlinkMacSystemFont, sans-serif;
   line-height: 1.6;
   color: #ffffff;
-  background-color: #000000;
+  background: #FFFFFF; /* Color base que será sobrescrito por el servicio dinámico */
   overflow-x: hidden;
   font-weight: 300;
+  min-height: 100vh;
+  text-rendering: optimizeSpeed;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
-/* Variables CSS para el tema oscuro elegante */
+/* Variables CSS optimizadas para las tres paletas */
 :root {
+  /* Paleta Blancos (Hero) - Optimizada */
+  --white-primary: #FFFFFF;
+  --white-secondary: #f3f3f3;
+  --white-tertiary: #8b8b8b;
+  --white-accent: #adadad;
+  --white-line: rgba(0, 0, 0, 0.08);
+  --white-glow: rgba(0, 0, 0, 0.03);
+  --white-shadow: rgba(0, 0, 0, 0.05);
+  
+  /* Paleta Cafés (About) - Enriquecida */
+  --brown-primary: #8B4513;
+  --brown-secondary: #A0522D;
+  --brown-tertiary: #CD853F;
+  --brown-accent: #D2691E;
+  --brown-light: #DEB887;
+  --brown-line: rgba(139, 69, 19, 0.25);
+  --brown-glow: rgba(139, 69, 19, 0.08);
+  
+  /* Paleta Negros (Projects & Contact) - Mejorada */
   --black-primary: #000000;
-  --black-secondary: #0a0a0a;
+  --black-secondary: #0A0A0A;
   --black-tertiary: #111111;
-  --white-primary: #ffffff;
-  --white-secondary: #e0e0e0;
-  --accent-glow: rgba(255, 255, 255, 0.1);
-  --line-color: rgba(255, 255, 255, 0.15);
+  --black-accent: #1A1A1A;
+  --black-light: #2D2D2D;
+  --black-line: rgba(255, 255, 255, 0.12);
+  --black-glow: rgba(255, 255, 255, 0.06);
+  
+  /* ===== NUEVA PALETA PARA PROFILE X ===== */
+  
+  /* Cafés enriquecidos - Más tonos para Profile X */
+  --brown-50: #fdf8f3;
+  --brown-100: #f6f0e8;
+  --brown-200: #e8d5c4;
+  --brown-300: #d4b899;
+  --brown-400: #c19a6d;
+  --brown-500: #a87c4f;  /* Café principal */
+  --brown-600: #8b5a30;
+  --brown-700: #6f4518;
+  --brown-800: #553312;
+  --brown-900: #3d2209;
+  
+  /* Beiges suaves - Para fondos y acentos */
+  --beige-50: #fefefc;
+  --beige-100: #fbf9f5;
+  --beige-200: #f5f1e8;
+  --beige-300: #eee7d8;
+  --beige-400: #e5dcc8;
+  --beige-500: #d4c9ad;
+  --beige-600: #c2b492;
+  --beige-700: #a89978;
+  --beige-800: #8a7d5f;
+  --beige-900: #6d6248;
+  
+  /* Negros enriquecidos - Más profundidad */
+  --black-50: #f8f9fa;
+  --black-100: #e9ecef;
+  --black-200: #dee2e6;
+  --black-300: #ced4da;
+  --black-400: #adb5bd;
+  --black-500: #6c757d;
+  --black-600: #495057;
+  --black-700: #343a40;
+  --black-800: #212529;
+  --black-900: #121416;
+  
+  /* Grises cálidos - Para Profile X */
+  --warm-gray-50: #fafaf9;
+  --warm-gray-100: #f5f5f4;
+  --warm-gray-200: #e7e5e4;
+  --warm-gray-300: #d6d3d1;
+  --warm-gray-400: #a8a29e;
+  --warm-gray-500: #78716c;
+  --warm-gray-600: #57534e;
+  --warm-gray-700: #44403c;
+  --warm-gray-800: #292524;
+  --warm-gray-900: #1c1917;
+  
+  /* Colores de acento para animaciones */
+  --accent-green: #10B981;
+  --accent-blue: #3B82F6;
+  --accent-purple: #8B5CF6;
+  --accent-pink: #EC4899;
+  --accent-orange: #F59E0B;
+  
+  /* Transiciones estandarizadas */
+  --transition-fast: 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-normal: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-slow: 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-bounce: 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
 }
 
-/* Fondo con líneas elegantes */
-body::before {
+/* ===== CLASES ESPECÍFICAS PARA PROFILE X ===== */
+
+/* Tema Profile X - Combinación única de cafés y beiges */
+.profile-x-theme {
+  --profile-x-bg-primary: var(--beige-50);
+  --profile-x-bg-secondary: var(--beige-100);
+  --profile-x-bg-tertiary: var(--beige-200);
+  --profile-x-accent-primary: var(--brown-500);
+  --profile-x-accent-secondary: var(--brown-600);
+  --profile-x-text-primary: var(--brown-900);
+  --profile-x-text-secondary: var(--brown-700);
+  --profile-x-text-tertiary: var(--brown-500);
+  --profile-x-border: var(--beige-300);
+  --profile-x-shadow: rgba(168, 124, 79, 0.15);
+  --profile-x-glow: rgba(168, 124, 79, 0.08);
+}
+
+/* Modo oscuro para Profile X */
+.profile-x-theme.dark {
+  --profile-x-bg-primary: var(--black-900);
+  --profile-x-bg-secondary: var(--black-800);
+  --profile-x-bg-tertiary: var(--black-700);
+  --profile-x-accent-primary: var(--brown-400);
+  --profile-x-accent-secondary: var(--brown-300);
+  --profile-x-text-primary: var(--beige-100);
+  --profile-x-text-secondary: var(--beige-300);
+  --profile-x-text-tertiary: var(--beige-500);
+  --profile-x-border: var(--black-600);
+  --profile-x-shadow: rgba(0, 0, 0, 0.3);
+  --profile-x-glow: rgba(212, 201, 173, 0.05);
+}
+
+/* Utilidades de color para Profile X */
+.text-profile-x-primary { color: var(--profile-x-text-primary) !important; }
+.text-profile-x-secondary { color: var(--profile-x-text-secondary) !important; }
+.text-profile-x-tertiary { color: var(--profile-x-text-tertiary) !important; }
+.text-profile-x-accent { color: var(--profile-x-accent-primary) !important; }
+
+.bg-profile-x-primary { background-color: var(--profile-x-bg-primary) !important; }
+.bg-profile-x-secondary { background-color: var(--profile-x-bg-secondary) !important; }
+.bg-profile-x-tertiary { background-color: var(--profile-x-bg-tertiary) !important; }
+.bg-profile-x-accent { background-color: var(--profile-x-accent-primary) !important; }
+
+.border-profile-x { border-color: var(--profile-x-border) !important; }
+.shadow-profile-x { box-shadow: 0 4px 20px var(--profile-x-shadow) !important; }
+
+/* Backdrop para Profile X */
+.bg-backdrop-profile-x {
+  background: rgba(212, 201, 173, 0.1) !important;
+  backdrop-filter: blur(20px);
+  border: 1px solid var(--profile-x-border);
+}
+
+/* Gradientes para Profile X */
+.gradient-profile-x-primary {
+  background: linear-gradient(135deg, var(--beige-50) 0%, var(--beige-100) 50%, var(--beige-200) 100%);
+}
+
+.gradient-profile-x-accent {
+  background: linear-gradient(135deg, var(--brown-400) 0%, var(--brown-500) 50%, var(--brown-600) 100%);
+}
+
+.gradient-profile-x-dark {
+  background: linear-gradient(135deg, var(--black-800) 0%, var(--black-900) 50%, var(--brown-900) 100%);
+}
+
+/* Resto del CSS se mantiene igual desde aquí... */
+/* CAMBIO IMPORTANTE: Secciones transparentes para mostrar fondo dinámico */
+.section-white,
+.section-brown,
+.section-black {
+  background: transparent !important;
+  position: relative;
+  isolation: isolate;
+}
+
+/* Mantener los colores de texto según la sección */
+.section-white {
+  color: #000000;
+}
+
+.section-brown {
+  color: #FFFFFF;
+}
+
+.section-black {
+  color: #FFFFFF;
+}
+
+/* Overlays de fondo optimizados - Mantener para efectos visuales sutiles */
+.section-white::before {
   content: '';
-  position: fixed;
+  position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
   background: 
-    linear-gradient(90deg, var(--line-color) 1px, transparent 1px) 0 0 / 50px 50px,
-    linear-gradient(0deg, var(--line-color) 1px, transparent 1px) 0 0 / 50px 50px;
+    radial-gradient(circle at 15% 85%, rgba(120, 119, 198, 0.03) 0%, transparent 50%),
+    radial-gradient(circle at 85% 15%, rgba(255, 119, 198, 0.02) 0%, transparent 50%);
   pointer-events: none;
   z-index: -1;
+  opacity: 0.3;
 }
 
-/* Tipografía elegante */
+.section-brown::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: 
+    radial-gradient(circle at 25% 75%, rgba(255, 255, 255, 0.02) 0%, transparent 50%),
+    radial-gradient(circle at 75% 25%, rgba(255, 255, 255, 0.01) 0%, transparent 50%);
+  pointer-events: none;
+  z-index: -1;
+  opacity: 0.2;
+}
+
+.section-black::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: 
+    radial-gradient(circle at 20% 20%, rgba(255, 255, 255, 0.02) 0%, transparent 50%),
+    radial-gradient(circle at 80% 80%, rgba(255, 255, 255, 0.008) 0%, transparent 50%);
+  pointer-events: none;
+  z-index: -1;
+  opacity: 0.15;
+}
+
+/* NUEVO: Estilos para elementos con fondos semitransparentes para mejor contraste */
+.bg-backdrop-white {
+  background: rgba(255, 255, 255, 0.85) !important;
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+.bg-backdrop-brown {
+  background: rgba(255, 255, 255, 0.12) !important;
+  backdrop-filter: blur(15px);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.bg-backdrop-black {
+  background: rgba(0, 0, 0, 0.25) !important;
+  backdrop-filter: blur(15px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Asegurar que los elementos internos tengan buen contraste */
+.section-white .hero-badge,
+.section-white .image-frame,
+.section-white .card {
+  background: rgba(255, 255, 255, 0.9) !important;
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.section-brown .about-content,
+.section-brown .card,
+.section-brown .skill-item {
+  background: rgba(255, 255, 255, 0.1) !important;
+  backdrop-filter: blur(15px);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.section-black .project-card,
+.section-black .contact-form,
+.section-black .tech-stack {
+  background: rgba(0, 0, 0, 0.3) !important;
+  backdrop-filter: blur(15px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Sistema de tipografía escalable y responsive */
+:root {
+  --text-xs: 0.75rem;   /* 12px */
+  --text-sm: 0.875rem;  /* 14px */
+  --text-base: 1rem;    /* 16px */
+  --text-lg: 1.125rem;  /* 18px */
+  --text-xl: 1.25rem;   /* 20px */
+  --text-2xl: 1.5rem;   /* 24px */
+  --text-3xl: 1.875rem; /* 30px */
+  --text-4xl: 2.25rem;  /* 36px */
+  --text-5xl: 3rem;     /* 48px */
+  --text-6xl: 3.75rem;  /* 60px */
+  --text-7xl: 4.5rem;   /* 72px */
+}
+
+/* Tipografía elegante - Sistema mejorado */
+.section-white {
+  --text-primary: #000000;
+  --text-secondary: rgba(0, 0, 0, 0.85);
+  --text-tertiary: rgba(0, 0, 0, 0.6);
+  --text-accent: var(--accent-green);
+}
+
+.section-brown {
+  --text-primary: #FFFFFF;
+  --text-secondary: rgba(255, 255, 255, 0.92);
+  --text-tertiary: rgba(255, 255, 255, 0.7);
+  --text-accent: var(--accent-orange);
+}
+
+.section-black {
+  --text-primary: #FFFFFF;
+  --text-secondary: rgba(255, 255, 255, 0.88);
+  --text-tertiary: rgba(255, 255, 255, 0.65);
+  --text-accent: var(--accent-blue);
+}
+
+.section-white h1,
+.section-white h2,
+.section-white h3,
+.section-white h4,
+.section-white h5,
+.section-white h6 {
+  color: var(--text-primary);
+  font-weight: 300;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+}
+
+.section-white p,
+.section-white span:not([class*="text-"]),
+.section-white li {
+  color: var(--text-secondary);
+}
+
+.section-white a:not([class]) {
+  color: var(--text-primary);
+}
+
+.section-brown h1,
+.section-brown h2,
+.section-brown h3,
+.section-brown h4,
+.section-brown h5,
+.section-brown h6 {
+  color: var(--text-primary);
+}
+
+.section-brown p,
+.section-brown span:not([class*="text-"]),
+.section-brown li {
+  color: var(--text-secondary);
+}
+
+.section-brown a:not([class]) {
+  color: var(--text-primary);
+}
+
+.section-black h1,
+.section-black h2,
+.section-black h3,
+.section-black h4,
+.section-black h5,
+.section-black h6 {
+  color: var(--text-primary);
+}
+
+.section-black p,
+.section-black span:not([class*="text-"]),
+.section-black li {
+  color: var(--text-secondary);
+}
+
+.section-black a:not([class]) {
+  color: var(--text-primary);
+}
+
+/* Escala de tipografía base mejorada */
 h1, h2, h3, h4, h5, h6 {
   font-weight: 300;
-  line-height: 1.2;
+  line-height: 1.1;
   margin-bottom: 1.5rem;
   letter-spacing: -0.02em;
 }
 
 h1 {
-  font-size: 4rem;
+  font-size: var(--text-6xl);
   font-weight: 250;
   letter-spacing: -0.03em;
 }
 
 h2 {
-  font-size: 2.5rem;
+  font-size: var(--text-5xl);
   font-weight: 300;
 }
 
 h3 {
-  font-size: 1.5rem;
+  font-size: var(--text-4xl);
   font-weight: 350;
+}
+
+h4 {
+  font-size: var(--text-3xl);
+  font-weight: 400;
+}
+
+h5 {
+  font-size: var(--text-2xl);
+  font-weight: 450;
+}
+
+h6 {
+  font-size: var(--text-xl);
+  font-weight: 500;
 }
 
 p {
   margin-bottom: 1.5rem;
-  color: var(--white-secondary);
   font-weight: 300;
   line-height: 1.6;
+  font-size: var(--text-base);
 }
 
-/* Utilidades */
+/* Enlaces globales con sistema de estados */
+a {
+  text-decoration: none;
+  color: inherit;
+  transition: all var(--transition-normal);
+  position: relative;
+}
+
+a:not([class]):hover {
+  color: var(--text-accent, inherit);
+}
+
+a:not([class])::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background: currentColor;
+  transition: width var(--transition-normal);
+}
+
+a:not([class]):hover::after {
+  width: 100%;
+}
+
+/* Sistema de contenedores responsive */
 .container {
   max-width: 1200px;
   margin: 0 auto;
   padding: 0 2rem;
+  width: 100%;
 }
 
-.text-center {
-  text-align: center;
+.container-wide {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 2rem;
+  width: 100%;
 }
 
+.container-narrow {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 0 2rem;
+  width: 100%;
+}
+
+/* Utilidades de texto mejoradas */
+.text-center { text-align: center; }
+.text-left { text-align: left; }
+.text-right { text-align: right; }
+.text-justify { text-align: justify; }
+
+.text-primary { color: var(--text-primary) !important; }
+.text-secondary { color: var(--text-secondary) !important; }
+.text-tertiary { color: var(--text-tertiary) !important; }
+.text-accent { color: var(--text-accent) !important; }
+
+/* Sistema de escalas de texto */
+.text-xs { font-size: var(--text-xs) !important; }
+.text-sm { font-size: var(--text-sm) !important; }
+.text-base { font-size: var(--text-base) !important; }
+.text-lg { font-size: var(--text-lg) !important; }
+.text-xl { font-size: var(--text-xl) !important; }
+.text-2xl { font-size: var(--text-2xl) !important; }
+.text-3xl { font-size: var(--text-3xl) !important; }
+.text-4xl { font-size: var(--text-4xl) !important; }
+.text-5xl { font-size: var(--text-5xl) !important; }
+.text-6xl { font-size: var(--text-6xl) !important; }
+.text-7xl { font-size: var(--text-7xl) !important; }
+
+/* Pesos de fuente */
+.font-light { font-weight: 300 !important; }
+.font-normal { font-weight: 400 !important; }
+.font-medium { font-weight: 500 !important; }
+.font-semibold { font-weight: 600 !important; }
+.font-bold { font-weight: 700 !important; }
+
+/* Utilidades de accesibilidad */
 .sr-only {
   position: absolute;
   width: 1px;
@@ -101,26 +540,482 @@ p {
   border: 0;
 }
 
-/* Scrollbar personalizado */
+.skip-link {
+  position: absolute;
+  top: -40px;
+  left: 6px;
+  background: #000;
+  color: white;
+  padding: 8px;
+  text-decoration: none;
+  z-index: 10000;
+  transition: top 0.3s;
+}
+
+.skip-link:focus {
+  top: 6px;
+}
+
+/* Scrollbar personalizado optimizado para fondo dinámico */
 ::-webkit-scrollbar {
-  width: 6px;
+  width: 10px;
 }
 
 ::-webkit-scrollbar-track {
-  background: var(--black-secondary);
+  background: rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: var(--white-primary);
-  border-radius: 3px;
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 8px;
+  border: 2px solid rgba(0, 0, 0, 0.1);
+  transition: all var(--transition-normal);
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: var(--white-secondary);
+  background: rgba(255, 255, 255, 0.5);
+  transform: scale(1.1);
 }
 
-/* Efectos de selección */
-::selection {
+/* Efectos de selección que se adaptan */
+.section-white ::selection {
+  background: var(--text-primary);
+  color: var(--white-primary);
+  text-shadow: none;
+}
+
+.section-brown ::selection {
+  background: var(--white-primary);
+  color: var(--brown-primary);
+  text-shadow: none;
+}
+
+.section-black ::selection {
   background: var(--white-primary);
   color: var(--black-primary);
+  text-shadow: none;
+}
+
+/* Transiciones suaves para cambios de color */
+section {
+  transition: all var(--transition-slow);
+  position: relative;
+}
+
+/* Clases utilitarias para fondos */
+.bg-white-elements {
+  background: rgba(255, 255, 255, 0.08) !important;
+  backdrop-filter: blur(12px);
+  border: 1px solid var(--white-line);
+}
+
+.bg-brown-elements {
+  background: rgba(139, 69, 19, 0.08) !important;
+  backdrop-filter: blur(12px);
+  border: 1px solid var(--brown-line);
+}
+
+.bg-black-elements {
+  background: rgba(0, 0, 0, 0.25) !important;
+  backdrop-filter: blur(12px);
+  border: 1px solid var(--black-line);
+}
+
+/* Sistema de animaciones estandarizadas */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 40px, 0);
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@keyframes fadeInDown {
+  from {
+    opacity: 0;
+    transform: translate3d(0, -40px, 0);
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@keyframes fadeInLeft {
+  from {
+    opacity: 0;
+    transform: translate3d(-40px, 0, 0);
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@keyframes fadeInRight {
+  from {
+    opacity: 0;
+    transform: translate3d(40px, 0, 0);
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: scale3d(0.8, 0.8, 0.8);
+  }
+  to {
+    opacity: 1;
+    transform: scale3d(1, 1, 1);
+  }
+}
+
+@keyframes slideInUp {
+  from {
+    transform: translate3d(0, 100%, 0);
+    visibility: visible;
+  }
+  to {
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@keyframes pulse {
+  0%, 100% {
+    transform: scale3d(1, 1, 1);
+  }
+  50% {
+    transform: scale3d(1.05, 1.05, 1.05);
+  }
+}
+
+/* Clases de animación utilitarias */
+.animate-fadeInUp { animation: fadeInUp 0.6s var(--transition-bounce); }
+.animate-fadeInDown { animation: fadeInDown 0.6s var(--transition-bounce); }
+.animate-fadeInLeft { animation: fadeInLeft 0.6s var(--transition-bounce); }
+.animate-fadeInRight { animation: fadeInRight 0.6s var(--transition-bounce); }
+.animate-scaleIn { animation: scaleIn 0.5s var(--transition-bounce); }
+.animate-pulse { animation: pulse 2s infinite; }
+
+/* Sistema de grid utilities */
+.grid { display: grid; }
+.grid-cols-1 { grid-template-columns: repeat(1, 1fr); }
+.grid-cols-2 { grid-template-columns: repeat(2, 1fr); }
+.grid-cols-3 { grid-template-columns: repeat(3, 1fr); }
+.grid-cols-4 { grid-template-columns: repeat(4, 1fr); }
+
+.gap-1 { gap: 0.5rem; }
+.gap-2 { gap: 1rem; }
+.gap-3 { gap: 1.5rem; }
+.gap-4 { gap: 2rem; }
+.gap-6 { gap: 3rem; }
+.gap-8 { gap: 4rem; }
+
+/* Flexbox utilities mejoradas */
+.flex { display: flex; }
+.flex-col { flex-direction: column; }
+.flex-row { flex-direction: row; }
+.flex-wrap { flex-wrap: wrap; }
+.flex-nowrap { flex-wrap: nowrap; }
+
+.items-start { align-items: flex-start; }
+.items-center { align-items: center; }
+.items-end { align-items: flex-end; }
+.items-stretch { align-items: stretch; }
+
+.justify-start { justify-content: flex-start; }
+.justify-center { justify-content: center; }
+.justify-end { justify-content: flex-end; }
+.justify-between { justify-content: space-between; }
+.justify-around { justify-content: space-around; }
+
+/* Sistema de espaciado escalable */
+:root {
+  --space-1: 0.25rem;  /* 4px */
+  --space-2: 0.5rem;   /* 8px */
+  --space-3: 0.75rem;  /* 12px */
+  --space-4: 1rem;     /* 16px */
+  --space-5: 1.5rem;   /* 24px */
+  --space-6: 2rem;     /* 32px */
+  --space-8: 3rem;     /* 48px */
+  --space-10: 4rem;    /* 64px */
+  --space-12: 6rem;    /* 96px */
+  --space-16: 8rem;    /* 128px */
+}
+
+/* Margin utilities */
+.m-1 { margin: var(--space-1); }
+.m-2 { margin: var(--space-2); }
+.m-3 { margin: var(--space-3); }
+.m-4 { margin: var(--space-4); }
+.m-5 { margin: var(--space-5); }
+.m-6 { margin: var(--space-6); }
+
+.mt-1 { margin-top: var(--space-1); }
+.mt-2 { margin-top: var(--space-2); }
+.mt-3 { margin-top: var(--space-3); }
+.mt-4 { margin-top: var(--space-4); }
+.mt-5 { margin-top: var(--space-5); }
+.mt-6 { margin-top: var(--space-6); }
+.mt-8 { margin-top: var(--space-8); }
+.mt-12 { margin-top: var(--space-12); }
+
+.mb-1 { margin-bottom: var(--space-1); }
+.mb-2 { margin-bottom: var(--space-2); }
+.mb-3 { margin-bottom: var(--space-3); }
+.mb-4 { margin-bottom: var(--space-4); }
+.mb-5 { margin-bottom: var(--space-5); }
+.mb-6 { margin-bottom: var(--space-6); }
+.mb-8 { margin-bottom: var(--space-8); }
+.mb-12 { margin-bottom: var(--space-12); }
+
+/* Padding utilities */
+.p-1 { padding: var(--space-1); }
+.p-2 { padding: var(--space-2); }
+.p-3 { padding: var(--space-3); }
+.p-4 { padding: var(--space-4); }
+.p-5 { padding: var(--space-5); }
+.p-6 { padding: var(--space-6); }
+
+.pt-1 { padding-top: var(--space-1); }
+.pt-2 { padding-top: var(--space-2); }
+.pt-3 { padding-top: var(--space-3); }
+.pt-4 { padding-top: var(--space-4); }
+.pt-5 { padding-top: var(--space-5); }
+.pt-6 { padding-top: var(--space-6); }
+.pt-8 { padding-top: var(--space-8); }
+.pt-12 { padding-top: var(--space-12); }
+
+.pb-1 { padding-bottom: var(--space-1); }
+.pb-2 { padding-bottom: var(--space-2); }
+.pb-3 { padding-bottom: var(--space-3); }
+.pb-4 { padding-bottom: var(--space-4); }
+.pb-5 { padding-bottom: var(--space-5); }
+.pb-6 { padding-bottom: var(--space-6); }
+.pb-8 { padding-bottom: var(--space-8); }
+.pb-12 { padding-bottom: var(--space-12); }
+
+/* Optimizaciones de rendimiento críticas */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Mejoras de accesibilidad avanzadas */
+@media (prefers-contrast: high) {
+  :root {
+    --white-line: rgba(0, 0, 0, 0.4);
+    --brown-line: rgba(139, 69, 19, 0.8);
+    --black-line: rgba(255, 255, 255, 0.4);
+    
+    --white-glow: rgba(0, 0, 0, 0.1);
+    --brown-glow: rgba(139, 69, 19, 0.2);
+    --black-glow: rgba(255, 255, 255, 0.1);
+  }
+
+  .bg-backdrop-white {
+    background: rgba(255, 255, 255, 0.95) !important;
+  }
+  
+  .bg-backdrop-brown {
+    background: rgba(255, 255, 255, 0.2) !important;
+  }
+  
+  .bg-backdrop-black {
+    background: rgba(0, 0, 0, 0.4) !important;
+  }
+}
+
+@media (prefers-contrast: no-preference) {
+  .section-white::before,
+  .section-brown::before,
+  .section-black::before {
+    opacity: 0.8;
+  }
+}
+
+/* Soporte para modo oscuro del sistema mejorado */
+@media (prefers-color-scheme: dark) {
+  body {
+    background: #000000;
+  }
+  
+  .section-white {
+    --text-secondary: rgba(255, 255, 255, 0.9);
+    --text-tertiary: rgba(255, 255, 255, 0.7);
+  }
+}
+
+/* Responsive design system - Mobile First */
+@media (max-width: 768px) {
+  :root {
+    --text-6xl: 3rem;
+    --text-5xl: 2.5rem;
+    --text-4xl: 2rem;
+    --text-3xl: 1.75rem;
+    --text-2xl: 1.5rem;
+  }
+  
+  .container {
+    padding: 0 1.5rem;
+  }
+  
+  h1 {
+    font-size: var(--text-5xl);
+  }
+  
+  h2 {
+    font-size: var(--text-4xl);
+  }
+  
+  h3 {
+    font-size: var(--text-3xl);
+  }
+  
+  .grid-cols-2,
+  .grid-cols-3,
+  .grid-cols-4 {
+    grid-template-columns: 1fr;
+  }
+
+  /* Ajustar backdrop filters para móviles */
+  .bg-backdrop-white,
+  .bg-backdrop-brown,
+  .bg-backdrop-black {
+    backdrop-filter: blur(10px);
+  }
+}
+
+@media (max-width: 480px) {
+  :root {
+    --text-6xl: 2.5rem;
+    --text-5xl: 2.25rem;
+    --text-4xl: 1.875rem;
+    --text-3xl: 1.5rem;
+  }
+  
+  .container {
+    padding: 0 1rem;
+  }
+  
+  h1 {
+    font-size: var(--text-5xl);
+  }
+  
+  h2 {
+    font-size: var(--text-4xl);
+  }
+  
+  h3 {
+    font-size: var(--text-3xl);
+  }
+
+  .section-white::before,
+  .section-brown::before,
+  .section-black::before {
+    opacity: 0.5; /* Reducir overlay en móviles */
+  }
+}
+
+/* Print styles */
+@media print {
+  * {
+    background: transparent !important;
+    color: black !important;
+    box-shadow: none !important;
+    text-shadow: none !important;
+  }
+  
+  .section-white,
+  .section-brown,
+  .section-black {
+    background: white !important;
+    color: black !important;
+  }
+  
+  .section-white::before,
+  .section-brown::before,
+  .section-black::before {
+    display: none;
+  }
+  
+  .bg-backdrop-white,
+  .bg-backdrop-brown,
+  .bg-backdrop-black {
+    background: white !important;
+    backdrop-filter: none !important;
+    border: 1px solid #ccc !important;
+  }
+  
+  a[href]::after {
+    content: " (" attr(href) ")";
+  }
+  
+  .no-print {
+    display: none !important;
+  }
+}
+
+/* High DPI screen optimizations */
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+  body {
+    -webkit-font-smoothing: subpixel-antialiased;
+  }
+}
+
+/* Support for very large screens */
+@media (min-width: 1920px) {
+  .container {
+    max-width: 1400px;
+  }
+  
+  .container-wide {
+    max-width: 1600px;
+  }
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  .hero-background,
+  .floating-shapes,
+  .connection-lines,
+  .tech-orb {
+    animation: none !important;
+    transition: none !important;
+  }
+  
+  .bg-backdrop-white,
+  .bg-backdrop-brown,
+  .bg-backdrop-black {
+    backdrop-filter: none !important;
+  }
+}
+
+/* Fallback para navegadores que no soportan backdrop-filter */
+@supports not (backdrop-filter: blur(10px)) {
+  .bg-backdrop-white {
+    background: rgba(255, 255, 255, 0.95) !important;
+  }
+  
+  .bg-backdrop-brown {
+    background: rgba(139, 69, 19, 0.9) !important;
+  }
+  
+  .bg-backdrop-black {
+    background: rgba(0, 0, 0, 0.8) !important;
+  }
 }

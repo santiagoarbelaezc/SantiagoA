@@ -21,14 +21,20 @@
             ],
             "tsConfig": "tsconfig.app.json",
             "assets": [
-              "src/assets"
+              "src/assets",
+              {
+                "glob": "**/*",
+                "input": "src/assets",
+                "output": "/assets"
+              }
             ],
             "styles": [
               "node_modules/aos/dist/aos.css",
               "src/styles.css"
             ],
-            "scripts": [
-              "node_modules/aos/dist/aos.js"
+            "scripts": [],
+            "allowedCommonJsDependencies": [
+              "aos"
             ]
           },
           "configurations": {
@@ -36,21 +42,26 @@
               "budgets": [
                 {
                   "type": "initial",
-                  "maximumWarning": "500kB",
-                  "maximumError": "1MB"
+                  "maximumWarning": "2MB",
+                  "maximumError": "5MB"
                 },
                 {
                   "type": "anyComponentStyle",
-                  "maximumWarning": "2kB",
-                  "maximumError": "4kB"
+                  "maximumWarning": "6kB",
+                  "maximumError": "10kB"
                 }
               ],
-              "outputHashing": "all"
+              "outputHashing": "all",
+              "optimization": true,
+              "sourceMap": false,
+              "namedChunks": false,
+              "extractLicenses": true
             },
             "development": {
               "optimization": false,
               "extractLicenses": false,
-              "sourceMap": true
+              "sourceMap": true,
+              "namedChunks": true
             }
           },
           "defaultConfiguration": "production"
@@ -65,7 +76,11 @@
               "buildTarget": "SantiagoA:build:development"
             }
           },
-          "defaultConfiguration": "development"
+          "defaultConfiguration": "development",
+          "options": {
+            "port": 4200,
+            "open": true
+          }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n"
@@ -83,20 +98,13 @@
                 "glob": "**/*",
                 "input": "src/assets",
                 "output": "/assets"
-              },
-              {
-                "glob": "**/*",
-                "input": "public",
-                "output": "/public"
               }
             ],
             "styles": [
               "node_modules/aos/dist/aos.css",
               "src/styles.css"
             ],
-            "scripts": [
-              "node_modules/aos/dist/aos.js"
-            ]
+            "scripts": []
           }
         }
       }

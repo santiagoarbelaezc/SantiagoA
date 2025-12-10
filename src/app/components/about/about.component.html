@@ -1,0 +1,80 @@
+<!-- about.component.html -->
+<section id="about" class="about-section section-brown">
+  <div class="section-lines">
+    <div class="section-line"></div>
+    <div class="section-line"></div>
+  </div>
+  
+  <div class="container">
+    <div class="section-header">
+      <h2 class="section-title">Sobre Mí</h2>
+      <div class="title-line"></div>
+      <div class="title-ornament"></div>
+    </div>
+    
+    <div class="about-text">
+      <p>Desarrollador full-stack con experiencia en tecnologías modernas y enfoque en crear experiencias digitales excepcionales.</p>
+    </div>
+    
+    <!-- Grid de habilidades - TRES COLUMNAS -->
+    <div class="skills-grid">
+      <!-- Frontend & Cloud -->
+      <div class="skill-category">
+        <div class="category-header">
+          <h3>Frontend & Cloud</h3>
+          <div class="category-line"></div>
+        </div>
+        <div class="skills-list">
+          <div class="skill-item" *ngFor="let frontendTech of frontendTechnologies">
+            <div class="skill-icon">
+              <img [src]="frontendTech.icon" [alt]="frontendTech.name" class="tech-logo">
+            </div>
+            <span class="skill-name">{{ frontendTech.name }}</span>
+            <div class="skill-line"></div>
+          </div>
+          <div class="skill-item" *ngFor="let otherTech of otherTechnologies">
+            <div class="skill-icon">
+              <img [src]="otherTech.icon" [alt]="otherTech.name" class="tech-logo">
+            </div>
+            <span class="skill-name">{{ otherTech.name }}</span>
+            <div class="skill-line"></div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Backend -->
+      <div class="skill-category">
+        <div class="category-header">
+          <h3>Backend</h3>
+          <div class="category-line"></div>
+        </div>
+        <div class="skills-list">
+          <div class="skill-item" *ngFor="let backendTech of backendTechnologies">
+            <div class="skill-icon">
+              <img [src]="backendTech.icon" [alt]="backendTech.name" class="tech-logo">
+            </div>
+            <span class="skill-name">{{ backendTech.name }}</span>
+            <div class="skill-line"></div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Bases de Datos -->
+      <div class="skill-category">
+        <div class="category-header">
+          <h3>Base de Datos</h3>
+          <div class="category-line"></div>
+        </div>
+        <div class="skills-list">
+          <div class="skill-item" *ngFor="let database of databases">
+            <div class="skill-icon">
+              <img [src]="database.icon" [alt]="database.name" class="tech-logo">
+            </div>
+            <span class="skill-name">{{ database.name }}</span>
+            <div class="skill-line"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

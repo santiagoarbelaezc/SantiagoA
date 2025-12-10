@@ -1,0 +1,72 @@
+/* Footer Mejorado - Tema Negro */
+.footer {
+  padding: 3rem 0;
+  border-top: 1px solid var(--black-line);
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all 0.8s ease;
+  position: relative;
+}
+
+.footer::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100px;
+  height: 1px;
+  background: var(--black-line);
+  opacity: 0;
+  transition: all 0.8s ease 0.2s;
+}
+
+.footer.revealed::before {
+  opacity: 0.3;
+}
+
+.footer.revealed {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.footer-content {
+  text-align: center;
+  position: relative;
+}
+
+.footer-line {
+  width: 100px;
+  height: 1px;
+  background: #FFFFFF;
+  margin: 1rem auto;
+  opacity: 0.5;
+  transform: scaleX(0);
+  transform-origin: center;
+  transition: transform 0.8s ease 0.3s;
+}
+
+.footer.revealed .footer-line {
+  transform: scaleX(1);
+}
+
+.footer p {
+  font-size: 0.9rem;
+}
+
+.footer-ornament {
+  position: absolute;
+  bottom: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 20px;
+  height: 1px;
+  background: var(--black-line);
+  opacity: 0;
+  transition: all 0.8s ease 0.5s;
+}
+
+.footer.revealed .footer-ornament {
+  opacity: 1;
+  width: 40px;
+}

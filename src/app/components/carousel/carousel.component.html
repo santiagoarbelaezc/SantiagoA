@@ -1,0 +1,85 @@
+<!-- components/carousel-3d/carousel-3d.component.html -->
+<div class="carousel-container">
+  <div 
+    class="carousel-scene"
+    [class.cursor-grabbing]="isDragging"
+    (mousedown)="onMouseDown($event)"
+    (touchstart)="onTouchStart($event)"
+    (touchmove)="onTouchMove($event)"
+    (touchend)="onTouchEnd()"
+  >
+    <div 
+      class="carousel-cylinder"
+      [ngStyle]="getCylinderStyle()"
+    >
+      <div
+        *ngFor="let slide of slides; let i = index; trackBy: trackByIndex"
+        class="carousel-item"
+        [style.transform]="getItemTransform(i)"
+        [style.opacity]="getItemOpacity(i)"
+      >
+        <div 
+          class="carousel-image-wrapper"
+          [style.transform]="'scale(' + getItemScale(i) + ')'"
+        >
+          <img 
+            [src]="slide.src" 
+            [alt]="slide.alt"
+            class="carousel-image"
+            draggable="false"
+            loading="lazy"
+          />
+          
+          <!-- ELIMINAR ESTOS ELEMENTOS -->
+          <!-- <div class="carousel-overlay"></div> -->
+          <!-- <div class="carousel-reflection"></div> -->
+        </div>
+      </div>
+    </div>
+    
+    <!-- ELIMINAR EL FLOOR REFLECTION -->
+    <!-- <div class="carousel-floor"></div> -->
+
+    @if (showControls && slides.length > 1) {
+      <div class="carousel-controls">
+        <button 
+          (click)="handlePrev()"
+          class="carousel-button"
+          aria-label="Anterior"
+        >
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="m15 18-6-6 6-6"/>
+          </svg>
+        </button>
+        
+        <div class="image-counter">
+          <span class="current-index">{{ getCurrentImageIndex() + 1 }}</span>
+          <span class="separator">/</span>
+          <span class="total-images">{{ slides.length }}</span>
+        </div>
+        
+        <button 
+          (click)="handleNext()"
+          class="carousel-button"
+          aria-label="Siguiente"
+        >
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="m9 18 6-6-6-6"/>
+          </svg>
+        </button>
+      </div>
+    }
+
+    @if (showIndicators && slides.length > 1) {
+      <div class="carousel-indicator">
+        <button
+          *ngFor="let slide of slides; let i = index; trackBy: trackByIndex"
+          (click)="goToSlide(i)"
+          [class.active]="isActiveSlide(i)"
+          class="carousel-dot"
+          [attr.aria-label]="'Ir a imagen ' + (i + 1)"
+        ></button>
+      </div>
+    }
+  </div>
+</div>

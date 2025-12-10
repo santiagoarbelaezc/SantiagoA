@@ -1,0 +1,74 @@
+<!-- projects.component.html -->
+<!-- Projects Section - Paleta Negros -->
+<section id="projects" class="projects-section section-black">
+  <!-- Líneas de sección -->
+  <div class="section-lines">
+    <div class="section-line"></div>
+    <div class="section-line"></div>
+  </div>
+  
+  <div class="container">
+    <div class="section-header">
+      <h2 class="section-title">Proyectos</h2>
+      <div class="title-line"></div>
+      <div class="title-ornament"></div>
+    </div>
+    <div class="projects-grid">
+      <div 
+        class="project-card bg-black-elements" 
+        *ngFor="let project of projects; let i = index"
+        [class.revealed]="true"
+        (click)="openProjectModal(project)"
+      >
+        <!-- Imagen del proyecto -->
+        <div class="project-image-container">
+          <img 
+            [src]="project.image" 
+            [alt]="project.title" 
+            class="project-image"
+            *ngIf="project.image"
+          />
+        </div>
+        
+        <div class="project-header">
+          <h3>{{ project.title }}</h3>
+          <div class="project-line"></div>
+        </div>
+        <p class="project-description">
+          {{ project.description }}
+        </p>
+        <div class="project-tech">
+          <!-- Mostrar tecnologías con iconos (máximo 3) -->
+          <div 
+            class="tech-item bg-black-elements" 
+            *ngFor="let tech of getVisibleTechnologies(project)"
+          >
+            <div class="tech-icon">
+              <img [src]="tech.icon" [alt]="tech.name" class="tech-logo">
+            </div>
+            <span class="tech-name">{{ tech.name }}</span>
+          </div>
+          
+          <!-- Mostrar contador de tecnologías ocultas -->
+          <div 
+            class="tech-item more-tech bg-black-elements" 
+            *ngIf="getHiddenTechnologiesCount(project) > 0"
+            title="Ver todas las tecnologías"
+          >
+            +{{ getHiddenTechnologiesCount(project) }}
+          </div>
+        </div>
+        <div class="card-line"></div>
+        
+        <!-- Botón para ver más (opcional, visual) -->
+        <div class="project-view-more">
+          <span>Ver detalles</span>
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M5 12h14"></path>
+            <path d="m12 5 7 7-7 7"></path>
+          </svg>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

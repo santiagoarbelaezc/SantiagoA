@@ -1,0 +1,511 @@
+/* Projects Section - Tema Negro */
+.projects-section {
+  padding: 6rem 0;
+  position: relative;
+}
+
+/* Formas geométricas para projects */
+.projects-section::after {
+  content: '';
+  position: absolute;
+  bottom: 10%;
+  right: 5%;
+  width: 70px;
+  height: 35px;
+  border: 1px solid var(--black-line);
+  opacity: 0.2;
+  z-index: 1;
+}
+
+.projects-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  gap: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.project-card {
+  padding: 2.5rem;
+  border: 1px solid var(--black-line);
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+  opacity: 0;
+  transform: translateY(40px);
+  background: rgba(255, 255, 255, 0.02);
+  backdrop-filter: blur(10px);
+  border-radius: 8px;
+}
+
+/* Contenedor de la imagen del proyecto */
+.project-image-container {
+  width: 100%;
+  height: 200px;
+  margin-bottom: 1.5rem;
+  overflow: hidden;
+  position: relative;
+  border: 1px solid var(--black-line);
+  transition: all 0.3s ease;
+  border-radius: 6px;
+}
+
+.project-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top;
+  transition: all 0.5s ease;
+  filter: brightness(0.95) contrast(1.05);
+}
+
+.project-card:hover .project-image {
+  transform: scale(1.05);
+  filter: brightness(1) contrast(1.1);
+}
+
+.project-image-container::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(0deg, rgba(0,0,0,0.1) 0%, transparent 50%);
+  z-index: 1;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.project-card:hover .project-image-container::before {
+  opacity: 1;
+}
+
+/* Decoraciones geométricas */
+.project-card::before {
+  content: '';
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  width: 20px;
+  height: 20px;
+  border: 1px solid var(--black-line);
+  opacity: 0;
+  transform: scale(0) rotate(45deg);
+  transition: all 0.5s ease 0.3s;
+}
+
+.project-card::after {
+  content: '';
+  position: absolute;
+  bottom: 15px;
+  left: 15px;
+  width: 30px;
+  height: 15px;
+  border: 1px solid var(--black-line);
+  opacity: 0;
+  transform: scale(0);
+  transition: all 0.5s ease 0.5s;
+}
+
+.project-card.revealed::before,
+.project-card.revealed::after {
+  opacity: 0.4;
+  transform: scale(1);
+}
+
+.project-card.revealed {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.project-card:nth-child(1) { transition-delay: 0.2s; }
+.project-card:nth-child(2) { transition-delay: 0.4s; }
+.project-card:nth-child(3) { transition-delay: 0.6s; }
+
+/* Efecto de brillo al pasar el mouse */
+.project-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, var(--black-glow), transparent);
+  transition: left 0.5s ease;
+}
+
+.project-card:hover::before {
+  left: 100%;
+}
+
+.project-card:hover {
+  border-color: rgba(255, 255, 255, 0.3);
+  transform: translateY(-8px);
+  box-shadow: 
+    0 20px 40px rgba(0, 0, 0, 0.3),
+    0 8px 24px rgba(0, 0, 0, 0.2);
+}
+
+.project-header {
+  margin-bottom: 1.5rem;
+  position: relative;
+}
+
+.project-header h3 {
+  font-size: 1.5rem;
+  font-weight: 350;
+  margin-bottom: 1rem;
+  color: #FFFFFF;
+  letter-spacing: -0.5px;
+}
+
+.project-line {
+  width: 40px;
+  height: 1px;
+  background: #FFFFFF;
+  opacity: 0.5;
+  transition: width 0.3s ease;
+}
+
+.project-card:hover .project-line {
+  width: 60px;
+}
+
+.project-description {
+  margin-bottom: 2rem;
+  line-height: 1.6;
+  color: #ccc;
+  font-size: 0.95rem;
+}
+
+/* Updated Project Tech with Images - Tema Negro */
+.project-tech {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-bottom: 1.5rem;
+}
+
+.tech-item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 0.9rem;
+  font-size: 0.8rem;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  transition: all 0.3s ease;
+  position: relative;
+  border-radius: 6px;
+  color: #ccc;
+  background: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(10px);
+}
+
+.tech-icon {
+  width: 18px;
+  height: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.tech-logo {
+  width: 18px;
+  height: 18px;
+  object-fit: contain;
+  transition: all 0.3s ease;
+  filter: brightness(0.9);
+}
+
+.tech-name {
+  font-size: 0.75rem;
+  font-weight: 400;
+  white-space: nowrap;
+}
+
+.tech-item::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 0;
+  background: linear-gradient(45deg, rgba(58, 134, 255, 0.1), rgba(255, 255, 255, 0.05));
+  transition: all 0.3s ease;
+  z-index: -1;
+  border-radius: 5px;
+}
+
+.tech-item:hover::before {
+  height: 100%;
+}
+
+.tech-item:hover {
+  border-color: rgba(58, 134, 255, 0.3);
+  transform: translateY(-2px);
+  color: #FFFFFF;
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.tech-item:hover .tech-logo {
+  transform: scale(1.1);
+  filter: brightness(1.1);
+}
+
+/* Tecnología "más" */
+.more-tech {
+  background: rgba(255, 255, 255, 0.03);
+  color: #888;
+  cursor: help;
+  min-width: 40px;
+  justify-content: center;
+}
+
+.more-tech:hover {
+  color: #FFFFFF;
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
+.card-line {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, #FFFFFF, transparent);
+  transition: all 0.8s ease 0.3s;
+}
+
+.project-card.revealed .card-line {
+  width: 100%;
+}
+
+/* Project View More */
+.project-view-more {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.75rem;
+  margin-top: 1rem;
+  color: #3a86ff;
+  font-weight: 500;
+  font-size: 0.9rem;
+  opacity: 0;
+  transition: all 0.3s ease;
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+  position: relative;
+}
+
+.project-card:hover .project-view-more {
+  opacity: 1;
+  padding-top: 1rem;
+}
+
+.project-view-more span {
+  transition: transform 0.3s ease;
+}
+
+.project-card:hover .project-view-more span {
+  transform: translateX(5px);
+}
+
+.project-view-more svg {
+  width: 14px;
+  height: 14px;
+  transition: transform 0.3s ease;
+}
+
+.project-card:hover .project-view-more svg {
+  transform: translateX(3px);
+}
+
+/* Efecto de resplandor en hover */
+.project-card:hover .project-view-more {
+  color: #FFFFFF;
+}
+
+.project-view-more::before {
+  content: '';
+  position: absolute;
+  bottom: -1px;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, #3a86ff, transparent);
+  transition: width 0.5s ease 0.2s;
+}
+
+.project-card:hover .project-view-more::before {
+  width: 100%;
+}
+
+/* Responsive Design para Projects */
+@media (max-width: 768px) {
+  .projects-grid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+  
+  .project-card {
+    padding: 1.8rem;
+  }
+  
+  .project-image-container {
+    height: 180px;
+  }
+  
+  .projects-section::after {
+    display: none;
+  }
+  
+  .project-header h3 {
+    font-size: 1.3rem;
+  }
+  
+  .project-description {
+    font-size: 0.9rem;
+  }
+  
+  .tech-item {
+    padding: 0.4rem 0.7rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .project-image-container {
+    height: 160px;
+  }
+  
+  .project-card {
+    padding: 1.5rem;
+  }
+  
+  .project-tech {
+    gap: 0.5rem;
+  }
+  
+  .tech-item {
+    padding: 0.35rem 0.6rem;
+    font-size: 0.75rem;
+  }
+  
+  .tech-icon {
+    width: 16px;
+    height: 16px;
+  }
+  
+  .tech-logo {
+    width: 16px;
+    height: 16px;
+  }
+  
+  .more-tech {
+    min-width: 35px;
+  }
+}
+
+/* Estilos para el modal overlay (si aún los necesitas) */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.85);
+  backdrop-filter: blur(10px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  padding: 2rem;
+  animation: fadeIn 0.3s ease-out;
+}
+
+.modal-container {
+  width: 100%;
+  max-width: 1400px;
+  max-height: 90vh;
+  animation: slideUp 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Animaciones */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    backdrop-filter: blur(0);
+  }
+  to {
+    opacity: 1;
+    backdrop-filter: blur(10px);
+  }
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(40px) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* Mejorar la interactividad de las tarjetas */
+.project-card {
+  cursor: pointer;
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  position: relative;
+  overflow: hidden;
+}
+
+.project-card:hover {
+  transform: translateY(-8px) scale(1.01);
+  box-shadow: 
+    0 25px 50px rgba(0, 0, 0, 0.35),
+    0 10px 30px rgba(0, 0, 0, 0.25),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.05);
+}
+
+.project-card:hover .project-image {
+  transform: scale(1.08);
+}
+
+/* Variables CSS (añadir al inicio si no las tienes) */
+:root {
+  --black-line: rgba(255, 255, 255, 0.1);
+  --black-glow: linear-gradient(90deg, transparent, rgba(58, 134, 255, 0.1), transparent);
+}
+
+/* Efectos de profundidad */
+.project-card::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: radial-gradient(circle at var(--mouse-x, 50%) var(--mouse-y, 50%), 
+              rgba(255, 255, 255, 0.03) 0%, 
+              transparent 50%);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.project-card:hover::after {
+  opacity: 1;
+}
+
+/* Asegurar que el contenido esté por encima de los efectos */
+.project-image-container,
+.project-header,
+.project-description,
+.project-tech,
+.card-line,
+.project-view-more {
+  position: relative;
+  z-index: 1;
+}
