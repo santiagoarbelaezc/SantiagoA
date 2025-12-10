@@ -230,11 +230,15 @@
   margin-bottom: 1rem;
 }
 
+/* COLORES ESPECÍFICOS PARA SUBTÍTULOS EN HERO */
 .hero .subtitle-text {
   color: rgba(0, 0, 0, 0.8) !important;
 }
 
-.subtitle-line { display: block; }
+.hero .subtitle-line {
+  display: block;
+  color: rgba(0, 0, 0, 0.8) !important;
+}
 
 .subtitle-divider {
   width: 60px;
@@ -341,7 +345,6 @@
 
 .btn-primary {
   background: rgba(255, 255, 255, 0.75);
-  color: rgba(0, 0, 0, 0.9);
   border-color: rgba(255, 255, 255, 0.8);
   box-shadow: 
     0 4px 20px rgba(0, 0, 0, 0.08),
@@ -349,15 +352,35 @@
   animation: subtleEmphasis 6s ease-in-out infinite;
 }
 
-.btn-primary:hover {
+/* COLORES ESPECÍFICOS PARA BOTÓN EN HERO */
+.hero .btn-primary {
+  color: rgba(0, 0, 0, 0.9) !important;
+}
+
+.hero .btn-primary .btn-text {
+  color: rgba(0, 0, 0, 0.9) !important;
+}
+
+.hero .btn-primary .btn-arrow {
+  color: rgba(0, 0, 0, 0.8) !important;
+}
+
+.hero .btn-primary:hover {
   background: rgba(255, 255, 255, 0.9);
-  color: rgba(0, 0, 0, 1);
   border-color: rgba(255, 255, 255, 1);
   transform: translateY(-2px);
   box-shadow: 
     0 8px 30px rgba(0, 0, 0, 0.12),
     0 3px 8px rgba(0, 0, 0, 0.06);
   animation: none;
+}
+
+.hero .btn-primary:hover .btn-text {
+  color: rgba(0, 0, 0, 1) !important;
+}
+
+.hero .btn-primary:hover .btn-arrow {
+  color: rgba(0, 0, 0, 1) !important;
 }
 
 .btn-primary:active {
