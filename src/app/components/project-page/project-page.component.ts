@@ -2,7 +2,7 @@
 import { Component, OnInit, OnDestroy, HostListener, Inject, PLATFORM_ID } from '@angular/core';
 import { CommonModule, isPlatformBrowser } from '@angular/common';
 import { Router } from '@angular/router';
-import { ModalService, ProjectData } from '../../services/modal.service';
+import { ModalService, ProjectData, UsageInfo } from '../../services/modal.service';
 import { CarouselComponent } from '../carousel/carousel.component';
 
 interface Technology {
@@ -20,6 +20,7 @@ interface Technology {
 export class ProjectPageComponent implements OnInit, OnDestroy {
   projectData: ProjectData | null = null;
   technologyIcons: Technology[] = [];
+  usageInfo: UsageInfo | null = null;
   isLoading: boolean = true;
   error: string | null = null;
   private isBrowser: boolean;
@@ -86,6 +87,7 @@ export class ProjectPageComponent implements OnInit, OnDestroy {
     
     if (this.projectData) {
       this.loadTechnologyIcons();
+      this.loadUsageInfo();
       this.handleProjectLoaded();
       return;
     }
@@ -103,6 +105,12 @@ export class ProjectPageComponent implements OnInit, OnDestroy {
     }
   }
 
+  private loadUsageInfo(): void {
+    if (this.projectData && this.projectData.id) {
+      this.usageInfo = this.modalService.getUsageInfo(this.projectData.id);
+    }
+  }
+
   private checkLocalStorage(): void {
     if (this.isBrowser) {
       try {
@@ -116,6 +124,7 @@ export class ProjectPageComponent implements OnInit, OnDestroy {
             // Actualizar el servicio con los datos recuperados
             this.modalService.setProjectWithoutOpening(projectData);
             this.loadTechnologyIcons();
+            this.loadUsageInfo();
             this.handleProjectLoaded();
             return;
           }
@@ -265,5 +274,18 @@ export class ProjectPageComponent implements OnInit, OnDestroy {
   // Método para obtener icono de tecnología
   getTechIcon(techName: string): string {
     return this.technologyIconMap[techName] || 'assets/default-tech.png';
+  }
+
+  // Método para copiar credenciales al portapapeles
+  copyCredential(username: string, password: string): void {
+    if (!this.isBrowser) return;
+    
+    const text = `Usuario: ${username}\nContraseña: ${password}`;
+    navigator.clipboard.writeText(text).then(() => {
+      this.showToast('Credenciales copiadas!', '#3498db');
+    }).catch(err => {
+      console.error('Error al copiar: ', err);
+      this.showToast('Error al copiar credenciales', '#e74c3c');
+    });
   }
 }

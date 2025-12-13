@@ -109,6 +109,71 @@
           </div>
         </div>
 
+        <!-- Información de uso (credenciales) -->
+        @if (usageInfo) {
+          <div class="detail-section usage-section">
+            <h2 class="detail-title">{{ usageInfo.title }}</h2>
+            <div class="detail-content">
+              
+              <!-- Credenciales -->
+              @if (usageInfo.credentials && usageInfo.credentials.length > 0) {
+                <div class="credentials-section">
+                  <h3 class="credentials-title">Credenciales de Acceso</h3>
+                  <p class="credentials-description">Utiliza estas credenciales para probar la aplicación en diferentes roles:</p>
+                  
+                  <div class="credentials-grid">
+                    @for (credential of usageInfo.credentials; track credential.role) {
+                      <div class="credential-card bg-black-elements">
+                        <div class="credential-header">
+                          <div class="credential-role">{{ credential.role }}</div>
+                          <button 
+                            class="copy-credential-btn"
+                            (click)="copyCredential(credential.username, credential.password)"
+                            [attr.aria-label]="'Copiar credenciales de ' + credential.role"
+                            title="Copiar credenciales"
+                          >
+                            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                              <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                              <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                            </svg>
+                          </button>
+                        </div>
+                        <div class="credential-details">
+                          <div class="credential-field">
+                            <span class="field-label">Usuario:</span>
+                            <code class="field-value">{{ credential.username }}</code>
+                          </div>
+                          <div class="credential-field">
+                            <span class="field-label">Contraseña:</span>
+                            <code class="field-value">{{ credential.password }}</code>
+                          </div>
+                          @if (credential.description) {
+                            <div class="credential-description">
+                              {{ credential.description }}
+                            </div>
+                          }
+                        </div>
+                      </div>
+                    }
+                  </div>
+                </div>
+              }
+              
+              <!-- Instrucciones -->
+              @if (usageInfo.instructions && usageInfo.instructions.length > 0) {
+                <div class="instructions-section">
+                  <h3 class="instructions-title">Instrucciones para Acceder</h3>
+                  <ol class="instructions-list">
+                    @for (instruction of usageInfo.instructions; track instruction; let i = $index) {
+                      <li class="instruction-item">{{ instruction }}</li>
+                    }
+                  </ol>
+                </div>
+              }
+            </div>
+          </div>
+        }
+
         <!-- Tecnologías con iconos -->
         @if (technologyIcons.length > 0) {
           <div class="detail-section">

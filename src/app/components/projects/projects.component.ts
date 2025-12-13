@@ -22,6 +22,11 @@ interface Project {
   images: SlideImage[];
   liveUrl?: string;
   githubUrl?: string;
+  usageInfo?: {
+    title: string;
+    credentials: Array<{ role: string; username: string; password: string; description?: string }>;
+    instructions?: string[];
+  };
 }
 
 @Component({
@@ -68,26 +73,56 @@ export class ProjectsComponent {
   };
 
   projects: Project[] = [
-    {
-      id: 1,
-      title: 'TodoTech Shop',
-      description: 'Sistema completo de comercio electrónico de productos de tecnologia, realizado en Spring Boot y Angular y con PostgreSQL, cuenta con panel administrativo, cuenta con servicios para descargar recibos e integracion de pagos con Stripe.',
-      longDescription: 'Plataforma de e-commerce desarrollada con arquitectura de microservicios. Incluye sistema de carrito de compras, procesamiento de pagos con múltiples proveedores (Stripe, PayPal), panel administrativo para gestión de productos, pedidos y usuarios, y análisis de ventas en tiempo real. Implementa autenticación JWT y autorización basada en roles.',
-      image: 'assets/e-commerce.png',
-      category: 'E-commerce',
-      year: '2024',
-      technologies: ['Angular 17', 'Spring Boot 3', 'PostgreSQL', 'AWS'],
-      technologyIcons: this.getTechnologyIcons(['Angular 17', 'Spring Boot 3', 'PostgreSQL', 'Redis', 'Docker', 'AWS']),
-      images: [
-        { src: 'assets/home.png', alt: 'Página principal de TodoTech Shop' },
-        { src: 'assets/product-detail.png', alt: 'Detalle de producto' },
-        { src: 'assets/cart.png', alt: 'Carrito de compras' },
-        { src: 'assets/login.png', alt: 'Login TodoTech' },
-        { src: 'assets/admin.png', alt: 'Panel de administración' }
+  {
+    id: 1,
+    title: 'TodoTech Shop',
+    description: 'Sistema completo de comercio electrónico para tienda física de productos tecnológicos, desarrollado en Spring Boot y Angular con PostgreSQL. Permite gestión optimizada de ventas presenciales, sincronización de inventario en tiempo real, control de órdenes y múltiples métodos de pago incluyendo Stripe.',
+    longDescription: 'Plataforma de e-commerce desarrollada con arquitectura de microservicios. Incluye sistema de carrito de compras, procesamiento de pagos con múltiples proveedores (Stripe, PayPal), panel administrativo para gestión de productos, pedidos y usuarios, y análisis de ventas en tiempo real. Implementa autenticación JWT y autorización basada en roles. El sistema está diseñado para ser utilizado tanto en modalidad online como en tienda física, donde los vendedores realizan todo el proceso de venta asistida.',
+    image: 'assets/e-commerce.png',
+    category: 'E-commerce',
+    year: '2024',
+    technologies: ['Angular 17', 'Spring Boot 3', 'PostgreSQL', 'AWS', 'Redis', 'Docker'],
+    technologyIcons: this.getTechnologyIcons(['Angular 17', 'Spring Boot 3', 'PostgreSQL', 'Redis', 'Docker', 'AWS']),
+    images: [
+      { src: 'assets/home.png', alt: 'Página principal de TodoTech Shop' },
+      { src: 'assets/product-detail.png', alt: 'Detalle de producto' },
+      { src: 'assets/cart.png', alt: 'Carrito de compras' },
+      { src: 'assets/login.png', alt: 'Login TodoTech' },
+      { src: 'assets/admin.png', alt: 'Panel de administración' }
+    ],
+    liveUrl: 'https://todotechshopfrontend.web.app/login',
+    githubUrl: 'https://github.com/santiagoarbelaezc/TodoTechShop-Frontend',
+    usageInfo: {
+      title: 'Información de Acceso',
+      credentials: [
+        {
+          role: 'Vendedor',
+          username: 'vendedor1',
+          password: 'Vendedor.1',
+          description: 'Acceso al módulo de ventas presenciales. Permite registro de clientes, procesamiento de pedidos y generación de facturas.'
+        },
+        {
+          role: 'Cajero',
+          username: 'cajero1',
+          password: 'Cajero.1',
+          description: 'Acceso al módulo de caja. Permite procesar pagos, generar recibos y cerrar turnos de caja.'
+        },
+        {
+          role: 'Administrador',
+          username: 'adminprueba',
+          password: 'Admin.123',
+          description: 'Acceso completo al sistema. Permite gestión de usuarios, productos, inventario, reportes y configuración del sistema.'
+        }
       ],
-      liveUrl: 'https://todotechshopfrontend.web.app/login',
-      githubUrl: 'https://github.com/santiagoarbelaezc/TodoTechShop-Frontend'
-    },
+      instructions: [
+        '1. Ingresa a la URL de la aplicación',
+        '2. Selecciona "Iniciar Sesión"',
+        '3. Introduce las credenciales según tu rol',
+        '4. El sistema te redirigirá automáticamente al módulo correspondiente',
+        '5. Para pruebas en ambiente local, descarga el repositorio y sigue las instrucciones del README'
+      ]
+    }
+  },
     {
       id: 2,
       title: 'Dashboard Analytics',
@@ -106,6 +141,7 @@ export class ProjectsComponent {
       ],
       liveUrl: 'https://analytics-dashboard.demo.com',
       githubUrl: 'https://github.com/tu-usuario/analytics-dashboard'
+      // Sin usageInfo (vacío como solicitaste)
     },
     {
       id: 3,
@@ -125,6 +161,7 @@ export class ProjectsComponent {
       ],
       liveUrl: 'https://play.google.com/store/apps/details?id=com.taskflow',
       githubUrl: 'https://github.com/tu-usuario/taskflow-app'
+      // Sin usageInfo (vacío como solicitaste)
     }
   ];
 
@@ -153,7 +190,8 @@ export class ProjectsComponent {
       year: project.year,
       images: project.images as SlideImage[],
       liveUrl: project.liveUrl,
-      githubUrl: project.githubUrl
+      githubUrl: project.githubUrl,
+      usageInfo: project.usageInfo // Asegúrate de que el servicio ModalService acepte este campo
     };
     
     // Guardar el proyecto en el servicio

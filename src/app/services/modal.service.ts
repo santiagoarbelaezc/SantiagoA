@@ -8,6 +8,19 @@ export interface SlideImage {
   alt: string;
 }
 
+export interface Credential {
+  role: string;
+  username: string;
+  password: string;
+  description?: string;
+}
+
+export interface UsageInfo {
+  title: string;
+  credentials: Credential[];
+  instructions?: string[];
+}
+
 export interface ProjectData {
   id: number;
   title: string;
@@ -19,6 +32,7 @@ export interface ProjectData {
   images: SlideImage[];
   liveUrl?: string;
   githubUrl?: string;
+  usageInfo?: UsageInfo;
 }
 
 @Injectable({
@@ -136,5 +150,29 @@ export class ModalService {
   // Método para limpiar cuando se navega fuera de la página de proyecto
   clear(): void {
     this.clearModal();
+  }
+  
+  // Método para obtener credenciales de un proyecto
+  getCredentials(projectId: number): Credential[] | null {
+    const project = this.projectDataSubject.value;
+    if (project && project.id === projectId && project.usageInfo) {
+      return project.usageInfo.credentials;
+    }
+    return null;
+  }
+  
+  // Método para verificar si un proyecto tiene información de uso
+  hasUsageInfo(projectId: number): boolean {
+    const project = this.projectDataSubject.value;
+    return !!(project && project.id === projectId && project.usageInfo);
+  }
+  
+  // Método para obtener toda la información de uso
+  getUsageInfo(projectId: number): UsageInfo | null {
+    const project = this.projectDataSubject.value;
+    if (project && project.id === projectId) {
+      return project.usageInfo || null;
+    }
+    return null;
   }
 }
