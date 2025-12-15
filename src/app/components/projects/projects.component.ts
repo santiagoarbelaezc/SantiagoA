@@ -81,8 +81,8 @@ export class ProjectsComponent {
     image: 'assets/e-commerce.png',
     category: 'E-commerce',
     year: '2024',
-    technologies: ['Angular 17', 'Spring Boot 3', 'PostgreSQL', 'AWS', 'Redis', 'Docker'],
-    technologyIcons: this.getTechnologyIcons(['Angular 17', 'Spring Boot 3', 'PostgreSQL', 'Redis', 'Docker', 'AWS']),
+    technologies: ['Angular 17', 'Spring Boot 3', 'PostgreSQL', 'AWS'],
+    technologyIcons: this.getTechnologyIcons(['Angular 17', 'Spring Boot 3', 'PostgreSQL', 'AWS']),
     images: [
       { src: 'assets/home.png', alt: 'Página principal de TodoTech Shop' },
       { src: 'assets/product-detail.png', alt: 'Detalle de producto' },
