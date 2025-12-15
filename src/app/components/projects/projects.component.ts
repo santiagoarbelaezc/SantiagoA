@@ -111,7 +111,7 @@ export class ProjectsComponent {
           role: 'Administrador',
           username: 'adminprueba',
           password: 'Admin.123',
-          description: 'Acceso completo al sistema. Permite gestión de usuarios, productos, inventario, reportes y configuración del sistema.'
+          description: 'Acceso parcial al sistema. Permite gestión de usuarios, productos, inventario, reportes y configuración del sistema.'
         }
       ],
       instructions: [
