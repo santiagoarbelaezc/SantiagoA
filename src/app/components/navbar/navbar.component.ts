@@ -266,7 +266,7 @@ export class NavbarComponent implements OnInit, OnDestroy {
     // About: desde 1000px hasta 1800px aprox  
     // Projects: desde 1800px en adelante
     
-    const heroEnd = 1000;       // Fin del hero
+    const heroEnd = 840;       // Fin del hero
     const aboutEnd = 1800;      // Fin del about
     
     // Si estamos cerca del top (en el hero)
