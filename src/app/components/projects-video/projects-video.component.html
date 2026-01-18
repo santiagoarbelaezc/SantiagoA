@@ -1,0 +1,176 @@
+<section id="projects" class="projects" data-aos="fade-up">
+  <div class="projects__container">
+    <!-- Header -->
+    <div class="projects__header">
+      <h2 class="projects__title">
+        <span class="projects__title-word">
+          <span class="projects__title-letter">P</span>
+          <span class="projects__title-letter">R</span>
+          <span class="projects__title-letter">O</span>
+          <span class="projects__title-letter">Y</span>
+          <span class="projects__title-letter">E</span>
+          <span class="projects__title-letter">C</span>
+          <span class="projects__title-letter">T</span>
+          <span class="projects__title-letter">O</span>
+          <span class="projects__title-letter">S</span>
+        </span>
+      </h2>
+      <p class="projects__subtitle">
+        Proyectos destacados desarrollados con tecnologías modernas
+      </p>
+    </div>
+
+    <!-- Projects Content -->
+    <div class="projects__content">
+      <div 
+        *ngFor="let project of projects; let i = index"
+        [attr.data-aos]="'fade-up'"
+        [attr.data-aos-delay]="i * 200"
+        [attr.data-aos-duration]="800"
+        class="projects__item">
+        
+        <!-- Videos Container -->
+        <div class="projects__videos-container">
+          <!-- Single Video (Full) -->
+          <ng-container *ngIf="project.videos.length === 1">
+            <div class="projects__video-container projects__video-container--full">
+              <div class="projects__video-wrapper">
+                <video
+                  #videoElement
+                  [attr.data-video-id]="project.id + '-0'"
+                  class="projects__video"
+                  autoplay
+                  loop
+                  muted
+                  playsinline
+                  preload="metadata"
+                  (play)="handlePlayVideo(project.id + '-0', videoElement)"
+                  (pause)="handleVideoPause(project.id + '-0')">
+                  <source [src]="getVideoUrl(project.videos[0].url)" type="video/mp4" />
+                  Tu navegador no soporta videos HTML5
+                </video>
+                <button
+                  *ngIf="!isVideoPlaying(project.id + '-0')"
+                  class="projects__video-play"
+                  (click)="handlePlayVideo(project.id + '-0', videoElement)"
+                  aria-label="Reproducir video">
+                  <svg width="80" height="80" viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <circle cx="40" cy="40" r="39" stroke="currentColor" stroke-width="2"/>
+                    <path d="M32 25L32 55L58 40L32 25Z" fill="currentColor"/>
+                  </svg>
+                </button>
+                <div class="projects__video-overlay"></div>
+              </div>
+            </div>
+          </ng-container>
+
+          <!-- Multiple Videos Layout -->
+          <ng-container *ngIf="project.videos.length > 1">
+            <!-- Non-Vertical Videos Row -->
+            <div class="projects__videos-row">
+              <div 
+                *ngFor="let video of getNonVerticalVideos(project); let vidIndex = index"
+                class="projects__video-container projects__video-container--half">
+                <div class="projects__video-wrapper">
+                  <video
+                    #videoElement
+                    [attr.data-video-id]="project.id + '-' + vidIndex"
+                    class="projects__video"
+                    autoplay
+                    loop
+                    muted
+                    playsinline
+                    preload="metadata"
+                    (play)="handlePlayVideo(project.id + '-' + vidIndex, videoElement)"
+                    (pause)="handleVideoPause(project.id + '-' + vidIndex)">
+                    <source [src]="getVideoUrl(video.url)" type="video/mp4" />
+                    Tu navegador no soporta videos HTML5
+                  </video>
+                  <button
+                    *ngIf="!isVideoPlaying(project.id + '-' + vidIndex)"
+                    class="projects__video-play"
+                    (click)="handlePlayVideo(project.id + '-' + vidIndex, videoElement)"
+                    aria-label="Reproducir video">
+                    <svg width="80" height="80" viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <circle cx="40" cy="40" r="39" stroke="currentColor" stroke-width="2"/>
+                      <path d="M32 25L32 55L58 40L32 25Z" fill="currentColor"/>
+                    </svg>
+                  </button>
+                  <div class="projects__video-overlay"></div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Vertical Video Row -->
+            <ng-container *ngIf="hasVerticalVideo(project)">
+              <div class="projects__videos-row">
+                <div class="projects__video-container projects__video-container--vertical">
+                  <div class="projects__video-wrapper">
+                    <video
+                      #videoElement
+                      [attr.data-video-id]="project.id + '-vertical'"
+                      class="projects__video"                      autoplay                      loop
+                      muted
+                      playsinline
+                      preload="metadata"
+                      (play)="handlePlayVideo(project.id + '-vertical', videoElement)"
+                      (pause)="handleVideoPause(project.id + '-vertical')">
+                      <source [src]="getVideoUrl(getVerticalVideo(project)?.url || '')" type="video/mp4" />
+                      Tu navegador no soporta videos HTML5
+                    </video>
+                    <button
+                      *ngIf="!isVideoPlaying(project.id + '-vertical')"
+                      class="projects__video-play"
+                      (click)="handlePlayVideo(project.id + '-vertical', videoElement)"
+                      aria-label="Reproducir video">
+                      <svg width="80" height="80" viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <circle cx="40" cy="40" r="39" stroke="currentColor" stroke-width="2"/>
+                        <path d="M32 25L32 55L58 40L32 25Z" fill="currentColor"/>
+                      </svg>
+                    </button>
+                    <div class="projects__video-overlay"></div>
+                  </div>
+                </div>
+              </div>
+            </ng-container>
+          </ng-container>
+        </div>
+
+        <!-- Project Info -->
+        <div class="projects__info">
+          <div class="projects__header-info">
+            <h3 class="projects__project-title">{{ project.title }}</h3>
+            <span class="projects__year">{{ project.year }}</span>
+          </div>
+
+          <p class="projects__company">{{ project.company }}</p>
+
+          <p class="projects__description">
+            {{ project.description }}
+          </p>
+
+          <!-- Technologies -->
+          <div class="projects__technologies">
+            <h4 class="projects__tech-title">Tecnologías utilizadas</h4>
+            <div class="projects__tech-list">
+              <span 
+                *ngFor="let tech of project.technologies; let techIndex = index"
+                [attr.data-aos]="'fade-up'"
+                [attr.data-aos-delay]="(i * 200 + (techIndex * 80))"
+                [attr.data-aos-duration]="500"
+                class="projects__tech-tag">
+                {{ tech }}
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Decorative Lines -->
+    <div class="projects__lines">
+      <div class="projects__line projects__line--vertical projects__line--left"></div>
+      <div class="projects__line projects__line--vertical projects__line--right"></div>
+    </div>
+  </div>
+</section>

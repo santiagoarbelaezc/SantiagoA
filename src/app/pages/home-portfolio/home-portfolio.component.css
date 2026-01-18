@@ -13,6 +13,24 @@ app-contact {
   position: relative;
 }
 
+/* Espacio entre el navbar y el hero */
+app-hero {
+  margin-top: 4rem;
+}
+
+/* Responsive: Reducir espacio en móviles */
+@media (max-width: 768px) {
+  app-hero {
+    margin-top: 1.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  app-hero {
+    margin-top: 0rem;
+  }
+}
+
 /* Opcional: Agregar efectos de overlay para mejor legibilidad */
 app-hero::before,
 app-about::before,

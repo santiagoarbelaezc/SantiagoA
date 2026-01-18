@@ -1,0 +1,788 @@
+/* ========================================================================== */
+/* PROJECTS VIDEO SECTION - PORTFOLIO DE PROYECTOS */
+/* ========================================================================== */
+
+.projects {
+  position: relative;
+  min-height: auto;
+  padding: 120px 0;
+  overflow: hidden;
+}
+
+.projects::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: 
+    radial-gradient(circle at 20% 80%, rgba(255, 255, 255, 0.02) 0%, transparent 40%),
+    radial-gradient(circle at 80% 20%, rgba(255, 255, 255, 0.01) 0%, transparent 35%);
+  pointer-events: none;
+  z-index: -1;
+}
+
+.projects__container {
+  position: relative;
+  z-index: 2;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 3rem;
+}
+
+/* ========================================================================== */
+/* HEADER */
+/* ========================================================================== */
+
+.projects__header {
+  text-align: center;
+  margin-bottom: 4rem;
+}
+
+.projects__title {
+  margin-bottom: 1.5rem;
+  position: relative;
+  display: inline-block;
+}
+
+.projects__title-word {
+  display: inline-block;
+  margin-right: 1.5rem;
+}
+
+.projects__title-letter {
+  display: inline-block;
+  font-family: 'Fashion Fetish Light', 'Avenir Next LT Pro', sans-serif;
+  font-weight: 200;
+  font-size: clamp(2.5rem, 4vw, 4rem);
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+  color: rgba(255, 255, 255, 0.95);
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeInUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  position: relative;
+}
+
+.projects__title-letter:nth-child(1) { animation-delay: 0.1s; }
+.projects__title-letter:nth-child(2) { animation-delay: 0.15s; }
+.projects__title-letter:nth-child(3) { animation-delay: 0.2s; }
+.projects__title-letter:nth-child(4) { animation-delay: 0.25s; }
+.projects__title-letter:nth-child(5) { animation-delay: 0.3s; }
+.projects__title-letter:nth-child(6) { animation-delay: 0.35s; }
+.projects__title-letter:nth-child(7) { animation-delay: 0.4s; }
+.projects__title-letter:nth-child(8) { animation-delay: 0.45s; }
+.projects__title-letter:nth-child(9) { animation-delay: 0.5s; }
+
+.projects__subtitle {
+  font-size: clamp(1rem, 1.5vw, 1.25rem);
+  color: rgba(255, 255, 255, 0.75);
+  font-weight: 300;
+  font-family: 'Avenir Next LT Pro Thin', 'Helvetica Neue Thin', sans-serif;
+  max-width: 700px;
+  margin: 0 auto;
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeInUp 0.8s 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  letter-spacing: 0.3px;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ========================================================================== */
+/* CONTENT */
+/* ========================================================================== */
+
+.projects__content {
+  position: relative;
+  z-index: 2;
+}
+
+/* ========================================================================== */
+/* PROJECT ITEM */
+/* ========================================================================== */
+
+.projects__item {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2rem;
+  align-items: stretch;
+  margin-bottom: 4rem;
+  opacity: 0;
+  animation: fadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  padding: 2rem;
+  border-radius: 1.5rem;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.03) 0%, rgba(255, 255, 255, 0.01) 100%);
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.projects__item:hover {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.06) 0%, rgba(255, 255, 255, 0.02) 100%);
+  border-color: rgba(255, 255, 255, 0.12);
+  transform: translateY(-4px);
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+}
+
+/* ========================================================================== */
+/* VIDEOS CONTAINER */
+/* ========================================================================== */
+
+.projects__videos-container {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  width: 100%;
+}
+
+.projects__videos-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+  width: 100%;
+}
+
+/* ========================================================================== */
+/* VIDEO CONTAINER */
+/* ========================================================================== */
+
+.projects__video-container {
+  position: relative;
+  width: 100%;
+}
+
+.projects__video-container--full {
+  aspect-ratio: 21 / 9;
+}
+
+.projects__video-container--half {
+  aspect-ratio: 16 / 9;
+}
+
+.projects__video-container--vertical {
+  aspect-ratio: 9 / 16;
+  max-width: 40%;
+  margin: 0 auto;
+}
+
+.projects__video-wrapper {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  border-radius: 1rem;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(0, 0, 0, 0.3);
+  box-shadow: 
+    0 20px 50px rgba(0, 0, 0, 0.3), 
+    inset 0 0 20px rgba(255, 255, 255, 0.02);
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.projects__item:hover .projects__video-wrapper {
+  border-color: rgba(255, 255, 255, 0.15);
+  box-shadow: 
+    0 25px 60px rgba(0, 0, 0, 0.35), 
+    inset 0 0 30px rgba(255, 255, 255, 0.04);
+}
+
+.projects__video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.projects__video-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle at 50% 50%, transparent 0%, rgba(0, 0, 0, 0.15) 100%);
+  pointer-events: none;
+  z-index: 1;
+}
+
+.projects__video-play {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 2;
+  width: 80px;
+  height: 80px;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  color: rgba(255, 255, 255, 0.9);
+  opacity: 0.8;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.projects__video-play:hover {
+  opacity: 1;
+  transform: translate(-50%, -50%) scale(1.1);
+  color: rgba(255, 255, 255, 1);
+}
+
+.projects__video-play svg {
+  width: 100%;
+  height: 100%;
+  filter: drop-shadow(0 4px 20px rgba(0, 0, 0, 0.4));
+  transition: filter 0.3s ease;
+}
+
+.projects__video-play:hover svg {
+  filter: drop-shadow(0 6px 30px rgba(100, 200, 255, 0.6));
+}
+
+/* ========================================================================== */
+/* PROJECT INFO */
+/* ========================================================================== */
+
+.projects__info {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.projects__header-info {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.projects__project-title {
+  font-family: 'Fashion Fetish Light', 'Avenir Next LT Pro', sans-serif;
+  font-weight: 200;
+  font-size: clamp(1.75rem, 3vw, 2.5rem);
+  color: rgba(255, 255, 255, 0.95);
+  margin: 0;
+  letter-spacing: -0.02em;
+  transition: color 0.3s ease;
+}
+
+.projects__item:hover .projects__project-title {
+  color: rgba(100, 200, 255, 0.95);
+}
+
+.projects__year {
+  font-family: 'Avenir Next LT Pro Thin', 'Helvetica Neue Thin', sans-serif;
+  font-size: 0.85rem;
+  color: rgba(100, 200, 255, 0.8);
+  font-weight: 300;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  opacity: 0.8;
+  transition: opacity 0.3s ease;
+  white-space: nowrap;
+}
+
+.projects__item:hover .projects__year {
+  opacity: 1;
+}
+
+.projects__company {
+  font-size: 1.1rem;
+  color: rgba(255, 255, 255, 0.8);
+  font-weight: 300;
+  font-family: 'Avenir Next LT Pro Thin', 'Helvetica Neue Thin', sans-serif;
+  margin: 0;
+  letter-spacing: 0.3px;
+}
+
+.projects__description {
+  font-size: clamp(0.95rem, 1.2vw, 1.1rem);
+  color: rgba(255, 255, 255, 0.7);
+  font-weight: 300;
+  font-family: 'Avenir Next LT Pro Thin', 'Helvetica Neue Thin', sans-serif;
+  line-height: 1.7;
+  margin: 0;
+  letter-spacing: 0.2px;
+}
+
+/* ========================================================================== */
+/* TECHNOLOGIES */
+/* ========================================================================== */
+
+.projects__technologies {
+  padding-top: 1.5rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.projects__tech-title {
+  font-size: 0.75rem;
+  color: rgba(100, 200, 255, 0.8);
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  margin: 0 0 1rem 0;
+  font-weight: 300;
+  font-family: 'Avenir Next LT Pro Thin', 'Helvetica Neue Thin', sans-serif;
+}
+
+.projects__tech-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+.projects__tech-tag {
+  display: inline-block;
+  padding: 0.5rem 1rem;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 0.75rem;
+  font-weight: 300;
+  font-family: 'Avenir Next LT Pro Thin', 'Helvetica Neue Thin', sans-serif;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  opacity: 0;
+  animation: fadeInUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.projects__tech-tag:hover {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(100, 200, 255, 0.8);
+  color: rgba(100, 200, 255, 0.95);
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(100, 200, 255, 0.2);
+}
+
+/* ========================================================================== */
+/* DECORATIVE LINES */
+/* ========================================================================== */
+
+.projects__lines {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.projects__line {
+  position: absolute;
+  background: linear-gradient(180deg, rgba(100, 200, 255, 0.2) 0%, transparent 100%);
+  opacity: 0.15;
+}
+
+.projects__line--vertical {
+  width: 1px;
+  height: 100%;
+  top: 0;
+}
+
+.projects__line--left {
+  left: 15%;
+}
+
+.projects__line--right {
+  right: 15%;
+}
+
+/* ========================================================================== */
+/* RESPONSIVE DESIGN */
+/* ========================================================================== */
+
+/* Laptops grandes y tablets */
+@media (max-width: 1024px) {
+  .projects {
+    padding: 80px 0;
+  }
+
+  .projects__container {
+    padding: 0 2.5rem;
+  }
+
+  .projects__header {
+    margin-bottom: 3rem;
+  }
+
+  .projects__title-word {
+    display: block;
+    margin-right: 0;
+    margin-bottom: 0.5rem;
+  }
+
+  .projects__videos-row {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .projects__video-container--vertical {
+    max-width: 50%;
+  }
+}
+
+/* Tablets */
+@media (max-width: 768px) {
+  .projects {
+    padding: 60px 0;
+  }
+
+  .projects__container {
+    padding: 0 1.5rem;
+  }
+
+  .projects__header {
+    margin-bottom: 2.5rem;
+  }
+
+  .projects__title-letter {
+    font-size: clamp(1.5rem, 5vw, 3rem);
+  }
+
+  .projects__subtitle {
+    font-size: clamp(0.9rem, 2.5vw, 1rem);
+  }
+
+  .projects__item {
+    padding: 1.5rem;
+    margin-bottom: 2.5rem;
+    gap: 1.5rem;
+  }
+
+  .projects__project-title {
+    font-size: clamp(1.3rem, 3.5vw, 2rem);
+  }
+
+  .projects__company {
+    font-size: clamp(1rem, 2vw, 1.1rem);
+  }
+
+  .projects__description {
+    font-size: clamp(0.85rem, 1.8vw, 1rem);
+  }
+
+  .projects__videos-row {
+    gap: 1.5rem;
+  }
+
+  .projects__video-container--vertical {
+    max-width: 70%;
+  }
+
+  .projects__tech-title {
+    margin-bottom: 0.75rem;
+  }
+
+  .projects__tech-tag {
+    font-size: 0.65rem;
+    padding: 0.4rem 0.8rem;
+  }
+}
+
+/* Móviles grandes */
+@media (max-width: 640px) {
+  .projects {
+    padding: 40px 0;
+  }
+
+  .projects__container {
+    padding: 0 1.25rem;
+  }
+
+  .projects__header {
+    margin-bottom: 1.5rem;
+  }
+
+  .projects__title-letter {
+    font-size: clamp(1.2rem, 4vw, 2.5rem);
+  }
+
+  .projects__subtitle {
+    font-size: clamp(0.8rem, 2.2vw, 0.95rem);
+  }
+
+  .projects__item {
+    padding: 1.25rem;
+    margin-bottom: 1.5rem;
+    gap: 1.25rem;
+  }
+
+  .projects__header-info {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+  }
+
+  .projects__project-title {
+    font-size: clamp(1.2rem, 3.5vw, 1.8rem);
+  }
+
+  .projects__year {
+    font-size: 0.75rem;
+    white-space: nowrap;
+  }
+
+  .projects__company {
+    font-size: clamp(0.95rem, 2.2vw, 1.05rem);
+  }
+
+  .projects__description {
+    font-size: clamp(0.8rem, 2vw, 0.95rem);
+    line-height: 1.6;
+  }
+
+  .projects__technologies {
+    padding-top: 1rem;
+  }
+
+  .projects__tech-title {
+    font-size: 0.65rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .projects__tech-list {
+    gap: 0.5rem;
+  }
+
+  .projects__tech-tag {
+    font-size: 0.6rem;
+    padding: 0.4rem 0.75rem;
+  }
+
+  .projects__videos-row {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  .projects__video-container--full {
+    aspect-ratio: 16 / 9;
+  }
+
+  .projects__video-container--half {
+    aspect-ratio: 16 / 9;
+  }
+
+  .projects__video-container--vertical {
+    max-width: 85%;
+  }
+
+  .projects__video-play {
+    width: 60px;
+    height: 60px;
+  }
+}
+
+/* Móviles pequeños */
+@media (max-width: 480px) {
+  .projects {
+    padding: 30px 0;
+  }
+
+  .projects__container {
+    padding: 0 1rem;
+  }
+
+  .projects__header {
+    margin-bottom: 1.5rem;
+  }
+
+  .projects__title-letter {
+    font-size: clamp(1rem, 3vw, 1.8rem);
+  }
+
+  .projects__subtitle {
+    font-size: clamp(0.75rem, 1.8vw, 0.9rem);
+  }
+
+  .projects__item {
+    padding: 1rem;
+    margin-bottom: 1.5rem;
+    gap: 1rem;
+    border-radius: 1rem;
+  }
+
+  .projects__header-info {
+    gap: 0.75rem;
+  }
+
+  .projects__project-title {
+    font-size: clamp(1.1rem, 2.5vw, 1.5rem);
+    letter-spacing: -0.01em;
+  }
+
+  .projects__year {
+    font-size: 0.65rem;
+    opacity: 0.7;
+  }
+
+  .projects__company {
+    font-size: clamp(0.9rem, 2vw, 1rem);
+    margin-bottom: 0.5rem;
+  }
+
+  .projects__description {
+    font-size: clamp(0.75rem, 1.8vw, 0.9rem);
+    line-height: 1.5;
+    margin: 0;
+  }
+
+  .projects__technologies {
+    padding-top: 0.75rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+  }
+
+  .projects__tech-title {
+    font-size: 0.6rem;
+    margin-bottom: 0.5rem;
+    letter-spacing: 0.12em;
+  }
+
+  .projects__tech-list {
+    gap: 0.4rem;
+    flex-wrap: wrap;
+  }
+
+  .projects__tech-tag {
+    padding: 0.35rem 0.65rem;
+    font-size: 0.55rem;
+    white-space: nowrap;
+  }
+
+  .projects__videos-row {
+    grid-template-columns: 1fr;
+    gap: 0.75rem;
+  }
+
+  .projects__video-container--full {
+    aspect-ratio: 16 / 9;
+  }
+
+  .projects__video-container--half {
+    aspect-ratio: 16 / 9;
+  }
+
+  .projects__videos-container {
+    gap: 1rem;
+  }
+
+  .projects__video-container--vertical {
+    max-width: 90%;
+    aspect-ratio: 9 / 16;
+  }
+
+  .projects__video-play {
+    width: 50px;
+    height: 50px;
+  }
+
+  .projects__line--left,
+  .projects__line--right {
+    display: none;
+  }
+}
+
+/* Móviles muy pequeños */
+@media (max-width: 375px) {
+  .projects__container {
+    padding: 0 0.75rem;
+  }
+
+  .projects__item {
+    padding: 0.875rem;
+  }
+
+  .projects__project-title {
+    font-size: clamp(1rem, 2.5vw, 1.3rem);
+  }
+
+  .projects__company {
+    font-size: clamp(0.85rem, 2vw, 0.95rem);
+  }
+
+  .projects__description {
+    font-size: clamp(0.7rem, 1.8vw, 0.85rem);
+  }
+
+  .projects__tech-tag {
+    padding: 0.3rem 0.6rem;
+    font-size: 0.5rem;
+  }
+}
+
+/* Orientación horizontal en móviles */
+@media (max-width: 932px) and (orientation: landscape) {
+  .projects {
+    padding: 30px 0;
+  }
+
+  .projects__container {
+    padding: 0 1.5rem;
+  }
+
+  .projects__header {
+    margin-bottom: 1.5rem;
+  }
+
+  .projects__title-letter {
+    font-size: clamp(1.2rem, 3vw, 1.8rem);
+  }
+
+  .projects__subtitle {
+    font-size: clamp(0.75rem, 2vw, 0.9rem);
+  }
+
+  .projects__item {
+    padding: 1rem;
+    margin-bottom: 1rem;
+    gap: 1rem;
+  }
+
+  .projects__project-title {
+    font-size: clamp(1.1rem, 2.5vw, 1.5rem);
+  }
+
+  .projects__videos-row {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .projects__video-container--vertical {
+    max-width: 100%;
+    grid-column: 1 / -1;
+  }
+}
+
+/* Reducir movimiento */
+@media (prefers-reduced-motion: reduce) {
+  .projects__title-letter,
+  .projects__subtitle,
+  .projects__item,
+  .projects__tech-tag,
+  .projects__item:hover,
+  .projects__video-play:hover {
+    animation: none;
+    transition: none;
+  }
+
+  .projects__title-letter,
+  .projects__subtitle,
+  .projects__item,
+  .projects__tech-tag {
+    opacity: 1;
+    transform: none;
+  }
+}

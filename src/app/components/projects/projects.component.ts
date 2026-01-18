@@ -124,25 +124,54 @@ export class ProjectsComponent {
     }
   },
     {
-      id: 2,
-      title: 'Dashboard Analytics',
-      description: 'Visualización de datos en tiempo real con métricas personalizables y reportes automatizados.',
-      longDescription: 'Dashboard empresarial para análisis de datos con visualizaciones interactivas. Implementa WebSockets para actualizaciones en tiempo real, exportación de reportes en múltiples formatos (PDF, Excel), y paneles personalizables por usuario. Integra APIs de terceros y permite la creación de métricas personalizadas con lenguaje de consulta propio.',
-      image: 'assets/dashboard.png',
-      category: 'Business Intelligence',
-      year: '2024',
-      technologies: ['React 18', 'TypeScript', 'D3.js', 'Node.js', 'MongoDB', 'WebSocket'],
-      technologyIcons: this.getTechnologyIcons(['React 18', 'TypeScript', 'D3.js', 'Node.js', 'MongoDB', 'WebSocket']),
-      images: [
-        { src: 'assets/projects/dashboard/main.jpg', alt: 'Dashboard principal' },
-        { src: 'assets/projects/dashboard/charts.jpg', alt: 'Gráficos interactivos' },
-        { src: 'assets/projects/dashboard/reports.jpg', alt: 'Generación de reportes' },
-        { src: 'assets/projects/dashboard/mobile.jpg', alt: 'Vista móvil responsive' }
-      ],
-      liveUrl: 'https://analytics-dashboard.demo.com',
-      githubUrl: 'https://github.com/tu-usuario/analytics-dashboard'
-      // Sin usageInfo (vacío como solicitaste)
-    },
+  id: 2,
+  title: 'Bases Education',
+  description: 'Plataforma educativa integral para creación, administración y evaluación de exámenes en línea, con calificación automática, análisis detallado de desempeño estudiantil y generación de reportes institucionales personalizados.',
+  longDescription: 'Aplicación web completa para instituciones educativas que permite a docentes crear y gestionar exámenes en línea. La plataforma incluye: creación de exámenes organizados por temas con diversos tipos de preguntas, bancos de preguntas reutilizables (públicas/privadas), configuración de parámetros de examen (tiempo, fechas, cantidad de preguntas), calificación automática con retroalimentación inmediata, generación de estadísticas detalladas por estudiante, grupo y tema, gestión de matrícula estudiantil, visualización de horarios y programación de evaluaciones, análisis de preguntas con baja tasa de aciertos para mejora continua, y reportes exportables personalizados según necesidades institucionales.',
+  image: 'assets/loginBases.png',
+  category: 'Educación',
+  year: '2024',
+  technologies: ['Angular 17', 'ExpressJS', 'Oracle Developer', 'Node.js'],
+  technologyIcons: this.getTechnologyIcons(['Angular 17', 'ExpressJS', 'Oracle Developer', 'Node.js']),
+  images: [
+    { src: 'assets/loginBases.png', alt: 'Dashboard principal de EduQuiz' },
+    { src: 'assets/homeBases.png', alt: 'Creación de exámenes' },
+    { src: 'assets/exam.png', alt: 'Vista de estudiante para examen' }
+   
+  ],
+  liveUrl: 'https://eduquiz-platform.demo.com',
+  githubUrl: 'https://github.com/santiagoarbelaezc/eduquiz-platform',
+  usageInfo: {
+    title: 'Información de Acceso Demo',
+    credentials: [
+      {
+        role: 'Docente Demo',
+        username: 'profesor.demo',
+        password: 'Profesor.2024',
+        description: 'Acceso completo al módulo docente: creación de exámenes, banco de preguntas, calificación y análisis estadístico.'
+      },
+      {
+        role: 'Estudiante Demo',
+        username: 'estudiante.demo',
+        password: 'Estudiante.2024',
+        description: 'Acceso al módulo estudiantil: presentación de exámenes, revisión de resultados, visualización de horarios.'
+      },
+      {
+        role: 'Administrador',
+        username: 'admin.demo',
+        password: 'AdminEdu.2024',
+        description: 'Acceso a configuración institucional: gestión de cursos, usuarios, planes de estudio y reportes generales.'
+      }
+    ],
+    instructions: [
+      '1. Ingresa a la URL de la plataforma',
+      '2. Selecciona "Iniciar Sesión" en la esquina superior derecha',
+      '3. Utiliza las credenciales según el rol que desees probar',
+      '4. Explora las diferentes funcionalidades según tu rol',
+      '5. Para pruebas locales: clona el repositorio y sigue las instrucciones del README'
+    ]
+  }
+},
     {
       id: 3,
       title: 'TaskFlow Mobile App',

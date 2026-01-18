@@ -17,8 +17,8 @@ export class NavbarComponent implements OnInit, OnDestroy {
   isMenuOpen = false;
   currentBackground = '#FFFFFF';
   
-  // SIEMPRE mostrar Portafolio como activa mientras estemos en esta app
-  currentSection = 'projects'; 
+  // Sección actual detectada por scroll
+  currentSection = 'hero'; 
   
   private colorSubscription!: Subscription;
   private isBrowser: boolean;
@@ -29,31 +29,16 @@ export class NavbarComponent implements OnInit, OnDestroy {
 
   // Definir las secciones principales para el navbar
   mainSections = [
-    { 
-      id: 'profilex', 
-      name: 'Profile X', 
-      external: true, 
-      url: '/profile-x'
-    },
-    { 
-      id: 'projects', 
-      name: 'Portafolio', 
-      external: false 
-    }
-  ];
-
-  // Productos
-  products = [
-    { id: 'capturex', name: 'CaptureX', external: true, url: 'https://capturex.com' },
-    { id: 'findlink', name: 'FindLink', external: true, url: 'https://findlink.com' }
+    { id: 'hero', name: 'Portfolio', external: false },
+    { id: 'projects', name: 'Proyectos', external: false },
+    { id: 'about', name: 'Tecnologías', external: false },
+    { id: 'contact', name: 'Contacto', external: false }
   ];
 
   // Redes sociales
   socialNetworks = [
-    { id: 'github', name: 'GitHub', external: true, url: 'https://github.com/santiagoarbelaezc' },
     { id: 'linkedin', name: 'LinkedIn', external: true, url: 'https://www.linkedin.com/in/santiago-arbelaez-contreras-9830b5290/' },
-    { id: 'instagram', name: 'Instagram', external: true, url: 'https://www.instagram.com/santiago_arbelaezc/' },
-    { id: 'whatsapp', name: 'WhatsApp', external: true, url: 'https://wa.me/tu-numero' }
+    { id: 'github', name: 'GitHub', external: true, url: 'https://github.com/santiagoarbelaezc' }
   ];
 
   constructor(
@@ -139,8 +124,33 @@ export class NavbarComponent implements OnInit, OnDestroy {
     const scrollThreshold = this.isMobileView() ? 5 : 10;
     this.isScrolled = scrollTop > scrollThreshold;
     
+    // Detectar sección actual y actualizar
+    this.updateCurrentSection(scrollTop);
+    
     // Guardar la última posición del scroll
     this.lastScrollTop = scrollTop;
+  }
+
+  // Nuevo método para detectar la sección actual basándose en el scroll
+  private updateCurrentSection(scrollPosition: number): void {
+    if (!this.isBrowser) return;
+    
+    const sectionClass = this.getSectionClass();
+    
+    // Mapear la clase de sección a la ID de sección
+    switch(sectionClass) {
+      case 'navbar-white':
+        this.currentSection = 'hero';
+        break;
+      case 'navbar-brown':
+        this.currentSection = 'about';
+        break;
+      case 'navbar-black':
+        this.currentSection = 'projects';
+        break;
+      default:
+        this.currentSection = 'hero';
+    }
   }
 
   toggleMenu() {
@@ -170,8 +180,8 @@ export class NavbarComponent implements OnInit, OnDestroy {
 
   // Método para verificar si una sección está activa
   isActiveSection(sectionId: string): boolean {
-    // Solo "Portafolio" está activa mientras estemos en esta aplicación
-    return sectionId === 'projects';
+    // Comparar con la sección actual detectada dinámicamente
+    return this.currentSection === sectionId;
   }
 
   // Método para navegar suavemente a una sección

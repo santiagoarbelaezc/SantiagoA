@@ -4,7 +4,7 @@ import { ScrollColorService } from '../../services/scroll-color.service';
 import { HeroComponent } from '../../components/hero/hero.component';
 import { SectionDividerComponent } from '../../components/section-divider/section-divider.component';
 import { AboutComponent } from '../../components/about/about.component';
-import { ProjectsComponent } from '../../components/projects/projects.component';
+import { ProjectsVideoComponent } from '../../components/projects-video/projects-video.component';
 import { ContactComponent } from '../../components/contact/contact.component';
 import { FooterComponent } from '../../components/footer/footer.component';
 import { CommonModule } from '@angular/common';
@@ -23,7 +23,7 @@ import { DesignGalleryComponent } from '../../components/design-gallery/design-g
     HeroComponent,
     SectionDividerComponent,
     AboutComponent,
-    ProjectsComponent,
+    ProjectsVideoComponent,
     ContactComponent,
     DesignGalleryComponent,
     FooterComponent
