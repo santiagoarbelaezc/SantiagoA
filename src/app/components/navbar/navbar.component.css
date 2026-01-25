@@ -175,6 +175,7 @@
   display: flex;
   gap: 0.75rem;
   align-items: center;
+  margin-left: auto;
 }
 
 .social-link {
@@ -220,6 +221,7 @@
   padding: 0;
   z-index: 1001;
   transition: all var(--transition-normal);
+  tabindex: -1;
 }
 
 .nav-toggle:hover {
@@ -692,11 +694,10 @@
     gap: 1rem;
   }
 
-  /* Logo centrado */
+  /* Logo en la izquierda */
   .nav-logo {
-    position: absolute;
-    left: 50%;
-    transform: translateX(-50%);
+    position: static;
+    transform: none;
   }
 
   .logo-text {

@@ -1,4 +1,4 @@
-// navbar.component.ts - VERSIÓN CON CONFIGURACIÓN MANUAL DE ALTURAS
+// navbar.component.ts - VERSIÓN CORREGIDA CON MANEJO DE SCROLL FIABLE
 import { CommonModule, isPlatformBrowser } from '@angular/common';
 import { Component, HostListener, OnInit, OnDestroy, Inject, PLATFORM_ID } from '@angular/core';
 import { Router } from '@angular/router';
@@ -13,10 +13,15 @@ import { Router } from '@angular/router';
 export class NavbarComponent implements OnInit, OnDestroy {
   isScrolled = false;
   isMenuOpen = false;
+  hamburgerActive = false;
   currentBackground = '#FFFFFF';
   
   // Sección actual detectada por scroll
   currentSection = 'hero'; 
+  
+  // Variables para manejar el scroll al abrir/cerrar menú
+  private scrollPositionBeforeMenuOpen = 0;
+  private scrollFreezeClass = 'navbar-menu-open';
   
   // ===========================================
   // CONFIGURACIÓN DE ALTURAS - AJUSTA ESTOS VALORES
@@ -76,7 +81,6 @@ export class NavbarComponent implements OnInit, OnDestroy {
   // FIN DE CONFIGURACIÓN
   // ===========================================
 
-
   private isBrowser: boolean;
   private lastScrollTop = 0;
   private scrollTimeout: any;
@@ -116,11 +120,20 @@ export class NavbarComponent implements OnInit, OnDestroy {
     if (this.resizeTimeout) {
       clearTimeout(this.resizeTimeout);
     }
+    
+    // Asegurarse de restaurar el scroll al destruir el componente
+    if (this.isBrowser) {
+      this.removeScrollFreeze();
+      document.body.classList.remove('menu-open');
+    }
   }
 
   @HostListener('window:scroll')
   onWindowScroll() {
     if (!this.isBrowser) return;
+    
+    // No procesar scroll cuando el menú está abierto
+    if (this.isMenuOpen) return;
     
     // Usar debounce para mejor rendimiento
     if (this.scrollTimeout) {
@@ -147,6 +160,26 @@ export class NavbarComponent implements OnInit, OnDestroy {
         this.closeMenu();
       }
     }, 150);
+  }
+
+  @HostListener('document:click', ['$event'])
+  onDocumentClick(event: MouseEvent) {
+    if (!this.isBrowser || !this.isMenuOpen) return;
+    
+    // Verificar si el clic fue fuera del contenido del menú móvil
+    const mobileMenuContent = document.querySelector('.mobile-menu-content');
+    const navToggle = document.querySelector('.nav-toggle');
+    const hamburger = document.querySelector('.hamburger');
+    
+    // Si el clic NO fue dentro del contenido del menú Y NO fue en el botón hamburguesa
+    const clickedInsideMenu = mobileMenuContent?.contains(event.target as Node);
+    const clickedOnToggle = navToggle?.contains(event.target as Node) || 
+                           hamburger?.contains(event.target as Node);
+    
+    if (!clickedInsideMenu && !clickedOnToggle) {
+      // Cerrar el menú manteniendo la posición del scroll
+      this.closeMenu();
+    }
   }
 
   private checkScroll() {
@@ -181,29 +214,136 @@ export class NavbarComponent implements OnInit, OnDestroy {
     }
   }
 
-  toggleMenu() {
-    this.isMenuOpen = !this.isMenuOpen;
+  toggleMenu(event: Event) {
+    event.preventDefault();
+    event.stopPropagation();
     
-    // Prevenir scroll del body cuando el menú está abierto
+    if (!this.isMenuOpen) {
+      this.openMenu();
+    } else {
+      this.closeMenu();
+    }
+  }
+
+  openMenu() {
+    // Guardar la posición actual del scroll ANTES de abrir el menú
     if (this.isBrowser) {
-      if (this.isMenuOpen) {
-        document.body.classList.add('menu-open');
-        document.body.style.overflow = 'hidden';
-      } else {
-        document.body.classList.remove('menu-open');
-        document.body.style.overflow = '';
-      }
+      this.scrollPositionBeforeMenuOpen = window.pageYOffset || document.documentElement.scrollTop;
+      console.log('Guardando posición del scroll:', this.scrollPositionBeforeMenuOpen);
+      
+      // Usar método que NO modifica el estilo del body directamente
+      this.freezeScrollPosition();
+    }
+    
+    // Abrir menú
+    this.isMenuOpen = true;
+    this.hamburgerActive = true;
+    
+    // Agregar clase al body
+    if (this.isBrowser) {
+      document.body.classList.add('menu-open');
     }
   }
 
   closeMenu() {
+    if (!this.isMenuOpen) return;
+    
+    console.log('Cerrando menú, restaurando a posición:', this.scrollPositionBeforeMenuOpen);
+    
+    // Cerrar menú
     this.isMenuOpen = false;
     
-    // Remover clase del body
+    // Restaurar el scroll usando un enfoque diferente
     if (this.isBrowser) {
+      this.restoreScrollPosition();
       document.body.classList.remove('menu-open');
-      document.body.style.overflow = '';
     }
+    
+    // Quitar la clase active del hamburger después de la animación
+    setTimeout(() => {
+      this.hamburgerActive = false;
+    }, 300);
+  }
+
+  private freezeScrollPosition() {
+    if (!this.isBrowser) return;
+    
+    // Guardar la posición actual del scroll
+    this.scrollPositionBeforeMenuOpen = window.pageYOffset || document.documentElement.scrollTop;
+    
+    // En lugar de modificar estilos directamente, usar una clase CSS
+    // La clase CSS manejará la prevención del scroll
+    document.body.classList.add(this.scrollFreezeClass);
+    
+    // Aplicar estilos CSS para prevenir scroll manteniendo posición
+    const style = document.createElement('style');
+    style.id = 'navbar-freeze-scroll';
+    style.textContent = `
+      body.${this.scrollFreezeClass} {
+        overflow: hidden !important;
+        position: fixed !important;
+        top: -${this.scrollPositionBeforeMenuOpen}px !important;
+        left: 0 !important;
+        right: 0 !important;
+        width: 100% !important;
+        height: 100% !important;
+      }
+    `;
+    
+    // Remover estilo anterior si existe
+    const existingStyle = document.getElementById('navbar-freeze-scroll');
+    if (existingStyle) {
+      existingStyle.remove();
+    }
+    
+    document.head.appendChild(style);
+  }
+
+  private removeScrollFreeze() {
+    if (!this.isBrowser) return;
+    
+    // Remover clase
+    document.body.classList.remove(this.scrollFreezeClass);
+    
+    // Remover estilo
+    const style = document.getElementById('navbar-freeze-scroll');
+    if (style) {
+      style.remove();
+    }
+  }
+
+  private restoreScrollPosition() {
+    if (!this.isBrowser) return;
+    
+    // Primero, remover la clase de freeze
+    this.removeScrollFreeze();
+    
+    // Pequeña pausa para que el navegador procese la remoción de estilos
+    setTimeout(() => {
+      // Ahora restaurar la posición del scroll
+      const restorePosition = this.scrollPositionBeforeMenuOpen || 0;
+      
+      console.log('Restaurando scroll a posición:', restorePosition);
+      
+      // Usar diferentes métodos para asegurar que funcione
+      window.scrollTo(0, restorePosition);
+      
+      // Forzar scroll después de un breve retraso
+      setTimeout(() => {
+        window.scrollTo({
+          top: restorePosition,
+          left: 0,
+          behavior: 'auto'
+        });
+        
+        // Un tercer intento por si acaso
+        setTimeout(() => {
+          if (window.pageYOffset !== restorePosition) {
+            window.scrollTo(0, restorePosition);
+          }
+        }, 50);
+      }, 50);
+    }, 10);
   }
 
   // Método para verificar si una sección está activa
@@ -213,28 +353,38 @@ export class NavbarComponent implements OnInit, OnDestroy {
 
   // Método para navegar suavemente a una sección
   scrollToSection(sectionId: string, event: Event): void {
-    event.preventDefault();
+    if (event) {
+      event.preventDefault();
+    }
+    
+    // Cerrar menú primero
     this.closeMenu();
     
-    if (!this.isBrowser) return;
+    // Esperar a que se restaure el scroll antes de navegar
+    setTimeout(() => {
+      if (!this.isBrowser) return;
 
-    const element = document.getElementById(sectionId);
-    if (element) {
-      // Calcular la posición considerando el navbar fijo
-      const navbarHeight = this.isMobileView() ? 60 : 70;
-      const elementPosition = element.getBoundingClientRect().top;
-      const offsetPosition = elementPosition + window.pageYOffset - navbarHeight;
+      const element = document.getElementById(sectionId);
+      if (element) {
+        // Calcular la posición considerando el navbar fijo
+        const navbarHeight = this.isMobileView() ? 60 : 70;
+        const elementPosition = element.getBoundingClientRect().top;
+        const offsetPosition = elementPosition + window.pageYOffset - navbarHeight;
 
-      window.scrollTo({
-        top: offsetPosition,
-        behavior: 'smooth'
-      });
-    }
+        window.scrollTo({
+          top: offsetPosition,
+          behavior: 'smooth'
+        });
+      }
+    }, 100); // Aumentar el tiempo para asegurar que el menú se cierre
   }
 
   // Método para abrir enlaces externos
   openExternalLink(url: string, event: Event): void {
-    event.preventDefault();
+    if (event) {
+      event.preventDefault();
+    }
+    
     this.closeMenu();
     
     if (this.isBrowser) {
@@ -244,17 +394,12 @@ export class NavbarComponent implements OnInit, OnDestroy {
 
   // Método para manejar clics en secciones
   handleSectionClick(section: any, event: Event): void {
-    event.preventDefault();
-    this.closeMenu();
+    if (event) {
+      event.preventDefault();
+    }
     
     if (section.external) {
-      if (section.url.startsWith('/')) {
-        this.router.navigate([section.url]);
-      } else {
-        if (this.isBrowser) {
-          window.open(section.url, '_blank', 'noopener,noreferrer');
-        }
-      }
+      this.openExternalLink(section.url, event);
     } else {
       this.scrollToSection(section.id, event);
     }
@@ -263,6 +408,12 @@ export class NavbarComponent implements OnInit, OnDestroy {
   // MÉTODO PRINCIPAL: Detección de sección con configuración manual
   getSectionClass(): string {
     if (!this.isBrowser) return 'navbar-white';
+    
+    // Cuando el menú está abierto, mantener la sección actual
+    if (this.isMenuOpen) {
+      const config = this.isMobileView() ? this.mobileConfig : this.desktopConfig;
+      return config.colors[this.currentSection as keyof typeof config.colors] || 'navbar-white';
+    }
     
     const scrollPosition = window.pageYOffset;
     
