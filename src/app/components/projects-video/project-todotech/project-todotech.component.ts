@@ -13,7 +13,7 @@ export class ProjectTodotechComponent {
   project: Project = {
     id: 'todotechshop',
     title: 'TodoTechShop',
-    company: 'Plataforma Global',
+    company: 'E-Commerce Tecnológico',
     description: 'Plataforma e-commerce especializada en tecnología. Ofrece un completo catálogo de productos electrónicos con sistema de carrito de compras, procesamiento de pagos seguro y gestión de órdenes optimizada para proporcionar una experiencia de compra fluida.',
     technologies: ['Spring Boot', 'PostgreSQL', 'Angular', 'AWS', 'Firebase'],
     videos: [
@@ -22,7 +22,9 @@ export class ProjectTodotechComponent {
         layout: 'full' 
       }
     ],
-    year: 2025
+    year: 2025,
+    linkRepositorio: 'https://github.com/santiagoarbelaezc/todo-tech-back',
+    linkEnVivo: 'https://todotechshopfrontend.web.app/catalogo-todotech-presentacion'
   };
 
   onVideoPlay(event: {projectId: string, videoIndex: number, videoElement: HTMLVideoElement}): void {

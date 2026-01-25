@@ -11,6 +11,7 @@ import { CommonModule } from '@angular/common';
 import { NavbarComponent } from '../../components/navbar/navbar.component';
 
 import { ProjectTodotechComponent } from "../../components/projects-video/project-todotech/project-todotech.component";
+import { ProjectPlaxtilineasComponent } from "../../components/projects-video/project-plaxtilineas/project-plaxtilineas.component";
 
 @Component({
   selector: 'app-home-portfolio',
@@ -25,7 +26,8 @@ import { ProjectTodotechComponent } from "../../components/projects-video/projec
     ProjectsVideoComponent,
     ContactComponent,
     FooterComponent,
-    ProjectTodotechComponent
+    ProjectTodotechComponent,
+    ProjectPlaxtilineasComponent
 ]
 })
 export class HomePortfolioComponent implements OnInit, AfterViewInit {

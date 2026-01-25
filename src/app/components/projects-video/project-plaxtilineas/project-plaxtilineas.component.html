@@ -1,1 +1,10 @@
-<p>project-plaxtilineas works!</p>
+<section class="project-plaxtilineas" id="plaxtilineas">
+      <app-project-scheme
+            [project]="project"
+            [animationDelay]="200"
+            [showPlayButtons]="true"
+            (videoPlay)="onVideoPlay($event)"
+            (videoPause)="onVideoPause($event)">
+      </app-project-scheme>
+
+</section>

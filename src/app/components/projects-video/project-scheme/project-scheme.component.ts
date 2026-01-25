@@ -26,6 +26,8 @@ export interface Project {
   technologies: string[];
   videos: ProjectVideo[];
   year: number;
+  linkRepositorio?: string;
+  linkEnVivo?: string;
 }
 
 interface VideoState {
@@ -266,5 +268,28 @@ export class ProjectSchemeComponent implements AfterViewInit, OnDestroy, OnInit 
     if (this.project.videos.length === 1) return 'video-container--full';
     if (video.layout === 'vertical') return 'video-container--vertical';
     return 'video-container--half';
+  }
+
+  getIconUrl(tech: string): string {
+    const iconMap: { [key: string]: string } = {
+      'Angular': 'angular.png',
+      'AWS': 'aws.png',
+      'Firebase': 'firebase.png',
+      'Spring Boot': 'spring-boot.png',
+      'PostgreSQL': 'postgresql.png',
+      'CSS': 'css.png',
+      'Docker': 'docker.png',
+      'Express': 'express.png',
+      'Hostinger': 'hostinger.png',
+      'MongoDB': 'mongodb.png',
+      'MySQL': 'mysql.png',
+      'NestJS': 'nestjs.png',
+      'Node.js': 'nodejs.png',
+      'Oracle': 'oracle.png',
+      'Play': 'play.png',
+      'React': 'react.png'
+    };
+    const iconName = iconMap[tech];
+    return iconName ? `assets/icons/${iconName}` : '';
   }
 }
