@@ -1,0 +1,175 @@
+<div class="project-scheme" 
+     [attr.data-aos]="'fade-up'"
+     [attr.data-aos-delay]="animationDelay"
+     [attr.data-aos-duration]="800">
+  
+  <!-- Videos Container -->
+  <div class="video-section">
+    <!-- Single Video Layout -->
+    <ng-container *ngIf="project.videos.length === 1">
+      <div class="video-container video-container--full">
+        <div class="video-wrapper">
+          <video
+            #videoElement
+            [attr.data-video-id]="getVideoId(0)"
+            class="project-video"
+            autoplay
+            loop
+            muted
+            playsinline
+            preload="metadata"
+            (click)="toggleVideo(0, videoElement)">
+            <source [src]="project.videos[0].url" type="video/mp4" />
+          </video>
+          
+          <!-- Play/Pause Overlay -->
+          <div class="video-controls-overlay" (click)="toggleVideo(0, videoElement)">
+            <div class="video-controls-content">
+              <button class="video-control-button" aria-label="Controlar video">
+                <svg *ngIf="isVideoPlaying(0)" class="video-control-icon video-control-icon--pause" viewBox="0 0 24 24">
+                  <path fill="currentColor" d="M14,19H18V5H14M6,19H10V5H6V19Z"/>
+                </svg>
+                <svg *ngIf="!isVideoPlaying(0)" class="video-control-icon video-control-icon--play" viewBox="0 0 24 24">
+                  <path fill="currentColor" d="M8,5.14V19.14L19,12.14L8,5.14Z"/>
+                </svg>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </ng-container>
+
+    <!-- Multiple Videos Layout -->
+    <ng-container *ngIf="project.videos.length > 1">
+      <!-- Non-Vertical Videos -->
+      <div class="videos-row">
+        <ng-container *ngFor="let video of getNonVerticalVideos(); let index = index">
+          <div class="video-container" [ngClass]="getLayoutClass(video)">
+            <div class="video-wrapper">
+              <video
+                #videoElement
+                [attr.data-video-id]="getVideoId(index)"
+                class="project-video"
+                autoplay
+                loop
+                muted
+                playsinline
+                preload="metadata"
+                (click)="toggleVideo(index, videoElement)">
+                <source [src]="video.url" type="video/mp4" />
+              </video>
+              
+              <!-- Play/Pause Overlay -->
+              <div class="video-controls-overlay" (click)="toggleVideo(index, videoElement)">
+                <div class="video-controls-content">
+                  <button class="video-control-button" aria-label="Controlar video">
+                    <svg *ngIf="isVideoPlaying(index)" class="video-control-icon video-control-icon--pause" viewBox="0 0 24 24">
+                      <path fill="currentColor" d="M14,19H18V5H14M6,19H10V5H6V19Z"/>
+                    </svg>
+                    <svg *ngIf="!isVideoPlaying(index)" class="video-control-icon video-control-icon--play" viewBox="0 0 24 24">
+                      <path fill="currentColor" d="M8,5.14V19.14L19,12.14L8,5.14Z"/>
+                    </svg>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </ng-container>
+      </div>
+
+      <!-- Vertical Video -->
+      <ng-container *ngIf="hasVerticalVideo()">
+        <div class="videos-row">
+          <div class="video-container video-container--vertical">
+            <div class="video-wrapper">
+              <video
+                #videoElement
+                [attr.data-video-id]="getVideoId(project.videos.length - 1)"
+                class="project-video"
+                autoplay
+                loop
+                muted
+                playsinline
+                preload="metadata"
+                (click)="toggleVideo(project.videos.length - 1, videoElement)">
+                <source [src]="getVerticalVideo()?.url" type="video/mp4" />
+              </video>
+              
+              <!-- Play/Pause Overlay -->
+              <div class="video-controls-overlay" (click)="toggleVideo(project.videos.length - 1, videoElement)">
+                <div class="video-controls-content">
+                  <button class="video-control-button" aria-label="Controlar video">
+  <!-- Icono de Pausa - Líneas verticales elegantes -->
+  <svg *ngIf="isVideoPlaying(project.videos.length - 1)" 
+       class="video-control-icon video-control-icon--pause" 
+       viewBox="0 0 32 32">
+    <path fill="currentColor" d="M12 6h-2a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h2a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2zm10 0h-2a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h2a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2z"
+          style="stroke-linecap: round; stroke-linejoin: round;"/>
+  </svg>
+  
+  <!-- Icono de Play - Triángulo moderno -->
+  <svg *ngIf="!isVideoPlaying(project.videos.length - 1)" 
+       class="video-control-icon video-control-icon--play" 
+       viewBox="0 0 32 32">
+    <path fill="currentColor" d="M24 16.5L10 25V8l14 8.5z"
+          style="stroke-linecap: round; stroke-linejoin: round;"/>
+  </svg>
+</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </ng-container>
+    </ng-container>
+  </div>
+
+  <!-- Project Info -->
+  <div class="info-section">
+    <!-- Header Line -->
+    <div class="header-line"></div>
+
+    <div class="info-header">
+      <h3 class="project-title">{{ project.title }}</h3>
+      <span class="project-year">{{ project.year }}</span>
+    </div>
+
+    <!-- Company with underline -->
+    <div class="company-wrapper">
+      <p class="project-company">{{ project.company }}</p>
+      <div class="company-line"></div>
+    </div>
+
+    <!-- Description -->
+    <p class="project-description">
+      {{ project.description }}
+    </p>
+
+    <!-- Technologies -->
+    <div class="technologies-section">
+      <div class="tech-title-wrapper">
+        <h4 class="tech-title">Tecnologías</h4>
+        <div class="tech-title-line"></div>
+      </div>
+      
+      <div class="tech-tags">
+        <span 
+          *ngFor="let tech of project.technologies; let techIndex = index"
+          class="tech-tag"
+          [attr.data-aos]="'fade-up'"
+          [attr.data-aos-delay]="(techIndex * 80)"
+          [attr.data-aos-duration]="500">
+          {{ tech }}
+        </span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Decorative Lines -->
+  <div class="decorative-lines">
+    <div class="line line--vertical line--left"></div>
+    <div class="line line--vertical line--right"></div>
+    <div class="line line--horizontal line--top"></div>
+    <div class="line line--horizontal line--bottom"></div>
+  </div>
+</div>

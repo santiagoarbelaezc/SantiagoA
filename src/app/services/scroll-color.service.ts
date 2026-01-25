@@ -12,7 +12,7 @@ export class ScrollColorService {
 
   private sections = [
     { id: 'hero', start: 0, end: 0, color: '#FFFFFF' },        // Blanco
-    { id: 'about', start: 0, end: 0, color: '#8B4513' },       // Café
+    { id: 'todotech', start: 0, end: 0, color: '#ca0e27' },    // Rojo
     { id: 'projects', start: 0, end: 0, color: '#000000' },    // Negro
     { id: 'contact', start: 0, end: 0, color: '#000000' },     // Negro
     { id: 'footer', start: 0, end: 0, color: '#000000' }       // Negro

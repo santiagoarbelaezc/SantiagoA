@@ -30,8 +30,7 @@ export class NavbarComponent implements OnInit, OnDestroy {
   // Definir las secciones principales para el navbar
   mainSections = [
     { id: 'hero', name: 'Portfolio', external: false },
-    { id: 'projects', name: 'Proyectos', external: false },
-    { id: 'about', name: 'Tecnologías', external: false },
+    { id: 'todotech', name: 'Proyectos', external: false },
     { id: 'contact', name: 'Contacto', external: false }
   ];
 
@@ -142,8 +141,8 @@ export class NavbarComponent implements OnInit, OnDestroy {
       case 'navbar-white':
         this.currentSection = 'hero';
         break;
-      case 'navbar-brown':
-        this.currentSection = 'about';
+      case 'navbar-red':
+        this.currentSection = 'todotech';
         break;
       case 'navbar-black':
         this.currentSection = 'projects';
@@ -263,7 +262,7 @@ export class NavbarComponent implements OnInit, OnDestroy {
     if (scrollPosition < mobileHeroHeight) {
       return 'navbar-white';
     } else if (scrollPosition < mobileHeroHeight + mobileAboutHeight) {
-      return 'navbar-brown';
+      return 'navbar-red';
     } else {
       return 'navbar-black';
     }
@@ -286,7 +285,7 @@ export class NavbarComponent implements OnInit, OnDestroy {
     
     // Si estamos en about section
     if (scrollPosition < aboutEnd) {
-      return 'navbar-brown';
+      return 'navbar-red';
     }
     
     // Si estamos en projects o más abajo
@@ -312,20 +311,20 @@ export class NavbarComponent implements OnInit, OnDestroy {
     
     // Zona de transición entre hero y about
     if (scrollPosition < heroEnd + transitionMargin) {
-      // Mezcla de blanco y café durante la transición
+      // Mezcla de blanco y rojo durante la transición
       // Podrías hacerlo más complejo si quieres, pero por simplicidad:
-      return scrollPosition < heroEnd ? 'navbar-white' : 'navbar-brown';
+      return scrollPosition < heroEnd ? 'navbar-white' : 'navbar-red';
     }
     
     // Si estamos en about (excluyendo zona de transición)
     if (scrollPosition < aboutEnd - transitionMargin) {
-      return 'navbar-brown';
+      return 'navbar-red';
     }
     
     // Zona de transición entre about y projects
     if (scrollPosition < aboutEnd + transitionMargin) {
-      // Mezcla de café y negro durante la transición
-      return scrollPosition < aboutEnd ? 'navbar-brown' : 'navbar-black';
+      // Mezcla de rojo y negro durante la transición
+      return scrollPosition < aboutEnd ? 'navbar-red' : 'navbar-black';
     }
     
     // Si estamos en projects o más abajo
@@ -349,8 +348,8 @@ export class NavbarComponent implements OnInit, OnDestroy {
     switch(sectionClass) {
       case 'navbar-white':
         return 'rgba(255, 255, 255, 0.95)';
-      case 'navbar-brown':
-        return 'rgba(151, 75, 24, 0.95)';
+      case 'navbar-red':
+        return 'rgba(187, 20, 34, 0.95)';
       case 'navbar-black':
         return 'rgba(0, 0, 0, 0.95)';
       default:
@@ -369,7 +368,7 @@ export class NavbarComponent implements OnInit, OnDestroy {
     switch(sectionClass) {
       case 'navbar-white':
         return 'rgba(0, 0, 0, 0.1)';
-      case 'navbar-brown':
+      case 'navbar-red':
         return 'rgba(255, 255, 255, 0.15)';
       case 'navbar-black':
         return 'rgba(255, 255, 255, 0.1)';

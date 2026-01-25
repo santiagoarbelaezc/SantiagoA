@@ -10,7 +10,7 @@ import { FooterComponent } from '../../components/footer/footer.component';
 import { CommonModule } from '@angular/common';
 import { NavbarComponent } from '../../components/navbar/navbar.component';
 
-import { DesignGalleryComponent } from '../../components/design-gallery/design-gallery.component';
+import { ProjectTodotechComponent } from "../../components/projects-video/project-todotech/project-todotech.component";
 
 @Component({
   selector: 'app-home-portfolio',
@@ -22,12 +22,11 @@ import { DesignGalleryComponent } from '../../components/design-gallery/design-g
     NavbarComponent,
     HeroComponent,
     SectionDividerComponent,
-    AboutComponent,
     ProjectsVideoComponent,
     ContactComponent,
-    DesignGalleryComponent,
-    FooterComponent
-  ]
+    FooterComponent,
+    ProjectTodotechComponent
+]
 })
 export class HomePortfolioComponent implements OnInit, AfterViewInit {
 
