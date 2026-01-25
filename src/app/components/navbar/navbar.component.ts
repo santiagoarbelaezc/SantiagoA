@@ -1,9 +1,7 @@
-// navbar.component.ts - VERSIÓN CON ALTURAS DEFINIDAS PARA DESKTOP
+// navbar.component.ts - VERSIÓN CON CONFIGURACIÓN MANUAL DE ALTURAS
 import { CommonModule, isPlatformBrowser } from '@angular/common';
 import { Component, HostListener, OnInit, OnDestroy, Inject, PLATFORM_ID } from '@angular/core';
 import { Router } from '@angular/router';
-import { ScrollColorService } from '../../services/scroll-color.service';
-import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-navbar',
@@ -20,12 +18,69 @@ export class NavbarComponent implements OnInit, OnDestroy {
   // Sección actual detectada por scroll
   currentSection = 'hero'; 
   
-  private colorSubscription!: Subscription;
+  // ===========================================
+  // CONFIGURACIÓN DE ALTURAS - AJUSTA ESTOS VALORES
+  // ===========================================
+  
+  // Configuración para DESKTOP (en píxeles)
+  desktopConfig = {
+    // Alturas de inicio/fin de cada sección
+    sections: {
+      hero: { start: 0, end: 1000 },           // Hero: 0px a 1000px
+      todotech: { start: 1000, end: 2200 },    // TodoTech: 1000px a 2100px (+100px)
+      plaxtilineas: { start: 2200, end: 4050 }, // Plaxtilineas: 2100px a 3400px (+600px)
+      espumas: { start: 4050, end: 5600 },     // Espumas: 3400px a 4600px (+1000px)
+      contact: { start: 5600, end: 6000 },     // Contacto: 4600px a 5200px
+      footer: { start: 6000, end: 6400 }       // Footer: 5200px a 5600px
+    },
+    // Colores para cada sección
+    colors: {
+      hero: 'navbar-white',
+      todotech: 'navbar-red',
+      plaxtilineas: 'navbar-black',
+      espumas: 'navbar-green',
+      contact: 'navbar-black',
+      footer: 'navbar-black'
+    }
+  };
+  
+  // Configuración para MÓVIL (en píxeles)
+  mobileConfig = {
+    // Alturas de inicio/fin de cada sección (más pequeñas)
+    sections: {
+      hero: { start: 0, end: 1500 },           // Hero: 0px a 700px
+      todotech: { start: 1500, end: 2200 },    // TodoTech: 700px a 1800px (+100px)
+      plaxtilineas: { start: 2200, end: 3400 }, // Plaxtilineas: 1800px a 3200px (+600px)
+      espumas: { start: 3400, end: 4500 },    // Espumas: 3200px a 4000px (+1000px)
+      contact: { start: 4500, end: 4600 },    // Contacto: 4000px a 4600px
+      footer: { start: 4600, end: 5000 }      // Footer: 4600px a 5000px
+    },
+    // Colores para cada sección (pueden ser los mismos o diferentes)
+    colors: {
+      hero: 'navbar-white',
+      todotech: 'navbar-red',
+      plaxtilineas: 'navbar-black',
+      espumas: 'navbar-green',
+      contact: 'navbar-black',
+      footer: 'navbar-black'
+    }
+  };
+  
+  // Margen para transición suave (en píxeles)
+  transitionMargin = 150;
+  
+  // Opacidad del navbar cuando está scrolled (0-1)
+  navbarOpacity = 0.95;
+  
+  // ===========================================
+  // FIN DE CONFIGURACIÓN
+  // ===========================================
+
+
   private isBrowser: boolean;
   private lastScrollTop = 0;
   private scrollTimeout: any;
   private resizeTimeout: any;
-  private currentSectionElement: HTMLElement | null = null;
 
   // Definir las secciones principales para el navbar
   mainSections = [
@@ -41,7 +96,6 @@ export class NavbarComponent implements OnInit, OnDestroy {
   ];
 
   constructor(
-    private scrollColorService: ScrollColorService,
     private router: Router,
     @Inject(PLATFORM_ID) private platformId: any
   ) {
@@ -49,36 +103,19 @@ export class NavbarComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    // Suscribirse a los cambios de color del fondo
+    // Inicializar el estado del scroll
     if (this.isBrowser) {
-      this.colorSubscription = this.scrollColorService.currentColor$.subscribe(color => {
-        this.currentBackground = color;
-      });
-      
-      // Inicializar el estado del scroll
       this.checkScroll();
-      // Obtener referencia a las secciones una vez al inicio
-      this.cacheSectionElements();
     }
   }
 
   ngOnDestroy() {
-    if (this.colorSubscription) {
-      this.colorSubscription.unsubscribe();
-    }
     if (this.scrollTimeout) {
       clearTimeout(this.scrollTimeout);
     }
     if (this.resizeTimeout) {
       clearTimeout(this.resizeTimeout);
     }
-  }
-
-  // Cachear referencias a elementos de sección para mejor performance
-  private cacheSectionElements() {
-    if (!this.isBrowser) return;
-    
-    this.currentSectionElement = document.getElementById('hero');
   }
 
   @HostListener('window:scroll')
@@ -109,8 +146,6 @@ export class NavbarComponent implements OnInit, OnDestroy {
       if (window.innerWidth > 768) {
         this.closeMenu();
       }
-      // Recachear elementos si cambia el tamaño
-      this.cacheSectionElements();
     }, 150);
   }
 
@@ -119,7 +154,7 @@ export class NavbarComponent implements OnInit, OnDestroy {
     
     const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
     
-    // Determinar si está scrolled con umbral más bajo para responsive
+    // Determinar si está scrolled
     const scrollThreshold = this.isMobileView() ? 5 : 10;
     this.isScrolled = scrollTop > scrollThreshold;
     
@@ -130,25 +165,19 @@ export class NavbarComponent implements OnInit, OnDestroy {
     this.lastScrollTop = scrollTop;
   }
 
-  // Nuevo método para detectar la sección actual basándose en el scroll
+  // Método para detectar la sección actual basándose en el scroll
   private updateCurrentSection(scrollPosition: number): void {
     if (!this.isBrowser) return;
     
     const sectionClass = this.getSectionClass();
     
-    // Mapear la clase de sección a la ID de sección
-    switch(sectionClass) {
-      case 'navbar-white':
-        this.currentSection = 'hero';
+    // Encontrar qué sección corresponde a esta clase
+    const config = this.isMobileView() ? this.mobileConfig : this.desktopConfig;
+    for (const [sectionId, color] of Object.entries(config.colors)) {
+      if (color === sectionClass) {
+        this.currentSection = sectionId;
         break;
-      case 'navbar-red':
-        this.currentSection = 'todotech';
-        break;
-      case 'navbar-black':
-        this.currentSection = 'projects';
-        break;
-      default:
-        this.currentSection = 'hero';
+      }
     }
   }
 
@@ -179,7 +208,6 @@ export class NavbarComponent implements OnInit, OnDestroy {
 
   // Método para verificar si una sección está activa
   isActiveSection(sectionId: string): boolean {
-    // Comparar con la sección actual detectada dinámicamente
     return this.currentSection === sectionId;
   }
 
@@ -193,7 +221,7 @@ export class NavbarComponent implements OnInit, OnDestroy {
     const element = document.getElementById(sectionId);
     if (element) {
       // Calcular la posición considerando el navbar fijo
-      const navbarHeight = this.isMobileView() ? 60 : 70; // Diferente altura para móvil
+      const navbarHeight = this.isMobileView() ? 60 : 70;
       const elementPosition = element.getBoundingClientRect().top;
       const offsetPosition = elementPosition + window.pageYOffset - navbarHeight;
 
@@ -214,126 +242,91 @@ export class NavbarComponent implements OnInit, OnDestroy {
     }
   }
 
-  // Método para manejar clics en secciones (internas o externas)
+  // Método para manejar clics en secciones
   handleSectionClick(section: any, event: Event): void {
     event.preventDefault();
     this.closeMenu();
     
     if (section.external) {
-      // Es un enlace externo - verificar si es ruta interna o externa real
       if (section.url.startsWith('/')) {
-        // Es una ruta interna de Angular - usar Router
         this.router.navigate([section.url]);
       } else {
-        // Es un enlace externo real - abrir en nueva pestaña
         if (this.isBrowser) {
           window.open(section.url, '_blank', 'noopener,noreferrer');
         }
       }
     } else {
-      // Es una sección interna - hacer scroll suave
       this.scrollToSection(section.id, event);
     }
   }
 
-  // NUEVO MÉTODO MEJORADO: Detección de sección optimizada para responsive
+  // MÉTODO PRINCIPAL: Detección de sección con configuración manual
   getSectionClass(): string {
     if (!this.isBrowser) return 'navbar-white';
     
     const scrollPosition = window.pageYOffset;
     
-    // Si estamos en móvil, usar lógica simplificada pero precisa
-    if (this.isMobileView()) {
-      return this.getMobileSectionClass(scrollPosition);
+    // Usar configuración diferente para móvil y desktop
+    const config = this.isMobileView() ? this.mobileConfig : this.desktopConfig;
+    const sections = config.sections;
+    
+    // Verificar en qué sección estamos
+    if (scrollPosition < sections.hero.end - this.transitionMargin) {
+      return config.colors.hero;
     }
     
-    // Para desktop, usar lógica con alturas definidas
-    return this.getDesktopSectionClass(scrollPosition);
+    // Zona de transición entre hero y todotech
+    if (scrollPosition < sections.hero.end + this.transitionMargin) {
+      return scrollPosition < sections.hero.end ? config.colors.hero : config.colors.todotech;
+    }
+    
+    // TodoTech section
+    if (scrollPosition < sections.todotech.end - this.transitionMargin) {
+      return config.colors.todotech;
+    }
+    
+    // Zona de transición entre todotech y plaxtilineas
+    if (scrollPosition < sections.todotech.end + this.transitionMargin) {
+      return scrollPosition < sections.todotech.end ? config.colors.todotech : config.colors.plaxtilineas;
+    }
+    
+    // Plaxtilineas section
+    if (scrollPosition < sections.plaxtilineas.end - this.transitionMargin) {
+      return config.colors.plaxtilineas;
+    }
+    
+    // Zona de transición entre plaxtilineas y espumas
+    if (scrollPosition < sections.plaxtilineas.end + this.transitionMargin) {
+      return scrollPosition < sections.plaxtilineas.end ? config.colors.plaxtilineas : config.colors.espumas;
+    }
+    
+    // Espumas section
+    if (scrollPosition < sections.espumas.end - this.transitionMargin) {
+      return config.colors.espumas;
+    }
+    
+    // Zona de transición entre espumas y contact
+    if (scrollPosition < sections.espumas.end + this.transitionMargin) {
+      return scrollPosition < sections.espumas.end ? config.colors.espumas : config.colors.contact;
+    }
+    
+    // Contact section
+    if (scrollPosition < sections.contact.end - this.transitionMargin) {
+      return config.colors.contact;
+    }
+    
+    // Zona de transición entre contact y footer
+    if (scrollPosition < sections.contact.end + this.transitionMargin) {
+      return scrollPosition < sections.contact.end ? config.colors.contact : config.colors.footer;
+    }
+    
+    // Footer o más abajo
+    return config.colors.footer;
   }
 
-  private getMobileSectionClass(scrollPosition: number): string {
-    // En móvil, usar offsets fijos para mejor performance
-    // Estos valores se basan en las alturas típicas de las secciones en responsive
-    
-    // Alturas aproximadas en móvil (ajustar según tu diseño)
-    const mobileHeroHeight = window.innerHeight * 1.5; // Hero ocupa 80% de la pantalla
-    const mobileAboutHeight = window.innerHeight * 1.2; // About más alto
-    
-    if (scrollPosition < mobileHeroHeight) {
-      return 'navbar-white';
-    } else if (scrollPosition < mobileHeroHeight + mobileAboutHeight) {
-      return 'navbar-red';
-    } else {
-      return 'navbar-black';
-    }
-  }
-
-  private getDesktopSectionClass(scrollPosition: number): string {
-    // ALTURAS DEFINIDAS PARA DESKTOP (ajusta estos valores según tu diseño real)
-    
-    // Hero: desde 0 hasta 1000px aprox
-    // About: desde 1000px hasta 1800px aprox  
-    // Projects: desde 1800px en adelante
-    
-    const heroEnd = 840;       // Fin del hero
-    const aboutEnd = 1800;      // Fin del about
-    
-    // Si estamos cerca del top (en el hero)
-    if (scrollPosition < heroEnd) {
-      return 'navbar-white';
-    }
-    
-    // Si estamos en about section
-    if (scrollPosition < aboutEnd) {
-      return 'navbar-red';
-    }
-    
-    // Si estamos en projects o más abajo
-    return 'navbar-black';
-  }
-
-  // Versión alternativa con márgenes para transición suave
-  private getDesktopSectionClassWithMargins(scrollPosition: number): string {
-    // ALTURAS DEFINIDAS PARA DESKTOP CON MÁRGENES DE TRANSICIÓN
-    
-    // Hero: desde 0 hasta 1000px aprox
-    // About: desde 1000px hasta 1800px aprox  
-    // Projects: desde 1800px en adelante
-    
-    const heroEnd = 1000;       // Fin del hero
-    const aboutEnd = 1800;      // Fin del about
-    const transitionMargin = 150; // Margen para transición suave
-    
-    // Si estamos en el hero (con margen para transición suave)
-    if (scrollPosition < heroEnd - transitionMargin) {
-      return 'navbar-white';
-    }
-    
-    // Zona de transición entre hero y about
-    if (scrollPosition < heroEnd + transitionMargin) {
-      // Mezcla de blanco y rojo durante la transición
-      // Podrías hacerlo más complejo si quieres, pero por simplicidad:
-      return scrollPosition < heroEnd ? 'navbar-white' : 'navbar-red';
-    }
-    
-    // Si estamos en about (excluyendo zona de transición)
-    if (scrollPosition < aboutEnd - transitionMargin) {
-      return 'navbar-red';
-    }
-    
-    // Zona de transición entre about y projects
-    if (scrollPosition < aboutEnd + transitionMargin) {
-      // Mezcla de rojo y negro durante la transición
-      return scrollPosition < aboutEnd ? 'navbar-red' : 'navbar-black';
-    }
-    
-    // Si estamos en projects o más abajo
-    return 'navbar-black';
-  }
-
-  // Método simplificado para el color de fondo
+  // Método para el color de fondo del navbar
   getNavbarBackground(): string {
-    // La capa sólida se encarga del fondo en móvil sin scroll
+    // Transparente cuando no hay scroll
     if (!this.isScrolled && this.isMobileView()) {
       return 'transparent';
     }
@@ -342,22 +335,25 @@ export class NavbarComponent implements OnInit, OnDestroy {
       return 'transparent';
     }
     
-    // Usar la misma lógica que getSectionClass
+    // Obtener la clase de sección actual
     const sectionClass = this.getSectionClass();
     
+    // Mapear la clase a un color con opacidad
     switch(sectionClass) {
       case 'navbar-white':
-        return 'rgba(255, 255, 255, 0.95)';
+        return `rgba(255, 255, 255, ${this.navbarOpacity})`;
       case 'navbar-red':
-        return 'rgba(187, 20, 34, 0.95)';
+        return `rgba(187, 20, 34, ${this.navbarOpacity})`;
       case 'navbar-black':
-        return 'rgba(0, 0, 0, 0.95)';
+        return `rgba(0, 0, 0, ${this.navbarOpacity})`;
+      case 'navbar-green':
+        return `rgba(51, 174, 128, ${this.navbarOpacity})`;
       default:
-        return 'rgba(255, 255, 255, 0.95)';
+        return `rgba(255, 255, 255, ${this.navbarOpacity})`;
     }
   }
 
-  // Método simplificado para obtener el color del borde
+  // Método para el color del borde
   getBorderColor(): string {
     if (!this.isScrolled) {
       return 'transparent';
@@ -372,6 +368,8 @@ export class NavbarComponent implements OnInit, OnDestroy {
         return 'rgba(255, 255, 255, 0.15)';
       case 'navbar-black':
         return 'rgba(255, 255, 255, 0.1)';
+      case 'navbar-green':
+        return 'rgba(255, 255, 255, 0.15)';
       default:
         return 'transparent';
     }
@@ -381,5 +379,65 @@ export class NavbarComponent implements OnInit, OnDestroy {
   isMobileView(): boolean {
     if (!this.isBrowser) return false;
     return window.innerWidth <= 768;
+  }
+  
+  // ===========================================
+  // MÉTODOS PARA AJUSTAR CONFIGURACIÓN EN TIEMPO REAL
+  // ===========================================
+  
+  // Actualizar configuración de desktop
+  updateDesktopConfig(newConfig: any): void {
+    if (newConfig.sections) {
+      this.desktopConfig.sections = { ...this.desktopConfig.sections, ...newConfig.sections };
+    }
+    if (newConfig.colors) {
+      this.desktopConfig.colors = { ...this.desktopConfig.colors, ...newConfig.colors };
+    }
+  }
+  
+  // Actualizar configuración de móvil
+  updateMobileConfig(newConfig: any): void {
+    if (newConfig.sections) {
+      this.mobileConfig.sections = { ...this.mobileConfig.sections, ...newConfig.sections };
+    }
+    if (newConfig.colors) {
+      this.mobileConfig.colors = { ...this.mobileConfig.colors, ...newConfig.colors };
+    }
+  }
+  
+  // Actualizar alturas específicas
+  updateDesktopSectionHeight(sectionId: string, start: number, end: number): void {
+    if (this.desktopConfig.sections[sectionId as keyof typeof this.desktopConfig.sections]) {
+      this.desktopConfig.sections[sectionId as keyof typeof this.desktopConfig.sections] = { start, end };
+    }
+  }
+  
+  updateMobileSectionHeight(sectionId: string, start: number, end: number): void {
+    if (this.mobileConfig.sections[sectionId as keyof typeof this.mobileConfig.sections]) {
+      this.mobileConfig.sections[sectionId as keyof typeof this.mobileConfig.sections] = { start, end };
+    }
+  }
+  
+  // Actualizar color de una sección
+  updateDesktopSectionColor(sectionId: string, color: string): void {
+    if (this.desktopConfig.colors[sectionId as keyof typeof this.desktopConfig.colors]) {
+      this.desktopConfig.colors[sectionId as keyof typeof this.desktopConfig.colors] = color;
+    }
+  }
+  
+  updateMobileSectionColor(sectionId: string, color: string): void {
+    if (this.mobileConfig.colors[sectionId as keyof typeof this.mobileConfig.colors]) {
+      this.mobileConfig.colors[sectionId as keyof typeof this.mobileConfig.colors] = color;
+    }
+  }
+  
+  // Actualizar margen de transición
+  updateTransitionMargin(margin: number): void {
+    this.transitionMargin = Math.max(0, margin);
+  }
+  
+  // Actualizar opacidad
+  updateNavbarOpacity(opacity: number): void {
+    this.navbarOpacity = Math.max(0, Math.min(1, opacity));
   }
 }

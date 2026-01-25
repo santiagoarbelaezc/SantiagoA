@@ -12,6 +12,7 @@ import { NavbarComponent } from '../../components/navbar/navbar.component';
 
 import { ProjectTodotechComponent } from "../../components/projects-video/project-todotech/project-todotech.component";
 import { ProjectPlaxtilineasComponent } from "../../components/projects-video/project-plaxtilineas/project-plaxtilineas.component";
+import { ProjectEspumasComponent } from "../../components/projects-video/project-espumas/project-espumas.component";
 
 @Component({
   selector: 'app-home-portfolio',
@@ -27,7 +28,8 @@ import { ProjectPlaxtilineasComponent } from "../../components/projects-video/pr
     ContactComponent,
     FooterComponent,
     ProjectTodotechComponent,
-    ProjectPlaxtilineasComponent
+    ProjectPlaxtilineasComponent,
+    ProjectEspumasComponent
 ]
 })
 export class HomePortfolioComponent implements OnInit, AfterViewInit {

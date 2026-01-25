@@ -147,3 +147,17 @@
     display: none;
   }
 }
+
+/* Asegurar que todo el texto use la fuente Fashion Fetish */
+.contact-section * {
+  font-family: 'Fashion Fetish Regular', 'Avenir Next LT Pro', sans-serif;
+}
+
+/* Excepciones específicas */
+.contact-text {
+  font-family: 'Fashion Fetish Regular', 'Avenir Next LT Pro', sans-serif;
+}
+
+.link-text {
+  font-family: 'Fashion Fetish Regular', 'Avenir Next LT Pro', sans-serif;
+}

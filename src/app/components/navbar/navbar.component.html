@@ -1,17 +1,17 @@
-<!-- navbar.component.html - VERSIÓN MEJORADA Y LIMPIA -->
+<!-- navbar.component.html - ACTUALIZADO PARA LA NUEVA CONFIGURACIÓN -->
 <nav class="navbar" 
      [class.scrolled]="isScrolled"
      [class]="getSectionClass()"
      [class.menu-open]="isMenuOpen">
   
   <!-- CAPA SÓLIDA DETRÁS - SOLO PARA RESPONSIVE -->
-  <div class="navbar-solid-layer"></div>
+  <div class="navbar-solid-layer" [style.background]="getNavbarBackground()"></div>
   
   <div class="nav-container">
     <!-- Logo izquierda -->
     <div class="nav-logo">
       <a href="#hero" class="logo-link" (click)="scrollToSection('hero', $event)">
-        <span class="logo-text"></span>
+        
       </a>
     </div>
 

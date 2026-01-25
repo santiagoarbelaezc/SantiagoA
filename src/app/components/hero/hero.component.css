@@ -217,8 +217,10 @@
 
 .tech-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  grid-template-columns: repeat(auto-fit, 160px);
   gap: 0.6rem;
+  justify-items: center;
+  align-items: center;
 }
 
 .info-item {
@@ -232,6 +234,9 @@
   border-left: 2px solid rgba(0, 0, 0, 0.2);
   transition: all var(--transition-normal);
   font-family: 'Fashion Fetish Regular', 'Avenir Next LT Pro', sans-serif;
+  width: 100%;
+  height: 40px;
+  justify-content: center;
 }
 
 .info-item:hover {
@@ -353,7 +358,7 @@
   box-shadow: 
     0 25px 50px rgba(0, 0, 0, 0.12),
     0 0 1px rgba(0, 0, 0, 0.05);
-  transition: all var(--transition-normal);
+  transition: all 0.1s ease;
   filter: brightness(1.03) contrast(1.08);
 }
 
@@ -374,7 +379,7 @@
   background: linear-gradient(135deg, rgba(255,255,255,0.15) 0%, transparent 60%);
   border-radius: 16px;
   opacity: 0;
-  transition: opacity var(--transition-normal);
+  transition: opacity 0.2s ease;
 }
 
 .hero-image:hover .image-overlay {
@@ -651,13 +656,28 @@
   }
   
   .tech-grid {
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(3, 1fr);
     gap: 0.5rem;
+    justify-items: center;
+    align-items: center;
   }
   
   .info-item {
     padding: 0.5rem 0.75rem;
     font-size: 0.8rem;
+    height: 50px;
+    width: 100%;
+    justify-content: center;
+  }
+  
+  .info-icon {
+    width: 20px;
+    height: 20px;
+  }
+  
+  .info-icon img {
+    width: 20px;
+    height: 20px;
   }
   
   .image-frame {
@@ -700,14 +720,28 @@
   }
   
   .tech-grid {
-    grid-template-columns: 1fr;
+    grid-template-columns: repeat(3, 1fr);
     gap: 0.4rem;
+    justify-items: center;
+    align-items: center;
   }
   
   .info-item {
     justify-content: center;
     max-width: 200px;
     margin: 0 auto;
+    height: 45px;
+    width: 100%;
+  }
+  
+  .info-icon {
+    width: 18px;
+    height: 18px;
+  }
+  
+  .info-icon img {
+    width: 18px;
+    height: 18px;
   }
   
   .image-frame {
@@ -749,6 +783,20 @@
   .social-link {
     width: 32px;
     height: 32px;
+  }
+  
+  .info-item {
+    height: 40px;
+  }
+  
+  .info-icon {
+    width: 16px;
+    height: 16px;
+  }
+  
+  .info-icon img {
+    width: 16px;
+    height: 16px;
   }
 }
 

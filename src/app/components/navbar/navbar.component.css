@@ -83,7 +83,8 @@
 }
 
 .navbar-red .logo-text,
-.navbar-black .logo-text {
+.navbar-black .logo-text,
+.navbar-green .logo-text {
   background: linear-gradient(135deg, rgba(255,255,255,0.95) 0%, rgba(255,255,255,0.8) 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -924,4 +925,110 @@
 .logo-link:hover::after {
   width: 200%;
   height: 200%;
+}
+
+
+/* ===== TEMA VERDE (Espumas) ===== */
+.navbar-green {
+  color: rgba(255, 255, 255, 0.85);
+}
+
+.navbar-green.scrolled {
+  background: rgba(51, 174, 128, 0.88) !important; /* Color verde con transparencia */
+  backdrop-filter: blur(30px) saturate(180%);
+  -webkit-backdrop-filter: blur(30px) saturate(180%);
+  border-bottom-color: rgba(255, 255, 255, 0.08);
+}
+
+.navbar-green .logo-text,
+.navbar-green .link-text,
+.navbar-green .hamburger span {
+  color: rgba(255, 255, 255, 0.85);
+}
+
+.navbar-green .social-link {
+  border-color: rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.navbar-green .social-link:hover {
+  background: rgba(255, 255, 255, 0.12);
+  border-color: rgba(255, 255, 255, 0.2);
+  color: rgba(255, 255, 255, 1);
+}
+
+.navbar-green.scrolled .link-text,
+.navbar-green.scrolled .logo-text {
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.navbar-green.scrolled .nav-link:hover .link-text,
+.navbar-green.scrolled .nav-link.active .link-text {
+  color: rgba(255, 255, 255, 1);
+}
+
+/* Tema Verde para el panel móvil derecho */
+.navbar-green .mobile-menu-content {
+  background: rgba(51, 174, 128, 0.98); /* Fondo verde sólido */
+  border-left: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.navbar-green .mobile-menu-header {
+  border-bottom: 0.5px solid rgba(255, 255, 255, 0.1);
+}
+
+.navbar-green .mobile-logo,
+.navbar-green .mobile-nav-link {
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.navbar-green .mobile-close span {
+  background: rgba(255, 255, 255, 0.8);
+}
+
+.navbar-green .mobile-nav-link:hover,
+.navbar-green .mobile-nav-link.active {
+  background: rgba(255, 255, 255, 0.08);
+  color: rgba(255, 255, 255, 1);
+}
+
+.navbar-green .mobile-subsection {
+  border-top-color: rgba(255, 255, 255, 0.1);
+}
+
+.navbar-green .subsection-title {
+  color: rgba(255, 255, 255, 0.7);
+}
+
+/* Capa sólida móvil para tema verde */
+.navbar-green .navbar-solid-layer {
+  background: #33AE80; /* Verde sólido para móvil */
+}
+
+/* Estilos para la línea en enlaces del menú móvil */
+.mobile-link-line {
+  position: absolute;
+  bottom: 0.75rem;
+  left: 1.5rem;
+  width: 0;
+  height: 1px;
+  background: currentColor;
+  transition: all var(--transition-normal) 0.1s;
+  opacity: 0;
+}
+
+.mobile-nav-link:hover .mobile-link-line,
+.mobile-nav-link.active .mobile-link-line {
+  width: calc(100% - 3rem);
+  opacity: 1;
+}
+
+.navbar-white .mobile-link-line {
+  background: rgba(0, 0, 0, 0.2);
+}
+
+.navbar-red .mobile-link-line,
+.navbar-black .mobile-link-line,
+.navbar-green .mobile-link-line {
+  background: rgba(255, 255, 255, 0.2);
 }

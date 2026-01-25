@@ -14,6 +14,7 @@ export class ScrollColorService {
     { id: 'hero', start: 0, end: 0, color: '#FFFFFF' },        // Blanco
     { id: 'todotech', start: 0, end: 0, color: '#ca0e27' },    // Rojo
     { id: 'plaxtilineas', start: 0, end: 0, color: '#000000' }, // Negro
+    { id: 'espumas', start: 0, end: 0, color: '#33AE80' },     // Verde
     { id: 'projects', start: 0, end: 0, color: '#000000' },    // Negro
     { id: 'contact', start: 0, end: 0, color: '#000000' },     // Negro
     { id: 'footer', start: 0, end: 0, color: '#000000' }       // Negro
