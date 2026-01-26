@@ -96,7 +96,8 @@ export class NavbarComponent implements OnInit, OnDestroy {
   // Redes sociales
   socialNetworks = [
     { id: 'linkedin', name: 'LinkedIn', external: true, url: 'https://www.linkedin.com/in/santiago-arbelaez-contreras-9830b5290/' },
-    { id: 'github', name: 'GitHub', external: true, url: 'https://github.com/santiagoarbelaezc' }
+    { id: 'github', name: 'GitHub', external: true, url: 'https://github.com/santiagoarbelaezc' },
+    { id: 'cv', name: 'CV', external: false, url: '/assets/docs/Santiago Arbelaez Contreras - CV ES .pdf' }
   ];
 
   constructor(
@@ -402,6 +403,16 @@ export class NavbarComponent implements OnInit, OnDestroy {
       this.openExternalLink(section.url, event);
     } else {
       this.scrollToSection(section.id, event);
+    }
+  }
+
+  // Método para manejar clics en enlaces sociales
+  handleSocialClick(social: any, event: Event): void {
+    if (social.id === 'cv') {
+      // Para CV, permitir la descarga natural del enlace
+      return;
+    } else {
+      this.openExternalLink(social.url, event);
     }
   }
 
