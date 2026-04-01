@@ -186,6 +186,10 @@
 
 ---
 
+### **🌍 TuristGo (2026)**
+- **Descripción:** Aplicación móvil de turismo para descubrir y explorar destinos
+- **Tecnologías:** Kotlin · Android
+- **Enlaces:** Repositorio | Demo
 
 
 ---
