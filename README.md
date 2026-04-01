@@ -172,6 +172,20 @@
 
 ---
 
+### **📂 Catálogo Districol (2026)**
+- **Descripción:** Catálogo digital de productos para Districol
+- **Tecnologías:** PHP · Angular
+- **Enlaces:** Repositorio | Demo
+
+---
+
+### **📚 EnglishNotebook (2026)**
+- **Descripción:** Aplicación web para el aprendizaje y gestión de vocabulario en inglés
+- **Tecnologías:** Node.js · Express · React · MongoDB
+- **Enlaces:** Repositorio | Demo
+
+---
+
 
 
 ---
