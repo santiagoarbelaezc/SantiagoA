@@ -194,6 +194,12 @@
 
 ---
 
+##  **PENDIENTE PARA MEJORAS EN EL DISEÑO, IMPLEMENTACION DE MEJORES ANIMACIONES**
+- Para el proyecto se ve a realizar un rediseño
+- Se va a realizar una aplicacion web progresiva, para que se pueda utilizar como una app tambien
+
+---
+
 ## 🔗 **Enlaces de Contacto**
 
 <div align="center">
